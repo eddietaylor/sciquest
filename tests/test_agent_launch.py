@@ -69,5 +69,7 @@ def test_continue_prints_sciquest_banner_by_default(tmp_path):
 
 def test_sciquest_splash_constant_has_banner_text_without_literal_escape_codes():
     assert "SCI-QUEST" in SCIQUEST_SPLASH
+    assert "█████╗██" in SCIQUEST_SPLASH
+    assert "╚════╝██" in SCIQUEST_SPLASH
     assert "\\033" not in SCIQUEST_SPLASH
     assert "[38;5;" not in SCIQUEST_SPLASH
