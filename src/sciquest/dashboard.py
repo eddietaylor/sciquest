@@ -7,10 +7,6 @@ from typing import Any
 from .io import read_yaml
 
 
-def _rel(path: Path, base: Path) -> str:
-    return path.relative_to(base).as_posix()
-
-
 def _list_items(items: list[Any]) -> str:
     if not items:
         return "<li>Not documented</li>"
@@ -58,14 +54,23 @@ def _extract_interpretation(report_text: str) -> str:
     return text[:1600]
 
 
+def _inline_svg(path: Path) -> str:
+    try:
+        text = path.read_text(encoding="utf-8", errors="ignore").strip()
+    except OSError:
+        return f'<div class="empty">Could not read {escape(path.name)}</div>'
+    if "<svg" not in text.lower():
+        return f'<pre>{escape(text[:4000])}</pre>'
+    return text
+
+
 def _svg_cards(files: list[Path], exp_dir: Path, title: str) -> str:
     if not files:
         return f'<div class="empty">No {escape(title.lower())} recorded.</div>'
     cards = []
     for file in files:
-        rel = escape(_rel(file, exp_dir))
         label = escape(file.stem.replace("_", " ").title())
-        cards.append(f'<figure><figcaption>{label}</figcaption><img src="{rel}" alt="{label}"></figure>')
+        cards.append(f'<figure><figcaption>{label}</figcaption><div class="svg-wrap">{_inline_svg(file)}</div></figure>')
     return "".join(cards)
 
 
@@ -139,7 +144,7 @@ h1 {{ margin:.2rem 0; font-size:32px; }} .muted, .eyebrow {{ color:var(--muted);
 .experiment {{ margin:28px 0; padding-top:8px; }} .exp-header {{ display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }} .score {{ border:1px solid var(--emerald); padding:12px 16px; border-radius:16px; background:rgba(52,211,153,.08); }} .score span {{ display:block; color:var(--muted); font-size:12px; }} .score strong {{ color:var(--emerald); }}
 .grid.two {{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }} .panel {{ border:1px solid var(--line); border-radius:18px; background:rgba(15,23,42,.88); padding:18px; margin-bottom:18px; box-shadow:0 20px 50px rgba(0,0,0,.22); }}
 dl {{ display:grid; grid-template-columns:160px 1fr; gap:8px 14px; }} dt {{ color:var(--muted); }} dd {{ margin:0; }} .feature-cols {{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }}
-.media-grid {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:16px; }} figure {{ margin:0; border:1px solid var(--line); background:white; border-radius:14px; padding:10px; }} figcaption {{ color:#0f172a; font-weight:700; margin-bottom:8px; }} img {{ width:100%; height:auto; display:block; }}
+.media-grid {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:16px; }} figure {{ margin:0; border:1px solid var(--line); background:white; border-radius:14px; padding:10px; overflow:hidden; }} figcaption {{ color:#0f172a; font-weight:700; margin-bottom:8px; }} .svg-wrap svg {{ width:100%; height:auto; display:block; }}
 table {{ width:100%; border-collapse:collapse; }} th,td {{ text-align:left; padding:10px; border-bottom:1px solid var(--line); }} th {{ color:var(--cyan); }} pre {{ white-space:pre-wrap; font-family:inherit; color:var(--text); line-height:1.5; }} .empty {{ color:var(--muted); padding:12px; }}
 @media (max-width: 900px) {{ .shell {{ grid-template-columns:1fr; }} .sidebar {{ position:relative; height:auto; }} .grid.two,.feature-cols {{ grid-template-columns:1fr; }} }}
 </style>

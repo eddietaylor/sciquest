@@ -65,7 +65,8 @@ def test_dashboard_builds_dynamic_experiment_page(tmp_path):
     assert "price" in html and "revenue" in html
     assert "Model Architecture" in html
     assert "Validation Technique" in html
-    assert "accuracy.svg" in html
+    assert "Accuracy" in html
+    assert "<img " not in html
     assert "Graph Interpretation" in html
 
 
