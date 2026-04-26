@@ -74,6 +74,62 @@ def _svg_cards(files: list[Path], exp_dir: Path, title: str) -> str:
     return "".join(cards)
 
 
+def _model_abstraction_section(meta: dict[str, Any]) -> str:
+    architecture = escape(str(meta.get("model_architecture", "Not documented")))
+    task_type = escape(str(meta.get("task_type", "Not documented")))
+    validation = escape(str(meta.get("validation_technique", "Not documented")))
+    svg = """
+<svg id="ResearchModelAbstraction" xmlns="http://www.w3.org/2000/svg" width="1180" height="430" viewBox="0 0 1180 430">
+  <defs><marker id="rma-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#38bdf8"/></marker></defs>
+  <rect width="1180" height="430" fill="#07111f"/>
+  <text x="38" y="42" fill="#e5f0ff" font-size="24" font-family="Arial" font-weight="700">SciQuest model abstraction</text>
+  <g font-family="Arial" font-size="14">
+    <rect x="55" y="105" width="220" height="120" rx="16" fill="#0f2d3a" stroke="#22d3ee" stroke-width="2"/>
+    <text x="78" y="140" fill="#e5f0ff" font-size="18" font-weight="700">State/context x</text>
+    <text x="78" y="170" fill="#b6c2d2">observed environment</text>
+    <text x="78" y="194" fill="#b6c2d2">history, constraints, covariates</text>
+    <rect x="55" y="270" width="220" height="88" rx="16" fill="#3d2a0b" stroke="#fbbf24" stroke-width="2"/>
+    <text x="78" y="305" fill="#e5f0ff" font-size="18" font-weight="700">Action a</text>
+    <text x="78" y="333" fill="#b6c2d2">candidate intervention</text>
+    <path d="M275 165 C340 165 340 230 410 230" stroke="#38bdf8" stroke-width="3" fill="none" marker-end="url(#rma-arrow)"/>
+    <path d="M275 314 C340 314 340 260 410 260" stroke="#38bdf8" stroke-width="3" fill="none" marker-end="url(#rma-arrow)"/>
+    <rect x="410" y="150" width="300" height="150" rx="16" fill="#123927" stroke="#34d399" stroke-width="2"/>
+    <text x="435" y="185" fill="#e5f0ff" font-size="18" font-weight="700">Learned world model fθ(x,a)</text>
+    <text x="435" y="218" fill="#b6c2d2">predicts counterfactual outcomes</text>
+    <text x="435" y="242" fill="#b6c2d2">compared against scientific baselines</text>
+    <text x="435" y="266" fill="#fbbf24">ŷ = fθ(x, a)</text>
+    <path d="M710 225 C770 225 770 225 835 225" stroke="#38bdf8" stroke-width="3" fill="none" marker-end="url(#rma-arrow)"/>
+    <rect x="835" y="105" width="280" height="120" rx="16" fill="#271b45" stroke="#a78bfa" stroke-width="2"/>
+    <text x="860" y="140" fill="#e5f0ff" font-size="18" font-weight="700">Predicted outcome ŷ</text>
+    <text x="860" y="170" fill="#b6c2d2">target variables and artifacts</text>
+    <text x="860" y="194" fill="#b6c2d2">plots, reports, validation results</text>
+    <rect x="835" y="270" width="280" height="90" rx="16" fill="#451a2b" stroke="#fb7185" stroke-width="2"/>
+    <text x="860" y="304" fill="#e5f0ff" font-size="18" font-weight="700">Validation score</text>
+    <text x="860" y="333" fill="#fbbf24">S = Σ wᵢ sᵢ / Σ wᵢ</text>
+  </g>
+</svg>
+"""
+    return f'''
+<section class="panel" id="research-model-abstraction">
+  <h3>Research Model Abstraction</h3>
+  <div class="grid two">
+    <article>
+      <h4>Latest model architecture</h4>
+      <p>{architecture}</p>
+      <h4>Task type</h4>
+      <p>{task_type}</p>
+      <h4>Validation technique</h4>
+      <p>{validation}</p>
+      <p>The common SciQuest pattern is: represent the state/context, choose or simulate an action/intervention, train a model to predict the target/counterfactual outcome, then score it with a validation suite.</p>
+      <p class="equation">\\(\\hat{{y}} = f_\\theta(x, a)\\)</p>
+      <p class="equation">\\(S = \\sum_i w_i s_i / \\sum_i w_i\\)</p>
+    </article>
+    <article><div class="svg-wrap">{svg}</div></article>
+  </div>
+</section>
+'''
+
+
 def build_dashboard(quest_path: Path, output_dir: Path | None = None) -> Path:
     """Build a static, dynamic-by-metadata dashboard for a SciQuest quest."""
     output_dir = output_dir or quest_path / "reports" / "dashboard"
@@ -84,6 +140,7 @@ def build_dashboard(quest_path: Path, output_dir: Path | None = None) -> Path:
     nav = []
     sections = []
     active_exp_id = next((p.name for p in reversed(experiments) if p.is_dir()), None)
+    latest_meta = read_yaml(quest_path / "experiments" / active_exp_id / "experiment.yaml", {}) if active_exp_id else {}
     for exp in experiments:
         if not exp.is_dir():
             continue
@@ -124,6 +181,7 @@ def build_dashboard(quest_path: Path, output_dir: Path | None = None) -> Path:
         nav="".join(nav) or '<span class="empty">No experiments yet.</span>',
         sections="".join(sections) or '<section class="panel"><h2>No experiments yet</h2></section>',
         metric_definitions=METRIC_DEFINITIONS_HTML,
+        model_abstraction=_model_abstraction_section(latest_meta),
     )
     out = output_dir / "index.html"
     out.write_text(html, encoding="utf-8")
@@ -160,7 +218,7 @@ table {{ width:100%; border-collapse:collapse; }} th,td {{ text-align:left; padd
 </style>
 </head>
 <body>
-<div class="shell"><aside class="sidebar"><div class="brand">SciQuest Dashboard</div><p class="muted">Status: {status}<br>Best score: {best}</p><nav>{nav}</nav></aside><main><section class="hero"><p class="eyebrow">Quest</p><h1>{title}</h1><h2>{hero}</h2><p>{problem}</p></section>{sections}{metric_definitions}</main></div>
+<div class="shell"><aside class="sidebar"><div class="brand">SciQuest Dashboard</div><p class="muted">Status: {status}<br>Best score: {best}</p><nav>{nav}</nav></aside><main><section class="hero"><p class="eyebrow">Quest</p><h1>{title}</h1><h2>{hero}</h2><p>{problem}</p></section>{sections}{metric_definitions}{model_abstraction}</main></div>
 <script>
 function showExperiment(id) {{
   document.querySelectorAll('.experiment').forEach(el => el.classList.toggle('active', el.id === id));

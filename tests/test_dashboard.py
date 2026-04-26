@@ -100,6 +100,19 @@ def test_dashboard_includes_metric_definitions_and_latex_equations(tmp_path):
     assert "RMSE" in html
 
 
+def test_dashboard_includes_research_model_abstraction_section(tmp_path):
+    quest = make_minimal_valid_experiment(tmp_path)
+    out = build_dashboard(quest)
+    html = out.read_text()
+    assert "Research Model Abstraction" in html
+    assert "Latest model architecture" in html
+    assert "Linear probe" in html
+    assert "state/context" in html
+    assert "\\hat{y}" in html
+    assert "Validation score" in html
+    assert "ResearchModelAbstraction" in html
+
+
 def test_dashboard_cli_writes_index(tmp_path):
     quest = make_minimal_valid_experiment(tmp_path)
     runner = CliRunner()
