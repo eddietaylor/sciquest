@@ -83,6 +83,7 @@ def build_dashboard(quest_path: Path, output_dir: Path | None = None) -> Path:
     experiments = sorted((quest_path / "experiments").glob("exp_*"))
     nav = []
     sections = []
+    active_exp_id = next((p.name for p in reversed(experiments) if p.is_dir()), None)
     for exp in experiments:
         if not exp.is_dir():
             continue
@@ -92,9 +93,10 @@ def build_dashboard(quest_path: Path, output_dir: Path | None = None) -> Path:
         report_text = (exp / "experiment_report.md").read_text(encoding="utf-8", errors="ignore") if (exp / "experiment_report.md").exists() else ""
         diagrams = sorted((exp / "artifacts" / "diagrams").glob("*.svg")) if (exp / "artifacts" / "diagrams").exists() else []
         plots = sorted((exp / "artifacts" / "plots").glob("*.svg")) if (exp / "artifacts" / "plots").exists() else []
-        nav.append(f'<a href="#{exp_id}">{exp_id}<span>{escape(str(validation.get("aggregate_score", "pending")))}</span></a>')
+        active_class = " active" if exp_id == active_exp_id else ""
+        nav.append(f'<button type="button" class="exp-tab{active_class}" data-exp-target="{exp_id}" onclick="showExperiment(\'{exp_id}\')">{exp_id}<span>{escape(str(validation.get("aggregate_score", "pending")))}</span></button>')
         sections.append(f'''
-<section class="experiment" id="{exp_id}">
+<section class="experiment{active_class}" id="{exp_id}">
   <header class="exp-header">
     <div><p class="eyebrow">Experiment</p><h2>{exp_id}</h2></div>
     <div class="score"><span>Aggregate</span><strong>{escape(str(validation.get('aggregate_score', 'pending')))}</strong></div>
@@ -121,6 +123,7 @@ def build_dashboard(quest_path: Path, output_dir: Path | None = None) -> Path:
         best=escape(str(state.get("best_score", "pending"))),
         nav="".join(nav) or '<span class="empty">No experiments yet.</span>',
         sections="".join(sections) or '<section class="panel"><h2>No experiments yet</h2></section>',
+        metric_definitions=METRIC_DEFINITIONS_HTML,
     )
     out = output_dir / "index.html"
     out.write_text(html, encoding="utf-8")
@@ -138,18 +141,67 @@ DASHBOARD_TEMPLATE = """<!doctype html>
 * {{ box-sizing:border-box; }} body {{ margin:0; font-family:Inter, ui-sans-serif, system-ui, sans-serif; background:radial-gradient(circle at top left,#123456 0,#07111f 35%,#020617 100%); color:var(--text); }}
 .shell {{ display:grid; grid-template-columns:280px 1fr; min-height:100vh; }}
 .sidebar {{ position:sticky; top:0; height:100vh; padding:24px; border-right:1px solid var(--line); background:rgba(2,6,23,.82); }}
-.brand {{ font-weight:800; letter-spacing:.08em; color:var(--cyan); }} .sidebar a {{ display:flex; justify-content:space-between; gap:12px; padding:10px 12px; margin:8px 0; color:var(--text); text-decoration:none; border:1px solid var(--line); border-radius:12px; background:#0f172a; }}
+.brand {{ font-weight:800; letter-spacing:.08em; color:var(--cyan); }} .exp-tab {{ width:100%; display:flex; justify-content:space-between; gap:12px; padding:10px 12px; margin:8px 0; color:var(--text); text-align:left; border:1px solid var(--line); border-radius:12px; background:#0f172a; cursor:pointer; }} .exp-tab:hover,.exp-tab.active {{ border-color:var(--cyan); background:rgba(34,211,238,.12); }}
 main {{ padding:32px; }} .hero {{ border:1px solid var(--line); border-radius:24px; padding:28px; background:linear-gradient(135deg,rgba(34,211,238,.12),rgba(167,139,250,.1)); margin-bottom:24px; }}
 h1 {{ margin:.2rem 0; font-size:32px; }} .muted, .eyebrow {{ color:var(--muted); }} .eyebrow {{ text-transform:uppercase; letter-spacing:.14em; font-size:12px; }}
-.experiment {{ margin:28px 0; padding-top:8px; }} .exp-header {{ display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }} .score {{ border:1px solid var(--emerald); padding:12px 16px; border-radius:16px; background:rgba(52,211,153,.08); }} .score span {{ display:block; color:var(--muted); font-size:12px; }} .score strong {{ color:var(--emerald); }}
+.experiment {{ display:none; margin:28px 0; padding-top:8px; }} .experiment.active {{ display:block; }} .exp-header {{ display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }} .score {{ border:1px solid var(--emerald); padding:12px 16px; border-radius:16px; background:rgba(52,211,153,.08); }} .score span {{ display:block; color:var(--muted); font-size:12px; }} .score strong {{ color:var(--emerald); }}
 .grid.two {{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }} .panel {{ border:1px solid var(--line); border-radius:18px; background:rgba(15,23,42,.88); padding:18px; margin-bottom:18px; box-shadow:0 20px 50px rgba(0,0,0,.22); }}
 dl {{ display:grid; grid-template-columns:160px 1fr; gap:8px 14px; }} dt {{ color:var(--muted); }} dd {{ margin:0; }} .feature-cols {{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }}
 .media-grid {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:16px; }} figure {{ margin:0; border:1px solid var(--line); background:white; border-radius:14px; padding:10px; overflow:hidden; }} figcaption {{ color:#0f172a; font-weight:700; margin-bottom:8px; }} .svg-wrap svg {{ width:100%; height:auto; display:block; }}
-table {{ width:100%; border-collapse:collapse; }} th,td {{ text-align:left; padding:10px; border-bottom:1px solid var(--line); }} th {{ color:var(--cyan); }} pre {{ white-space:pre-wrap; font-family:inherit; color:var(--text); line-height:1.5; }} .empty {{ color:var(--muted); padding:12px; }}
+table {{ width:100%; border-collapse:collapse; }} th,td {{ text-align:left; padding:10px; border-bottom:1px solid var(--line); }} th {{ color:var(--cyan); }} pre {{ white-space:pre-wrap; font-family:inherit; color:var(--text); line-height:1.5; }} .empty {{ color:var(--muted); padding:12px; }} .metric-defs {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; }} .metric-card {{ border:1px solid var(--line); border-radius:14px; padding:14px; background:rgba(2,6,23,.45); }} .metric-card h4 {{ margin:0 0 8px; color:var(--cyan); }} .equation {{ color:var(--amber); font-family:'Times New Roman',serif; font-size:18px; }}
 @media (max-width: 900px) {{ .shell {{ grid-template-columns:1fr; }} .sidebar {{ position:relative; height:auto; }} .grid.two,.feature-cols {{ grid-template-columns:1fr; }} }}
 </style>
 </head>
 <body>
-<div class="shell"><aside class="sidebar"><div class="brand">SciQuest Dashboard</div><p class="muted">Status: {status}<br>Best score: {best}</p><nav>{nav}</nav></aside><main><section class="hero"><p class="eyebrow">Quest</p><h1>{title}</h1><h2>{hero}</h2><p>{problem}</p></section>{sections}</main></div>
+<div class="shell"><aside class="sidebar"><div class="brand">SciQuest Dashboard</div><p class="muted">Status: {status}<br>Best score: {best}</p><nav>{nav}</nav></aside><main><section class="hero"><p class="eyebrow">Quest</p><h1>{title}</h1><h2>{hero}</h2><p>{problem}</p></section>{sections}{metric_definitions}</main></div>
+<script>
+function showExperiment(id) {{
+  document.querySelectorAll('.experiment').forEach(el => el.classList.toggle('active', el.id === id));
+  document.querySelectorAll('.exp-tab').forEach(el => el.classList.toggle('active', el.dataset.expTarget === id));
+  history.replaceState(null, '', '#' + id);
+}}
+window.addEventListener('DOMContentLoaded', () => {{
+  const requested = location.hash ? location.hash.slice(1) : null;
+  if (requested && document.getElementById(requested)) showExperiment(requested);
+}});
+</script>
 </body>
 </html>"""
+
+METRIC_DEFINITIONS_HTML = r"""
+<section class="panel" id="metric-definitions">
+  <h3>Validation Metric Definitions</h3>
+  <div class="metric-defs">
+    <article class="metric-card">
+      <h4>Weighted aggregate score</h4>
+      <p>Normalized metric scores are combined with user/agent-defined weights.</p>
+      <p class="equation">S = \sum_i w_i s_i / \sum_i w_i</p>
+    </article>
+    <article class="metric-card">
+      <h4>WAPE</h4>
+      <p>Weighted absolute percentage error. Lower is better for forecast/counterfactual error.</p>
+      <p class="equation">WAPE = \frac{\sum_i |y_i - \hat{y}_i|}{\sum_i |y_i|}</p>
+    </article>
+    <article class="metric-card">
+      <h4>Relative WAPE lift</h4>
+      <p>Improvement versus a baseline simulator or model. Higher is better.</p>
+      <p class="equation">Lift = (WAPE_{baseline} - WAPE_{model}) / WAPE_{baseline}</p>
+    </article>
+    <article class="metric-card">
+      <h4>RMSE</h4>
+      <p>Root mean squared error, used here for demand/unit prediction error. Lower is better.</p>
+      <p class="equation">RMSE = \sqrt{\frac{1}{n}\sum_i (y_i - \hat{y}_i)^2}</p>
+    </article>
+    <article class="metric-card">
+      <h4>Rank correlation</h4>
+      <p>Spearman correlation of true and predicted price-action rankings. Higher is better.</p>
+      <p class="equation">\rho = corr(rank(y), rank(\hat{y}))</p>
+    </article>
+    <article class="metric-card">
+      <h4>Law-of-demand pass rate</h4>
+      <p>Share of comparable states where predicted demand is non-increasing as price rises.</p>
+      <p class="equation">PassRate = \frac{1}{|G|}\sum_g 1[\hat{d}_{g,p_1} \geq \hat{d}_{g,p_2}\;\forall p_1&lt;p_2]</p>
+    </article>
+  </div>
+</section>
+"""

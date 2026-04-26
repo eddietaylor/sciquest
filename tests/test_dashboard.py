@@ -70,6 +70,33 @@ def test_dashboard_builds_dynamic_experiment_page(tmp_path):
     assert "Graph Interpretation" in html
 
 
+def test_dashboard_uses_clickable_single_experiment_panes(tmp_path):
+    quest = make_minimal_valid_experiment(tmp_path)
+    exp2 = quest / "experiments" / "exp_002"
+    exp1 = quest / "experiments" / "exp_001"
+    import shutil
+    shutil.copytree(exp1, exp2)
+    (exp2 / "experiment.yaml").write_text((exp2 / "experiment.yaml").read_text().replace("exp_001", "exp_002"))
+    out = build_dashboard(quest)
+    html = out.read_text()
+    assert "data-exp-target=\"exp_001\"" in html
+    assert "data-exp-target=\"exp_002\"" in html
+    assert "class=\"experiment active\" id=\"exp_002\"" in html
+    assert "class=\"experiment\" id=\"exp_001\"" in html
+    assert "function showExperiment" in html
+
+
+def test_dashboard_includes_metric_definitions_and_latex_equations(tmp_path):
+    quest = make_minimal_valid_experiment(tmp_path)
+    out = build_dashboard(quest)
+    html = out.read_text()
+    assert "Validation Metric Definitions" in html
+    assert "Weighted aggregate score" in html
+    assert "\\sum_i w_i" in html
+    assert "WAPE" in html
+    assert "RMSE" in html
+
+
 def test_dashboard_cli_writes_index(tmp_path):
     quest = make_minimal_valid_experiment(tmp_path)
     runner = CliRunner()
