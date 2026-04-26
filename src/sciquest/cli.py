@@ -10,6 +10,7 @@ from .core import create_quest, list_quests, run_next, continue_quest, update_st
 from .io import quest_dir, read_yaml, append_text
 from .validation import validate_experiment
 from .logic import run_logic_check
+from .agent import NEWTON_SPLASH, launch_agent
 
 app = typer.Typer(help="SciQuest autonomous research framework")
 console = Console()
@@ -26,8 +27,13 @@ def _qpath(root: Path, quest: str) -> Path:
 def new_quest(
     root: Path = typer.Option(Path.cwd(), help="Workspace root containing quests/"),
     slug: Optional[str] = typer.Option(None, help="Quest slug"),
+    start_agent: bool = typer.Option(False, help="After creating the quest, launch the configured external agent"),
+    agent_command: Optional[str] = typer.Option(None, help="External agent command. Also configurable via SCIQUEST_AGENT_COMMAND"),
+    splash: bool = typer.Option(True, "--splash/--no-splash", help="Show the Newton/SciQuest startup splash"),
 ):
     """Create a new quest and initialize all artifacts."""
+    if splash:
+        console.print(NEWTON_SPLASH)
     answers = {
         "hero_statement": typer.prompt("Hero Statement"),
         "problem_statement": typer.prompt("Problem Statement"),
@@ -41,6 +47,13 @@ def new_quest(
         raise typer.Abort()
     qpath = create_quest(root, answers, slug)
     console.print(f"Created quest: {qpath}")
+    if start_agent:
+        console.print("Launching configured SciQuest agent...")
+        result = launch_agent(qpath, agent_command)
+        if result.returncode != 0:
+            console.print(f"Agent exited with code {result.returncode}")
+            raise typer.Exit(result.returncode)
+        console.print("Agent completed.")
 
 
 @app.command("continue")
@@ -75,9 +88,20 @@ def run_next_cmd(
     root: Path = typer.Option(Path.cwd()),
     agent_stub: bool = typer.Option(False, help="Create deterministic scaffold without agent reasoning"),
     execute: bool = typer.Option(False, help="Execute generated notebook"),
+    start_agent: bool = typer.Option(False, help="Launch the configured external agent instead of only creating a deterministic scaffold"),
+    agent_command: Optional[str] = typer.Option(None, help="External agent command. Also configurable via SCIQUEST_AGENT_COMMAND"),
 ):
     """Execute the next iteration; primarily for agents/schedulers."""
-    exp_id = run_next(_qpath(root, quest), agent_stub=agent_stub, execute=execute)
+    qpath = _qpath(root, quest)
+    if start_agent:
+        console.print("Launching configured SciQuest agent...")
+        result = launch_agent(qpath, agent_command)
+        if result.returncode != 0:
+            console.print(f"Agent exited with code {result.returncode}")
+            raise typer.Exit(result.returncode)
+        console.print("Agent completed.")
+        return
+    exp_id = run_next(qpath, agent_stub=agent_stub, execute=execute)
     console.print(f"Created {exp_id}")
 
 

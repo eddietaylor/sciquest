@@ -26,6 +26,7 @@ pytest
 
 ```bash
 sciquest new
+sciquest new --start-agent --agent-command "codex"
 sciquest continue --quest <quest_slug> --idea "new idea" --data "new data note"
 sciquest list
 sciquest status --quest <quest_slug>
@@ -51,7 +52,22 @@ Every command accepts `--root PATH`; quests are stored under `PATH/quests/`.
 7. Validation weighting preferences (optional, natural language)
 8. Confirmation to start quest
 
-Inputs are stored in structured YAML and Markdown.
+Inputs are stored in structured YAML and Markdown. By default, `sciquest new` also shows a small Newton/SciQuest terminal splash. Use `--no-splash` to suppress it.
+
+To have quest creation immediately hand off to an agent, run:
+
+```bash
+sciquest new --start-agent --agent-command "codex"
+```
+
+or configure a default command:
+
+```bash
+export SCIQUEST_AGENT_COMMAND="codex"
+sciquest new --start-agent
+```
+
+SciQuest passes a complete one-iteration protocol prompt to the external agent on stdin. The command can be any local/open agent executable; SciQuest does not embed a proprietary agent.
 
 If no core data is supplied, SciQuest creates `data_manifest.yaml` with `status: missing_user_data`. The agent must infer required data, find or generate a dataset, store it in `data/raw/`, and write schema, meaning, provenance, and limitations.
 
@@ -103,6 +119,12 @@ Each iteration is designed to be run by an agent or external scheduler:
 8. Update `state.yaml`
 
 The built-in `run-next` command creates a deterministic experiment scaffold and lock-protected state transition. It does not invent scientific content; agents do that by following `AGENTS.md`.
+
+To run a scheduler-style agent iteration directly instead of creating only the scaffold:
+
+```bash
+sciquest run-next --quest <quest_slug> --start-agent --agent-command "codex"
+```
 
 ## Notebook requirements
 
