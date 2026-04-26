@@ -1,6 +1,6 @@
 from typer.testing import CliRunner
 
-from sciquest.agent import build_agent_prompt, parse_agent_command
+from sciquest.agent import build_agent_prompt, build_agent_argv, parse_agent_command
 from sciquest.cli import app
 
 
@@ -15,6 +15,22 @@ def test_build_agent_prompt_points_agent_at_quest_and_protocol(tmp_path):
     assert str(quest) in prompt
     assert "AGENTS.md" in prompt
     assert "one SciQuest iteration" in prompt
+
+
+def test_build_agent_argv_appends_prompt_for_hermes_query_style_command(tmp_path):
+    quest = tmp_path / "quests" / "demo"
+    quest.mkdir(parents=True)
+    argv = build_agent_argv(quest, "hermes chat -q")
+    assert argv[:3] == ["hermes", "chat", "-q"]
+    assert str(quest) in argv[-1]
+
+
+def test_build_agent_argv_supports_prompt_and_quest_placeholders(tmp_path):
+    quest = tmp_path / "quests" / "demo"
+    quest.mkdir(parents=True)
+    argv = build_agent_argv(quest, "agent --cwd {quest_path} --message {prompt}")
+    assert argv[:3] == ["agent", "--cwd", str(quest)]
+    assert str(quest) in argv[-1]
 
 
 def test_new_with_start_agent_runs_configured_agent_command(tmp_path):

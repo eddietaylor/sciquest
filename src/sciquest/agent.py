@@ -4,7 +4,6 @@ import os
 import shlex
 import subprocess
 from pathlib import Path
-from typing import Sequence
 
 NEWTON_SPLASH = r'''
         .-"""-.
@@ -51,15 +50,32 @@ def resolve_agent_command(agent_command: str | None = None) -> list[str] | None:
     return parse_agent_command(command)
 
 
+def build_agent_argv(quest_path: Path, agent_command: str | None = None) -> list[str] | None:
+    """Build argv for an external agent, adding the SciQuest prompt as input.
+
+    If the configured command contains `{prompt}` or `{quest_path}`, those
+    placeholders are expanded before shell-style parsing. Otherwise the prompt is
+    appended as the final argument, which works with commands like
+    `hermes chat -q` and `codex exec`.
+    """
+    command = agent_command or os.environ.get("SCIQUEST_AGENT_COMMAND")
+    if not command:
+        return None
+    prompt = build_agent_prompt(quest_path)
+    if "{prompt}" in command or "{quest_path}" in command:
+        argv = parse_agent_command(command)
+        return [part.replace("{quest_path}", str(quest_path)).replace("{prompt}", prompt) for part in argv]
+    argv = parse_agent_command(command)
+    return [*argv, prompt]
+
+
 def launch_agent(quest_path: Path, agent_command: str | None = None) -> subprocess.CompletedProcess[str]:
-    """Launch an external agent with a SciQuest prompt on stdin.
+    """Launch an external agent with a complete SciQuest prompt.
 
     SciQuest does not embed a proprietary agent. It starts whatever open or local
-    agent command the user configured, passing a complete protocol prompt through
-    stdin so the command can act on the quest directory.
+    agent command the user configured and supplies a one-iteration protocol prompt.
     """
-    argv = resolve_agent_command(agent_command)
+    argv = build_agent_argv(quest_path, agent_command)
     if not argv:
         raise ValueError("No agent command configured. Pass --agent-command or set SCIQUEST_AGENT_COMMAND.")
-    prompt = build_agent_prompt(quest_path)
-    return subprocess.run(argv, input=prompt, text=True, capture_output=False, check=False)
+    return subprocess.run(argv, text=True, capture_output=False, check=False)

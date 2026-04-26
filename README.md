@@ -26,7 +26,7 @@ pytest
 
 ```bash
 sciquest new
-sciquest new --start-agent --agent-command "codex"
+sciquest new --start-agent --agent-command "hermes chat -q"
 sciquest continue --quest <quest_slug> --idea "new idea" --data "new data note"
 sciquest list
 sciquest status --quest <quest_slug>
@@ -57,13 +57,13 @@ Inputs are stored in structured YAML and Markdown. By default, `sciquest new` al
 To have quest creation immediately hand off to an agent, run:
 
 ```bash
-sciquest new --start-agent --agent-command "codex"
+sciquest new --start-agent --agent-command "hermes chat -q"
 ```
 
 or configure a default command:
 
 ```bash
-export SCIQUEST_AGENT_COMMAND="codex"
+export SCIQUEST_AGENT_COMMAND="hermes chat -q"
 sciquest new --start-agent
 ```
 
@@ -123,7 +123,7 @@ The built-in `run-next` command creates a deterministic experiment scaffold and 
 To run a scheduler-style agent iteration directly instead of creating only the scaffold:
 
 ```bash
-sciquest run-next --quest <quest_slug> --start-agent --agent-command "codex"
+sciquest run-next --quest <quest_slug> --start-agent --agent-command "hermes chat -q"
 ```
 
 ## Notebook requirements
