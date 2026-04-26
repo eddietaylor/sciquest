@@ -3,8 +3,25 @@ from __future__ import annotations
 from html import escape
 from pathlib import Path
 from typing import Any
+import base64
+import mimetypes
 
 from .io import read_yaml
+
+
+def _logo_html(quest_path: Path) -> str:
+    candidates = [
+        quest_path / "artifacts" / "logo.png",
+        quest_path / "artifacts" / "logo.jpg",
+        quest_path / "artifacts" / "logo.jpeg",
+        Path("/home/edtaylor/Downloads/ChatGPT Image Apr 26, 2026, 09_35_07 PM.png"),
+    ]
+    logo = next((p for p in candidates if p.exists() and p.is_file()), None)
+    if not logo:
+        return '<div class="logo-fallback">SciQuest</div>'
+    mime = mimetypes.guess_type(str(logo))[0] or "image/png"
+    data = base64.b64encode(logo.read_bytes()).decode("ascii")
+    return f'<img class="sciquest-logo" src="data:{mime};base64,{data}" alt="SciQuest logo">'
 
 
 def _list_items(items: list[Any]) -> str:
@@ -173,6 +190,7 @@ def build_dashboard(quest_path: Path, output_dir: Path | None = None) -> Path:
 </section>
 ''')
     html = DASHBOARD_TEMPLATE.format(
+        logo=_logo_html(quest_path),
         title=escape(str(quest.get("slug", quest_path.name))),
         hero=escape(str(quest.get("hero_statement", ""))),
         problem=escape(str(quest.get("problem_statement", ""))),
@@ -202,15 +220,16 @@ window.MathJax = {{
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
-:root {{ color-scheme: dark; --bg:#07111f; --panel:#101b2d; --panel2:#0c1728; --text:#e5f0ff; --muted:#93a4bb; --cyan:#22d3ee; --emerald:#34d399; --violet:#a78bfa; --amber:#fbbf24; --line:#22334d; }}
-* {{ box-sizing:border-box; }} body {{ margin:0; font-family:Inter, ui-sans-serif, system-ui, sans-serif; background:radial-gradient(circle at top left,#123456 0,#07111f 35%,#020617 100%); color:var(--text); }}
-.shell {{ display:grid; grid-template-columns:280px 1fr; min-height:100vh; }}
-.sidebar {{ position:sticky; top:0; height:100vh; padding:24px; border-right:1px solid var(--line); background:rgba(2,6,23,.82); }}
-.brand {{ font-weight:800; letter-spacing:.08em; color:var(--cyan); }} .exp-tab {{ width:100%; display:flex; justify-content:space-between; gap:12px; padding:10px 12px; margin:8px 0; color:var(--text); text-align:left; border:1px solid var(--line); border-radius:12px; background:#0f172a; cursor:pointer; }} .exp-tab:hover,.exp-tab.active {{ border-color:var(--cyan); background:rgba(34,211,238,.12); }}
-main {{ padding:32px; }} .hero {{ border:1px solid var(--line); border-radius:24px; padding:28px; background:linear-gradient(135deg,rgba(34,211,238,.12),rgba(167,139,250,.1)); margin-bottom:24px; }}
-h1 {{ margin:.2rem 0; font-size:32px; }} .muted, .eyebrow {{ color:var(--muted); }} .eyebrow {{ text-transform:uppercase; letter-spacing:.14em; font-size:12px; }}
-.experiment {{ display:none; margin:28px 0; padding-top:8px; }} .experiment.active {{ display:block; }} .exp-header {{ display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }} .score {{ border:1px solid var(--emerald); padding:12px 16px; border-radius:16px; background:rgba(52,211,153,.08); }} .score span {{ display:block; color:var(--muted); font-size:12px; }} .score strong {{ color:var(--emerald); }}
-.grid.two {{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }} .panel {{ border:1px solid var(--line); border-radius:18px; background:rgba(15,23,42,.88); padding:18px; margin-bottom:18px; box-shadow:0 20px 50px rgba(0,0,0,.22); }}
+:root {{ color-scheme: dark; --bg:#050B16; --panel:#0A1626; --panel2:#101F33; --text:#EAF7FF; --muted:#8CA4BD; --cyan:#22E6FF; --aqua:#3FFFE0; --emerald:#45FF7A; --lime:#A6FF3D; --violet:#9B6CFF; --magenta:#C06BFF; --amber:#D6FF4D; --line:rgba(34,230,255,.22); }}
+* {{ box-sizing:border-box; }} body {{ margin:0; font-family:Inter, Space Grotesk, ui-sans-serif, system-ui, sans-serif; background:radial-gradient(circle at 20% 0%, rgba(34,230,255,.16), transparent 32%), radial-gradient(circle at 90% 15%, rgba(155,108,255,.12), transparent 30%), #050B16; color:var(--text); }}
+.shell {{ display:grid; grid-template-columns:320px 1fr; min-height:100vh; }}
+.sidebar {{ position:sticky; top:0; height:100vh; padding:22px; border-right:1px solid rgba(34,230,255,.18); background:linear-gradient(180deg,rgba(5,11,22,.96),rgba(8,18,31,.9)); box-shadow:10px 0 40px rgba(34,230,255,.05); overflow:auto; }}
+.brand {{ margin-bottom:20px; }} .sciquest-logo {{ width:100%; max-width:235px; display:block; margin:0 auto 12px; border-radius:18px; box-shadow:0 0 28px rgba(34,230,255,.22),0 0 50px rgba(166,255,61,.08); }} .logo-fallback {{ font-size:28px; font-weight:900; background:linear-gradient(90deg,var(--cyan),var(--emerald),var(--lime)); -webkit-background-clip:text; color:transparent; }} .brand-title {{ font-weight:800; letter-spacing:.08em; color:var(--cyan); text-align:center; text-transform:uppercase; font-size:12px; }}
+.exp-tab {{ width:100%; display:flex; justify-content:space-between; gap:12px; padding:10px 12px; margin:8px 0; color:var(--text); text-align:left; border:1px solid rgba(34,230,255,.18); border-radius:14px; background:rgba(10,22,38,.78); cursor:pointer; box-shadow:inset 0 0 16px rgba(155,108,255,.03); }} .exp-tab:hover,.exp-tab.active {{ border-color:var(--cyan); background:linear-gradient(90deg,rgba(34,230,255,.16),rgba(69,255,122,.08)); box-shadow:0 0 18px rgba(34,230,255,.16); }}
+main {{ padding:34px; }} .hero {{ position:relative; border:1px solid rgba(34,230,255,.23); border-radius:26px; padding:30px; background:linear-gradient(135deg,rgba(34,230,255,.12),rgba(155,108,255,.09) 54%,rgba(166,255,61,.07)); margin-bottom:24px; box-shadow:0 0 40px rgba(34,230,255,.08), inset 0 0 24px rgba(155,108,255,.04); }}
+h1 {{ margin:.2rem 0; font-size:34px; letter-spacing:-.03em; line-height:1.05; }} h2 {{ font-weight:650; color:#dff7ff; }} .muted, .eyebrow {{ color:var(--muted); }} .eyebrow {{ text-transform:uppercase; letter-spacing:.16em; font-size:12px; color:var(--aqua); }} .cycle-strip {{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:16px; }} .cycle-strip span {{ border:1px solid rgba(166,255,61,.32); color:#dfffc6; border-radius:999px; padding:6px 10px; font-size:12px; letter-spacing:.08em; text-transform:uppercase; background:rgba(166,255,61,.06); }}
+.experiment {{ display:none; margin:28px 0; padding-top:8px; }} .experiment.active {{ display:block; }} .exp-header {{ display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }} .score {{ border:1px solid var(--emerald); padding:12px 16px; border-radius:16px; background:rgba(69,255,122,.08); box-shadow:0 0 20px rgba(69,255,122,.08); }} .score span {{ display:block; color:var(--muted); font-size:12px; }} .score strong {{ color:var(--emerald); }}
+.grid.two {{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }} .panel {{ border:1px solid var(--line); border-radius:20px; background:rgba(10,22,38,.82); padding:20px; margin-bottom:18px; box-shadow:0 20px 60px rgba(0,0,0,.28), 0 0 24px rgba(34,230,255,.05), inset 0 0 18px rgba(155,108,255,.035); backdrop-filter:blur(10px); }} .panel h3 {{ margin-top:0; color:#F2FBFF; letter-spacing:-.01em; }}
 dl {{ display:grid; grid-template-columns:160px 1fr; gap:8px 14px; }} dt {{ color:var(--muted); }} dd {{ margin:0; }} .feature-cols {{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }}
 .media-grid {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:16px; }} figure {{ margin:0; border:1px solid var(--line); background:white; border-radius:14px; padding:10px; overflow:hidden; }} figcaption {{ color:#0f172a; font-weight:700; margin-bottom:8px; }} .svg-wrap svg {{ width:100%; height:auto; display:block; }}
 table {{ width:100%; border-collapse:collapse; }} th,td {{ text-align:left; padding:10px; border-bottom:1px solid var(--line); }} th {{ color:var(--cyan); }} pre {{ white-space:pre-wrap; font-family:inherit; color:var(--text); line-height:1.5; }} .empty {{ color:var(--muted); padding:12px; }} .metric-defs {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; }} .metric-card {{ border:1px solid var(--line); border-radius:14px; padding:14px; background:rgba(2,6,23,.45); }} .metric-card h4 {{ margin:0 0 8px; color:var(--cyan); }} .equation {{ color:var(--amber); font-family:'Times New Roman',serif; font-size:18px; }}
@@ -218,7 +237,7 @@ table {{ width:100%; border-collapse:collapse; }} th,td {{ text-align:left; padd
 </style>
 </head>
 <body>
-<div class="shell"><aside class="sidebar"><div class="brand">SciQuest Dashboard</div><p class="muted">Status: {status}<br>Best score: {best}</p><nav>{nav}</nav></aside><main><section class="hero"><p class="eyebrow">Quest</p><h1>{title}</h1><h2>{hero}</h2><p>{problem}</p></section>{sections}{metric_definitions}{model_abstraction}</main></div>
+<div class="shell"><aside class="sidebar"><div class="brand">{logo}<div class="brand-title">SciQuest Dashboard</div></div><p class="muted">Status: {status}<br>Best score: {best}</p><nav>{nav}</nav></aside><main><section class="hero"><div class="cycle-strip"><span>Hypothesize</span><span>Model</span><span>Validate</span><span>Iterate</span></div><p class="eyebrow">Quest</p><h1>{title}</h1><h2>{hero}</h2><p>{problem}</p></section>{sections}{metric_definitions}{model_abstraction}</main></div>
 <script>
 function showExperiment(id) {{
   document.querySelectorAll('.experiment').forEach(el => el.classList.toggle('active', el.id === id));

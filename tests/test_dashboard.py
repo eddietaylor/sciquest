@@ -15,6 +15,7 @@ def make_minimal_valid_experiment(tmp_path: Path) -> Path:
     (exp / "logs").mkdir(parents=True)
     (quest / "reports").mkdir(parents=True)
     (quest / "artifacts").mkdir()
+    (quest / "artifacts" / "logo.png").write_bytes(b"fake-logo")
     (quest / "logs").mkdir()
     (quest / "quest.yaml").write_text("slug: demo\nhero_statement: Hero\nproblem_statement: Problem\n")
     (quest / "state.yaml").write_text("quest_status: idle\nlast_experiment: exp_001\nbest_score: 0.8\n")
@@ -66,8 +67,11 @@ def test_dashboard_builds_dynamic_experiment_page(tmp_path):
     assert "Model Architecture" in html
     assert "Validation Technique" in html
     assert "Accuracy" in html
-    assert "<img " not in html
+    assert "artifacts/plots/accuracy.svg" not in html
     assert "Graph Interpretation" in html
+    assert "sciquest-logo" in html
+    assert "data:image/png;base64" in html
+    assert "cycle-strip" in html
 
 
 def test_dashboard_uses_clickable_single_experiment_panes(tmp_path):
