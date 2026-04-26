@@ -31,6 +31,7 @@ sciquest continue --quest <quest_slug> --idea "new idea" --data "new data note"
 sciquest list
 sciquest status --quest <quest_slug>
 sciquest run-next --quest <quest_slug>
+sciquest run-loop --quest <quest_slug> --start-agent --agent-command "hermes chat -q"
 sciquest validate --quest <quest_slug> --experiment exp_001
 sciquest logic-check --quest <quest_slug> --experiment exp_001
 sciquest dashboard --quest <quest_slug>
@@ -226,6 +227,28 @@ experiments/exp_NNN/artifacts/diagrams/
 - `lock_id`
 
 `run-next` acquires a lock to prevent concurrent runs and releases it after success or failure.
+
+## Iteration loop mode
+
+Run multiple autonomous iterations sequentially:
+
+```bash
+sciquest run-loop --quest <quest_slug> --start-agent --agent-command "hermes chat -q"
+```
+
+By default, `run-loop` runs at most 3 iterations. Override this with:
+
+```bash
+sciquest run-loop --quest <quest_slug> --max-iterations 10 --start-agent --agent-command "hermes chat -q"
+```
+
+The loop is foreground and deterministic: it starts the next iteration only after the prior `run-next`/agent process returns and `state.yaml` is idle/unlocked. If an iteration fails or the quest remains locked/running, the loop stops rather than stacking concurrent runs.
+
+For package tests or scaffold-only dry runs:
+
+```bash
+sciquest run-loop --quest <quest_slug> --agent-stub --max-iterations 3
+```
 
 ## Scheduling
 

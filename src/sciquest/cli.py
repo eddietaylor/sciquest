@@ -12,6 +12,7 @@ from .validation import validate_experiment
 from .logic import run_logic_check
 from .agent import NEWTON_SPLASH, launch_agent
 from .dashboard import build_dashboard
+from .loop import run_iteration_loop
 
 app = typer.Typer(help="SciQuest autonomous research framework")
 console = Console()
@@ -104,6 +105,35 @@ def run_next_cmd(
         return
     exp_id = run_next(qpath, agent_stub=agent_stub, execute=execute)
     console.print(f"Created {exp_id}")
+
+
+@app.command("run-loop")
+def run_loop_cmd(
+    quest: str = typer.Option(..., "--quest", "-q"),
+    root: Path = typer.Option(Path.cwd()),
+    max_iterations: int = typer.Option(3, "--max-iterations", "-n", help="Maximum iterations to run; default is 3"),
+    agent_stub: bool = typer.Option(False, help="Use deterministic scaffold iterations instead of an external agent"),
+    execute: bool = typer.Option(False, help="Execute generated stub notebooks"),
+    start_agent: bool = typer.Option(False, help="Launch the configured external agent for each iteration"),
+    agent_command: Optional[str] = typer.Option(None, help="External agent command. Also configurable via SCIQUEST_AGENT_COMMAND"),
+    wait_timeout_seconds: float = typer.Option(0.0, help="Seconds to wait for an in-progress previous iteration; 0 means fail immediately"),
+):
+    """Run multiple iterations sequentially, starting the next only after the previous one completes."""
+    result = run_iteration_loop(
+        _qpath(root, quest),
+        max_iterations=max_iterations,
+        agent_stub=agent_stub,
+        execute=execute,
+        start_agent=start_agent,
+        agent_command=agent_command,
+        wait_timeout_seconds=wait_timeout_seconds,
+    )
+    console.print(f"Completed {result['completed_iterations']}/{result['requested_iterations']} iterations")
+    if result["experiments"]:
+        console.print(f"Experiments: {', '.join(result['experiments'])}")
+    if result.get("failed"):
+        console.print(f"Loop stopped: {result.get('error')}")
+        raise typer.Exit(1)
 
 
 @app.command("validate")
