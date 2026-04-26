@@ -93,6 +93,9 @@ def test_dashboard_includes_metric_definitions_and_latex_equations(tmp_path):
     assert "Validation Metric Definitions" in html
     assert "Weighted aggregate score" in html
     assert "\\sum_i w_i" in html
+    assert "MathJax" in html
+    assert "tex-mml-chtml.js" in html
+    assert "\\(" in html and "\\)" in html
     assert "WAPE" in html
     assert "RMSE" in html
 

@@ -136,6 +136,13 @@ DASHBOARD_TEMPLATE = """<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SciQuest Dashboard - {title}</title>
+<script>
+window.MathJax = {{
+  tex: {{ inlineMath: [['\\\\(', '\\\\)'], ['$', '$']], displayMath: [['\\\\[', '\\\\]']] }},
+  svg: {{ fontCache: 'global' }}
+}};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
 :root {{ color-scheme: dark; --bg:#07111f; --panel:#101b2d; --panel2:#0c1728; --text:#e5f0ff; --muted:#93a4bb; --cyan:#22d3ee; --emerald:#34d399; --violet:#a78bfa; --amber:#fbbf24; --line:#22334d; }}
 * {{ box-sizing:border-box; }} body {{ margin:0; font-family:Inter, ui-sans-serif, system-ui, sans-serif; background:radial-gradient(circle at top left,#123456 0,#07111f 35%,#020617 100%); color:var(--text); }}
@@ -175,32 +182,32 @@ METRIC_DEFINITIONS_HTML = r"""
     <article class="metric-card">
       <h4>Weighted aggregate score</h4>
       <p>Normalized metric scores are combined with user/agent-defined weights.</p>
-      <p class="equation">S = \sum_i w_i s_i / \sum_i w_i</p>
+      <p class="equation">\(S = \sum_i w_i s_i / \sum_i w_i\)</p>
     </article>
     <article class="metric-card">
       <h4>WAPE</h4>
       <p>Weighted absolute percentage error. Lower is better for forecast/counterfactual error.</p>
-      <p class="equation">WAPE = \frac{\sum_i |y_i - \hat{y}_i|}{\sum_i |y_i|}</p>
+      <p class="equation">\(WAPE = \frac{\sum_i |y_i - \hat{y}_i|}{\sum_i |y_i|}\)</p>
     </article>
     <article class="metric-card">
       <h4>Relative WAPE lift</h4>
       <p>Improvement versus a baseline simulator or model. Higher is better.</p>
-      <p class="equation">Lift = (WAPE_{baseline} - WAPE_{model}) / WAPE_{baseline}</p>
+      <p class="equation">\(Lift = (WAPE_{baseline} - WAPE_{model}) / WAPE_{baseline}\)</p>
     </article>
     <article class="metric-card">
       <h4>RMSE</h4>
       <p>Root mean squared error, used here for demand/unit prediction error. Lower is better.</p>
-      <p class="equation">RMSE = \sqrt{\frac{1}{n}\sum_i (y_i - \hat{y}_i)^2}</p>
+      <p class="equation">\(RMSE = \sqrt{\frac{1}{n}\sum_i (y_i - \hat{y}_i)^2}\)</p>
     </article>
     <article class="metric-card">
       <h4>Rank correlation</h4>
       <p>Spearman correlation of true and predicted price-action rankings. Higher is better.</p>
-      <p class="equation">\rho = corr(rank(y), rank(\hat{y}))</p>
+      <p class="equation">\(\rho = corr(rank(y), rank(\hat{y}))\)</p>
     </article>
     <article class="metric-card">
       <h4>Law-of-demand pass rate</h4>
       <p>Share of comparable states where predicted demand is non-increasing as price rises.</p>
-      <p class="equation">PassRate = \frac{1}{|G|}\sum_g 1[\hat{d}_{g,p_1} \geq \hat{d}_{g,p_2}\;\forall p_1&lt;p_2]</p>
+      <p class="equation">\(PassRate = \frac{1}{|G|}\sum_g 1[\hat{d}_{g,p_1} \geq \hat{d}_{g,p_2}\;\forall p_1&lt;p_2]\)</p>
     </article>
   </div>
 </section>
