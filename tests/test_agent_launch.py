@@ -1,6 +1,6 @@
 from typer.testing import CliRunner
 
-from sciquest.agent import build_agent_prompt, build_agent_argv, parse_agent_command
+from sciquest.agent import SCIQUEST_SPLASH, build_agent_prompt, build_agent_argv, parse_agent_command
 from sciquest.cli import app
 
 
@@ -48,10 +48,25 @@ def test_new_with_start_agent_runs_configured_agent_command(tmp_path):
     assert "Agent completed" in result.output
 
 
-def test_new_prints_newton_splash_by_default(tmp_path):
+def test_new_prints_sciquest_banner_by_default(tmp_path):
     runner = CliRunner()
     inputs = "Hero\nProblem\nHypothesis\n\n\n\n\ny\n"
     result = runner.invoke(app, ["new", "--root", str(tmp_path), "--slug", "splash-demo"], input=inputs)
     assert result.exit_code == 0, result.output
-    assert "SciQuest" in result.output
-    assert "Newton" in result.output
+    assert "SCI-QUEST" in result.output
+    assert "autonomous research framework" in result.output
+
+
+def test_continue_prints_sciquest_banner_by_default(tmp_path):
+    runner = CliRunner()
+    inputs = "Hero\nProblem\nHypothesis\n\n\n\n\ny\n"
+    assert runner.invoke(app, ["new", "--root", str(tmp_path), "--slug", "demo", "--no-splash"], input=inputs).exit_code == 0
+    result = runner.invoke(app, ["continue", "--root", str(tmp_path), "--quest", "demo", "--idea", "next idea"])
+    assert result.exit_code == 0, result.output
+    assert "SCI-QUEST" in result.output
+    assert "Quest updated with injection" in result.output
+
+
+def test_sciquest_splash_constant_has_ansi_color_and_banner_text():
+    assert "SCI-QUEST" in SCIQUEST_SPLASH
+    assert "\033[" in SCIQUEST_SPLASH

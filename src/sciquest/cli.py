@@ -10,7 +10,7 @@ from .core import create_quest, list_quests, run_next, continue_quest, update_st
 from .io import quest_dir, read_yaml, append_text
 from .validation import validate_experiment
 from .logic import run_logic_check
-from .agent import NEWTON_SPLASH, launch_agent
+from .agent import SCIQUEST_SPLASH, launch_agent
 from .dashboard import build_dashboard
 from .loop import run_iteration_loop
 
@@ -31,11 +31,11 @@ def new_quest(
     slug: Optional[str] = typer.Option(None, help="Quest slug"),
     start_agent: bool = typer.Option(False, help="After creating the quest, launch the configured external agent"),
     agent_command: Optional[str] = typer.Option(None, help="External agent command. Also configurable via SCIQUEST_AGENT_COMMAND"),
-    splash: bool = typer.Option(True, "--splash/--no-splash", help="Show the Newton/SciQuest startup splash"),
+    splash: bool = typer.Option(True, "--splash/--no-splash", help="Show the SCI-QUEST startup banner"),
 ):
     """Create a new quest and initialize all artifacts."""
     if splash:
-        console.print(NEWTON_SPLASH)
+        console.print(SCIQUEST_SPLASH)
     answers = {
         "hero_statement": typer.prompt("Hero Statement"),
         "problem_statement": typer.prompt("Problem Statement"),
@@ -64,8 +64,11 @@ def continue_cmd(
     root: Path = typer.Option(Path.cwd()),
     idea: Optional[str] = typer.Option(None, help="New idea to inject"),
     data: Optional[str] = typer.Option(None, help="New data note/path to inject"),
+    splash: bool = typer.Option(True, "--splash/--no-splash", help="Show the SCI-QUEST banner"),
 ):
     """Resume an existing quest, optionally inject new ideas/data."""
+    if splash:
+        console.print(SCIQUEST_SPLASH)
     continue_quest(_qpath(root, quest), idea, data)
     console.print("Quest updated with injection.")
 
