@@ -33,6 +33,7 @@ sciquest status --quest <quest_slug>
 sciquest run-next --quest <quest_slug>
 sciquest validate --quest <quest_slug> --experiment exp_001
 sciquest logic-check --quest <quest_slug> --experiment exp_001
+sciquest dashboard --quest <quest_slug>
 sciquest journal --quest <quest_slug>
 sciquest journal --quest <quest_slug> --append "manual note"
 ```
@@ -163,6 +164,39 @@ Supported directions are `maximize`, `minimize`, and `target`. Supported normali
 
 Aggregate score is the weighted mean of normalized metric scores.
 
+## Dashboard
+
+Build a dynamic static HTML dashboard for a quest:
+
+```bash
+sciquest dashboard --quest <quest_slug>
+```
+
+The dashboard is written to:
+
+```text
+quests/<quest_slug>/reports/dashboard/index.html
+```
+
+It lets you click through experiment iterations and displays, when documented by the agent:
+
+- task type: supervised, unsupervised, generative, simulation, causal, etc.
+- model architecture
+- input features and target features
+- model architecture diagram
+- validation technique diagram
+- result graphs from `artifacts/plots/`
+- validation metrics and aggregate score
+- interpretation extracted from `experiment_report.md`
+
+Agents should place technical SVG diagrams under:
+
+```text
+experiments/exp_NNN/artifacts/diagrams/
+  model_architecture.svg
+  validation_technique.svg
+```
+
 ## Logic check
 
 `sciquest logic-check` verifies, as far as deterministic infrastructure can, that:
@@ -174,6 +208,9 @@ Aggregate score is the weighted mean of normalized metric scores.
 - data manifest status is visible
 - no missing validation results create silent failures
 - reports separate speculation from evidence
+- required experiment subdirectories exist, including `artifacts/plots/` and `artifacts/diagrams/`
+- generated/synthetic datasets preserve a data generation artifact
+- experiment metadata includes dashboard fields such as task type, features, targets, model architecture, and validation technique
 
 ## State and locking
 

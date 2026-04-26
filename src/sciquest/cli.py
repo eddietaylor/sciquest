@@ -11,6 +11,7 @@ from .io import quest_dir, read_yaml, append_text
 from .validation import validate_experiment
 from .logic import run_logic_check
 from .agent import NEWTON_SPLASH, launch_agent
+from .dashboard import build_dashboard
 
 app = typer.Typer(help="SciQuest autonomous research framework")
 console = Console()
@@ -129,6 +130,17 @@ def logic_check_cmd(
     console.print(result)
     if not result["passed"]:
         raise typer.Exit(1)
+
+
+@app.command("dashboard")
+def dashboard_cmd(
+    quest: str = typer.Option(..., "--quest", "-q"),
+    root: Path = typer.Option(Path.cwd()),
+    output_dir: Optional[Path] = typer.Option(None, help="Output directory for static dashboard"),
+):
+    """Build a static dashboard for visualizing experiment iterations."""
+    out = build_dashboard(_qpath(root, quest), output_dir)
+    console.print(f"Dashboard written: {out}")
 
 
 @app.command("journal")

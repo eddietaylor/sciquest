@@ -101,7 +101,20 @@ def run_next(qpath: Path, agent_stub: bool = False, execute: bool = False) -> st
     try:
         for sub in ["logs", "artifacts/plots", "artifacts/diagrams"]:
             (exp / sub).mkdir(parents=True, exist_ok=False)
-        write_yaml(exp / "experiment.yaml", {"id": exp_id, "created_at": utc_now(), "status": "agent_stub" if agent_stub else "agent_required"})
+        write_yaml(exp / "experiment.yaml", {
+            "id": exp_id,
+            "created_at": utc_now(),
+            "status": "agent_stub" if agent_stub else "agent_required",
+            "task_type": "agent_required",
+            "model_architecture": "agent_required",
+            "input_features": [],
+            "target_features": [],
+            "validation_technique": "agent_required",
+            "technical_diagrams": [
+                "artifacts/diagrams/model_architecture.svg",
+                "artifacts/diagrams/validation_technique.svg",
+            ],
+        })
         (exp / "hypothesis.md").write_text("# Hypothesis\n\nAgent must evolve one testable hypothesis for this iteration.\n", encoding="utf-8")
         create_stub_notebook(exp / "notebook.ipynb", exp_id)
         if execute:
