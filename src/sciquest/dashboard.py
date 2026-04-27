@@ -12,6 +12,89 @@ from .io import read_yaml
 
 SEMANTIC_CSS_CLASSES = "semantic-state semantic-action semantic-pass semantic-metric semantic-risk semantic-best"
 
+OPERATOR_EXPLANATIONS: tuple[dict[str, Any], ...] = (
+    {
+        "term": "Inverse-propensity-weighted ridge regression",
+        "aliases": ("inverse-propensity-weighted ridge regression", "inverse propensity weighted ridge regression"),
+        "explanation": (
+            "Some observations are more likely to appear under certain pricing policies. "
+            "Inverse propensity weighting tries to rebalance the training data so the model does not simply learn "
+            "the historical pricing policy. Ridge regression is the actual prediction model, with regularization "
+            "to avoid overfitting."
+        ),
+    },
+    {
+        "term": "Log-demand space",
+        "aliases": ("log-demand space", "log demand space"),
+        "explanation": (
+            "The model predicts the logarithm of demand instead of raw demand. This usually stabilizes variance "
+            "and helps keep predictions positive after exponentiation."
+        ),
+    },
+    {
+        "term": "Rank-aware objective",
+        "aliases": ("rank-aware objective", "rank aware objective"),
+        "explanation": (
+            "The model is not only judged by absolute error. It is also judged by whether it correctly ranks "
+            "scenarios from better to worse."
+        ),
+    },
+    {
+        "term": "Law-of-demand pass rate",
+        "aliases": ("law-of-demand pass rate", "law of demand pass rate"),
+        "explanation": "This checks whether predicted demand usually decreases when price increases.",
+    },
+)
+
+
+_OPERATOR_ALIAS_MAP = {
+    alias.lower(): item
+    for item in OPERATOR_EXPLANATIONS
+    for alias in item["aliases"]
+}
+
+
+def _operator_explain_text(text: str) -> str:
+    if not text:
+        return escape("Not documented")
+    aliases = sorted(_OPERATOR_ALIAS_MAP, key=len, reverse=True)
+    if not aliases:
+        return escape(text)
+    pattern = re.compile(r"(?<![\w-])(" + "|".join(re.escape(alias) for alias in aliases) + r")(?![\w-])", re.IGNORECASE)
+    chunks: list[str] = []
+    last = 0
+    for match in pattern.finditer(text):
+        chunks.append(escape(text[last:match.start()]))
+        item = _OPERATOR_ALIAS_MAP[match.group(0).lower()]
+        chunks.append(
+            '<details class="operator-explain">'
+            f'<summary>{escape(str(item["term"]))}</summary>'
+            f'<p>{escape(str(item["explanation"]))}</p>'
+            '</details>'
+        )
+        last = match.end()
+    chunks.append(escape(text[last:]))
+    return "".join(chunks)
+
+
+def _operator_glossary_section() -> str:
+    cards = []
+    for item in OPERATOR_EXPLANATIONS:
+        cards.append(
+            '<details class="operator-explain operator-card">'
+            f'<summary>{escape(str(item["term"]))}</summary>'
+            f'<p>{escape(str(item["explanation"]))}</p>'
+            '</details>'
+        )
+    return f'''
+<section class="panel operator-mode" id="operator-explanations">
+  <p class="eyebrow">Explainability Mode</p>
+  <h3>Explain this like I’m the operator</h3>
+  <p class="muted">Technical phrases in the dashboard appear as expandable chips. Open them when you want the operational meaning without losing the scientific detail.</p>
+  <div class="operator-grid">{"".join(cards)}</div>
+</section>
+'''
+
 
 def _logo_html(quest_path: Path) -> str:
     candidates = [
@@ -47,17 +130,17 @@ def _fmt(value: Any, digits: int = 4) -> str:
 def _list_items(items: list[Any]) -> str:
     if not items:
         return "<li>Not documented</li>"
-    return "".join(f"<li>{escape(str(item))}</li>" for item in items)
+    return "".join(f"<li>{_operator_explain_text(str(item))}</li>" for item in items)
 
 
 def _split_description(text: str) -> str:
     parts = [p.strip(" .") for p in re.split(r";|\. (?=[A-Z])", text or "") if p.strip()]
     if len(parts) <= 1:
-        return f"<p>{escape(text or 'Not documented')}</p>"
+        return f"<p>{_operator_explain_text(text or 'Not documented')}</p>"
     labels = ["Architecture", "Training signal", "Constraints", "Baselines", "Calibration", "Exclusions", "Notes"]
     rows = []
     for i, part in enumerate(parts):
-        rows.append(f"<li><span>{labels[min(i, len(labels)-1)]}</span>{escape(part)}</li>")
+        rows.append(f"<li><span>{labels[min(i, len(labels)-1)]}</span>{_operator_explain_text(part)}</li>")
     return f'<ul class="model-field-list">{"".join(rows)}</ul>'
 
 
@@ -69,7 +152,7 @@ def _metric_table(validation: dict[str, Any]) -> str:
         score = scores.get(name, {}) if isinstance(scores, dict) else {}
         rows.append(
             "<tr>"
-            f"<td>{escape(str(name))}</td>"
+            f"<td>{_operator_explain_text(str(name).replace('_', ' '))}</td>"
             f"<td class='mono'>{_fmt(raw, 6)}</td>"
             f"<td class='mono'>{_fmt(score.get('normalized'), 6) if score else '—'}</td>"
             f"<td class='mono'>{_fmt(score.get('weight'), 3) if score else '—'}</td>"
@@ -87,7 +170,7 @@ def _metric_scorecards(validation: dict[str, Any]) -> str:
         cls = "semantic-pass" if normalized is not None and normalized >= 0.75 else "semantic-risk" if normalized is not None and normalized < 0.45 else "semantic-metric"
         cards.append(f"""
         <article class="metric-scorecard {cls}">
-          <span>{escape(str(name).replace('_', ' '))}</span>
+          <span>{_operator_explain_text(str(name).replace('_', ' '))}</span>
           <strong class="mono">{_fmt(raw, 5)}</strong>
           <small>normalized {_fmt(normalized, 3) if normalized is not None else '—'}</small>
         </article>""")
@@ -315,9 +398,9 @@ def _data_panel(meta: dict[str, Any], manifest: dict[str, Any], quest_path: Path
 
 
 def _model_abstraction_section(meta: dict[str, Any]) -> str:
-    architecture = escape(str(meta.get("model_architecture", "Not documented")))
-    task_type = escape(str(meta.get("task_type", "Not documented")))
-    validation = escape(str(meta.get("validation_technique", "Not documented")))
+    architecture = _operator_explain_text(str(meta.get("model_architecture", "Not documented")))
+    task_type = _operator_explain_text(str(meta.get("task_type", "Not documented")))
+    validation = _operator_explain_text(str(meta.get("validation_technique", "Not documented")))
     svg = """
 <svg id="ResearchModelAbstraction" xmlns="http://www.w3.org/2000/svg" width="1180" height="430" viewBox="0 0 1180 430">
   <defs><marker id="rma-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#22E6FF"/></marker></defs>
@@ -448,6 +531,7 @@ def build_dashboard(quest_path: Path, output_dir: Path | None = None) -> Path:
         best=escape(str(state.get("best_score", "pending"))),
         nav="".join(nav) or '<span class="empty">No experiments yet.</span>',
         sections="".join(sections) or '<section class="panel"><h2>No experiments yet</h2></section>',
+        operator_glossary=_operator_glossary_section(),
         metric_definitions=METRIC_DEFINITIONS_HTML,
         model_abstraction=_model_abstraction_section(latest_meta),
         semantic_classes=SEMANTIC_CSS_CLASSES,
@@ -481,12 +565,13 @@ dl {{ display:grid; grid-template-columns:150px 1fr; gap:12px 18px; }} dt {{ col
 .metric-scorecards {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:14px; margin-bottom:22px; }} table {{ width:100%; border-collapse:collapse; }} th,td {{ text-align:left; padding:11px; border-bottom:1px solid rgba(34,230,255,.12); }} th {{ color:var(--cyan); font-family:Space Grotesk; }}
 .media-grid {{ display:grid; gap:18px; }} .diagrams-grid {{ grid-template-columns:repeat(auto-fit,minmax(380px,1fr)); }} .result-grid {{ grid-template-columns:repeat(2,minmax(0,1fr)); }} figure {{ margin:0; border:1px solid rgba(34,230,255,.18); background:#07111f; border-radius:18px; padding:12px; overflow:hidden; }} figcaption {{ color:var(--cyan); font-weight:800; margin-bottom:8px; font-family:Space Grotesk; }} .figure-caption {{ color:var(--muted); font-size:13px; margin:.7rem 0 0; }} .svg-wrap svg {{ width:100%; height:auto; display:block; border-radius:12px; }} .themed-svg {{ background:#07111f; }} pre {{ white-space:pre-wrap; font-family:Inter; color:var(--text); line-height:1.55; }}
 .metric-defs {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:14px; }} .metric-card {{ border:1px solid rgba(155,108,255,.28); border-radius:16px; padding:15px; background:rgba(2,6,23,.45); overflow:hidden; }} .metric-card h4 {{ margin:0 0 8px; color:var(--cyan); }} .equation {{ color:var(--gold); font-family:JetBrains Mono, monospace; font-size:14px; overflow-x:auto; max-width:100%; padding-bottom:4px; }} .next-card {{ border-color:rgba(214,255,77,.35); }}
+.operator-mode {{ border-color:rgba(214,255,77,.28); background:linear-gradient(135deg,rgba(214,255,77,.06),rgba(34,230,255,.05)); }} .operator-grid {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px; }} .operator-explain {{ display:inline-block; vertical-align:baseline; margin:0 2px; }} .operator-explain summary {{ list-style:none; cursor:pointer; color:var(--gold); border:1px solid rgba(214,255,77,.36); border-radius:999px; padding:2px 8px; background:rgba(214,255,77,.07); font-weight:700; }} .operator-explain summary::-webkit-details-marker {{ display:none; }} .operator-explain[open] {{ display:block; margin:8px 0; }} .operator-explain[open] summary {{ border-radius:12px 12px 0 0; }} .operator-explain p {{ margin:0; padding:10px 12px; color:var(--text); border:1px solid rgba(214,255,77,.24); border-top:0; border-radius:0 0 12px 12px; background:rgba(5,11,22,.72); line-height:1.45; }} .operator-card {{ display:block; margin:0; }}
 .semantic-state {{ color:var(--cyan)!important; }} .semantic-action {{ color:var(--orange)!important; }} .semantic-pass {{ color:var(--green)!important; }} .semantic-metric {{ color:var(--purple)!important; }} .semantic-risk {{ color:var(--red)!important; }} .semantic-best {{ color:var(--gold)!important; }} .empty {{ color:var(--muted); padding:12px; }} .sr-only {{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }}
 @media(max-width:1000px) {{ .shell {{ grid-template-columns:1fr; }} .sidebar {{ position:relative; height:auto; }} .grid.two,.verdict-card,.verdict-grid,.feature-cols,.result-grid {{ grid-template-columns:1fr; }} }}
 </style>
 </head>
 <body>
-<div class="shell"><aside class="sidebar"><div class="brand">{logo}<div class="brand-title">SciQuest Dashboard</div></div><p class="muted">Status: {status}<br>Best score: <span class="mono semantic-best">{best}</span></p><nav class="experiment-timeline">{nav}</nav></aside><main><section class="hero"><div class="cycle-strip"><span>Hypothesize</span><span>Model</span><span>Validate</span><span>Iterate</span></div><p class="eyebrow">Quest</p><h1>{title}</h1><h2>{hero}</h2><p>{problem}</p><span class="sr-only">{semantic_classes}</span></section>{sections}{metric_definitions}{model_abstraction}</main></div>
+<div class="shell"><aside class="sidebar"><div class="brand">{logo}<div class="brand-title">SciQuest Dashboard</div></div><p class="muted">Status: {status}<br>Best score: <span class="mono semantic-best">{best}</span></p><nav class="experiment-timeline">{nav}</nav></aside><main><section class="hero"><div class="cycle-strip"><span>Hypothesize</span><span>Model</span><span>Validate</span><span>Iterate</span></div><p class="eyebrow">Quest</p><h1>{title}</h1><h2>{hero}</h2><p>{problem}</p><span class="sr-only">{semantic_classes}</span></section>{operator_glossary}{sections}{metric_definitions}{model_abstraction}</main></div>
 <script>
 function showExperiment(id) {{ document.querySelectorAll('.experiment').forEach(el => el.classList.toggle('active', el.id === id)); document.querySelectorAll('.exp-tab').forEach(el => el.classList.toggle('active', el.dataset.expTarget === id)); history.replaceState(null, '', '#' + id); }}
 window.addEventListener('DOMContentLoaded', () => {{ const requested = location.hash ? location.hash.slice(1) : null; if (requested && document.getElementById(requested)) showExperiment(requested); }});

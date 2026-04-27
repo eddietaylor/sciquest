@@ -144,6 +144,29 @@ def test_dashboard_includes_research_model_abstraction_section(tmp_path):
     assert "ResearchModelAbstraction" in html
 
 
+def test_dashboard_includes_operator_explanations_for_technical_phrases(tmp_path):
+    quest = make_minimal_valid_experiment(tmp_path)
+    exp = quest / "experiments" / "exp_001"
+    meta = yaml.safe_load((exp / "experiment.yaml").read_text())
+    meta["model_architecture"] = "Inverse-propensity-weighted ridge regression in log-demand space"
+    meta["validation_technique"] = "Rank-aware objective with law-of-demand pass rate"
+    (exp / "experiment.yaml").write_text(yaml.safe_dump(meta))
+
+    out = build_dashboard(quest)
+    html = out.read_text()
+
+    assert "Explain this like I’m the operator" in html
+    assert "operator-explain" in html
+    assert "Inverse-propensity-weighted ridge regression" in html
+    assert "Some observations are more likely to appear under certain pricing policies" in html
+    assert "Log-demand space" in html
+    assert "The model predicts the logarithm of demand instead of raw demand" in html
+    assert "Rank-aware objective" in html
+    assert "not only judged by absolute error" in html
+    assert "Law-of-demand pass rate" in html
+    assert "predicted demand usually decreases when price increases" in html
+
+
 def test_dashboard_cli_writes_index(tmp_path):
     quest = make_minimal_valid_experiment(tmp_path)
     runner = CliRunner()
