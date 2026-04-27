@@ -4,6 +4,7 @@ from html import escape
 from pathlib import Path
 from typing import Any
 import base64
+import csv
 import mimetypes
 import re
 
@@ -202,6 +203,117 @@ def _human_title(quest: dict[str, Any], quest_path: Path) -> str:
     return slug.replace("-", " ").replace("_", " ").title()
 
 
+def _data_source_label(manifest: dict[str, Any]) -> str:
+    text = " ".join(
+        str(value)
+        for value in [manifest.get("status"), manifest.get("source"), manifest.get("provenance"), manifest.get("description")]
+        if value
+    )
+    for dataset in manifest.get("datasets") or []:
+        if isinstance(dataset, dict):
+            text += " " + " ".join(str(dataset.get(key, "")) for key in ("name", "path", "provenance", "description", "source"))
+    lower = text.lower()
+    if any(word in lower for word in ("synthetic", "generated", "simulated", "agent generated")):
+        return "Synthetic"
+    if any(word in lower for word in ("user", "provided", "uploaded", "declared")):
+        return "User provided"
+    if manifest.get("status") == "missing_user_data":
+        return "Missing user data; agent required"
+    return "Not documented"
+
+
+def _dataset_candidates(quest_path: Path, manifest: dict[str, Any]) -> list[Path]:
+    candidates: list[Path] = []
+    for dataset in manifest.get("datasets") or []:
+        if not isinstance(dataset, dict):
+            continue
+        raw_path = dataset.get("path")
+        if raw_path:
+            p = Path(str(raw_path))
+            candidates.append(p if p.is_absolute() else quest_path / p)
+    candidates.extend(sorted((quest_path / "data" / "raw").glob("*.csv")))
+    candidates.extend(sorted((quest_path / "data" / "processed").glob("*.csv")))
+    seen: set[Path] = set()
+    unique = []
+    for p in candidates:
+        resolved = p.resolve() if p.exists() else p
+        if resolved not in seen:
+            seen.add(resolved)
+            unique.append(p)
+    return unique
+
+
+def _dataset_profile(quest_path: Path, manifest: dict[str, Any]) -> dict[str, Any]:
+    for path in _dataset_candidates(quest_path, manifest):
+        if not path.exists() or path.suffix.lower() != ".csv":
+            continue
+        try:
+            with path.open(newline="", encoding="utf-8", errors="ignore") as f:
+                reader = csv.DictReader(f)
+                fields = reader.fieldnames or []
+                numeric: dict[str, list[float]] = {field: [] for field in fields}
+                rows = 0
+                for row in reader:
+                    rows += 1
+                    for field in fields:
+                        value = _num(row.get(field))
+                        if value is not None:
+                            numeric[field].append(value)
+        except OSError:
+            continue
+        stats = []
+        for field, values in numeric.items():
+            if not values:
+                continue
+            stats.append({
+                "name": field,
+                "count": len(values),
+                "mean": sum(values) / len(values),
+                "min": min(values),
+                "max": max(values),
+            })
+        return {"path": path, "rows": rows, "columns": len(fields), "fields": fields, "stats": stats[:6]}
+    return {"path": None, "rows": None, "columns": None, "fields": [], "stats": []}
+
+
+def _data_panel(meta: dict[str, Any], manifest: dict[str, Any], quest_path: Path) -> str:
+    profile = _dataset_profile(quest_path, manifest)
+    source = _data_source_label(manifest)
+    rows = profile.get("rows")
+    columns = profile.get("columns")
+    shape = f"{rows} rows × {columns} columns" if rows is not None and columns is not None else "Not documented"
+    path = profile.get("path")
+    if isinstance(path, Path) and path.exists():
+        try:
+            path_label = path.relative_to(quest_path)
+        except ValueError:
+            path_label = path
+    else:
+        path_label = "Not documented"
+    stats_rows = []
+    for stat in profile.get("stats") or []:
+        stats_rows.append(
+            "<tr>"
+            f"<td>{escape(str(stat['name']))}</td>"
+            f"<td class='mono'>{_fmt(stat['mean'], 3)}</td>"
+            f"<td class='mono'>{_fmt(stat['min'], 3)}</td>"
+            f"<td class='mono'>{_fmt(stat['max'], 3)}</td>"
+            "</tr>"
+        )
+    stats_html = "".join(stats_rows) or '<tr><td colspan="4">No numeric descriptive statistics available.</td></tr>'
+    return f'''
+    <article class="panel data-panel"><h3>The Data</h3>
+      <div class="data-facts">
+        <div><span>Data source</span><strong>{escape(source)}</strong></div>
+        <div><span>Data shape</span><strong class="mono">{escape(shape)}</strong></div>
+        <div><span>Dataset path</span><strong>{escape(str(path_label))}</strong></div>
+      </div>
+      <div class="feature-cols"><div><h4 class="semantic-state">Input features</h4><ul>{_list_items(meta.get('input_features') or [])}</ul></div><div><h4 class="semantic-action">Targets / outcomes</h4><ul>{_list_items(meta.get('target_features') or [])}</ul></div></div>
+      <h4>Descriptive statistics</h4>
+      <table class="stats-table"><thead><tr><th>Feature</th><th>Mean</th><th>Min</th><th>Max</th></tr></thead><tbody>{stats_html}</tbody></table>
+    </article>'''
+
+
 def _model_abstraction_section(meta: dict[str, Any]) -> str:
     architecture = escape(str(meta.get("model_architecture", "Not documented")))
     task_type = escape(str(meta.get("task_type", "Not documented")))
@@ -263,6 +375,7 @@ def build_dashboard(quest_path: Path, output_dir: Path | None = None) -> Path:
     output_dir.mkdir(parents=True, exist_ok=True)
     quest = read_yaml(quest_path / "quest.yaml", {})
     state = read_yaml(quest_path / "state.yaml", {})
+    data_manifest = read_yaml(quest_path / "data_manifest.yaml", {})
     experiments = [p for p in sorted((quest_path / "experiments").glob("exp_*")) if p.is_dir()]
     exp_data: list[dict[str, Any]] = []
     for exp in experiments:
@@ -311,12 +424,12 @@ def build_dashboard(quest_path: Path, output_dir: Path | None = None) -> Path:
     </div>
   </section>
   <div class="grid two summary-first">
+    {_data_panel(meta, data_manifest, quest_path)}
     <article class="panel"><h3>Task + Model</h3><dl>
       <dt>Task type</dt><dd>{escape(str(meta.get('task_type', 'Not documented')))}</dd>
       <dt>Model architecture</dt><dd>{_split_description(str(meta.get('model_architecture', 'Not documented')))}</dd>
       <dt>Validation technique</dt><dd>{_split_description(str(meta.get('validation_technique', 'Not documented')))}</dd>
     </dl></article>
-    <article class="panel"><h3>Features</h3><div class="feature-cols"><div><h4 class="semantic-state">Inputs</h4><ul>{_list_items(meta.get('input_features') or [])}</ul></div><div><h4 class="semantic-action">Targets / outcomes</h4><ul>{_list_items(meta.get('target_features') or [])}</ul></div></div></article>
   </div>
   <article class="panel"><h3>Executive Validation Scorecards</h3>{_metric_scorecards(validation)}<h4>Detailed validation metrics</h4><table><thead><tr><th>Metric</th><th>Raw</th><th>Normalized</th><th>Weight</th></tr></thead><tbody>{_metric_table(validation)}</tbody></table></article>
   <article class="panel"><h3>Technical Diagrams</h3><div class="media-grid diagrams-grid">{_svg_cards(diagrams, exp, 'Technical Diagrams', interpretation)}</div></article>
@@ -364,7 +477,7 @@ DASHBOARD_TEMPLATE = """<!doctype html>
 .exp-tab {{ position:relative; width:100%; display:grid; grid-template-columns:14px 1fr auto auto; align-items:center; gap:10px; padding:13px 12px; margin:10px 0; color:var(--text); text-align:left; border:1px solid rgba(34,230,255,.18); border-radius:16px; background:rgba(10,22,38,.78); cursor:pointer; }} .exp-tab.active {{ border-color:var(--cyan); box-shadow:0 0 22px rgba(34,230,255,.16); }} .timeline-dot {{ width:10px; height:10px; border-radius:50%; background:var(--purple); box-shadow:0 0 12px var(--purple); }} .timeline-main small {{ display:block; color:var(--muted); max-width:150px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }} .best-badge,.active-badge {{ display:none; position:absolute; top:-8px; right:8px; font-size:9px; border-radius:999px; padding:2px 7px; }} .best-badge {{ display:block; border:1px solid var(--gold); color:var(--gold); background:rgba(214,255,77,.08); }} .exp-tab.active .active-badge {{ display:block; border:1px solid var(--cyan); color:var(--cyan); background:#07111f; }}
 main {{ padding:38px; }} .hero,.panel {{ border:1px solid var(--line); border-radius:24px; background:rgba(10,22,38,.82); box-shadow:0 24px 70px rgba(0,0,0,.32),0 0 28px rgba(34,230,255,.05),inset 0 0 20px rgba(155,108,255,.035); backdrop-filter:blur(10px); }} .hero {{ padding:32px; margin-bottom:28px; background:linear-gradient(135deg,rgba(34,230,255,.13),rgba(155,108,255,.09) 55%,rgba(166,255,61,.06)); }} .panel {{ padding:22px; margin-bottom:22px; }} .cycle-strip {{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px; }} .cycle-strip span {{ border:1px solid rgba(166,255,61,.35); color:#dfffc6; border-radius:999px; padding:6px 11px; font-size:12px; letter-spacing:.08em; text-transform:uppercase; background:rgba(166,255,61,.06); }}
 .experiment {{ display:none; }} .experiment.active {{ display:block; }} .grid.two {{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px; }} .summary-first {{ align-items:start; }} .verdict-card {{ display:grid; grid-template-columns:1.1fr 2fr; gap:24px; border-color:rgba(214,255,77,.28); }} .verdict-grid {{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }} .verdict-grid div,.metric-scorecard {{ border:1px solid rgba(34,230,255,.16); border-radius:16px; padding:14px; background:rgba(5,11,22,.38); }} .verdict-grid span,.metric-scorecard span {{ display:block; color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.08em; margin-bottom:7px; }} .verdict-grid strong,.metric-scorecard strong {{ font-size:22px; }}
-dl {{ display:grid; grid-template-columns:150px 1fr; gap:12px 18px; }} dt {{ color:var(--muted); }} dd {{ margin:0; }} .model-field-list {{ list-style:none; padding:0; margin:0; display:grid; gap:9px; }} .model-field-list li {{ border-left:2px solid var(--cyan); padding-left:10px; }} .model-field-list span {{ display:block; color:var(--cyan); font-size:12px; text-transform:uppercase; letter-spacing:.08em; }} .feature-cols {{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }}
+dl {{ display:grid; grid-template-columns:150px 1fr; gap:12px 18px; }} dt {{ color:var(--muted); }} dd {{ margin:0; }} .model-field-list {{ list-style:none; padding:0; margin:0; display:grid; gap:9px; }} .model-field-list li {{ border-left:2px solid var(--cyan); padding-left:10px; }} .model-field-list span {{ display:block; color:var(--cyan); font-size:12px; text-transform:uppercase; letter-spacing:.08em; }} .feature-cols {{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }} .data-facts {{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin:12px 0 18px; }} .data-facts div {{ border:1px solid rgba(34,230,255,.15); border-radius:14px; background:rgba(5,11,22,.34); padding:12px; }} .data-facts span {{ display:block; color:var(--muted); font-size:11px; text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px; }} .data-facts strong {{ color:var(--text); font-size:13px; overflow-wrap:anywhere; }} .data-panel .stats-table {{ margin-top:8px; font-size:13px; }}
 .metric-scorecards {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:14px; margin-bottom:22px; }} table {{ width:100%; border-collapse:collapse; }} th,td {{ text-align:left; padding:11px; border-bottom:1px solid rgba(34,230,255,.12); }} th {{ color:var(--cyan); font-family:Space Grotesk; }}
 .media-grid {{ display:grid; gap:18px; }} .diagrams-grid {{ grid-template-columns:repeat(auto-fit,minmax(380px,1fr)); }} .result-grid {{ grid-template-columns:repeat(2,minmax(0,1fr)); }} figure {{ margin:0; border:1px solid rgba(34,230,255,.18); background:#07111f; border-radius:18px; padding:12px; overflow:hidden; }} figcaption {{ color:var(--cyan); font-weight:800; margin-bottom:8px; font-family:Space Grotesk; }} .figure-caption {{ color:var(--muted); font-size:13px; margin:.7rem 0 0; }} .svg-wrap svg {{ width:100%; height:auto; display:block; border-radius:12px; }} .themed-svg {{ background:#07111f; }} pre {{ white-space:pre-wrap; font-family:Inter; color:var(--text); line-height:1.55; }}
 .metric-defs {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:14px; }} .metric-card {{ border:1px solid rgba(155,108,255,.28); border-radius:16px; padding:15px; background:rgba(2,6,23,.45); overflow:hidden; }} .metric-card h4 {{ margin:0 0 8px; color:var(--cyan); }} .equation {{ color:var(--gold); font-family:JetBrains Mono, monospace; font-size:14px; overflow-x:auto; max-width:100%; padding-bottom:4px; }} .next-card {{ border-color:rgba(214,255,77,.35); }}

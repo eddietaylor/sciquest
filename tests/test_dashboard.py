@@ -14,6 +14,8 @@ def make_minimal_valid_experiment(tmp_path: Path) -> Path:
     (exp / "artifacts" / "diagrams").mkdir(parents=True)
     (exp / "logs").mkdir(parents=True)
     (quest / "reports").mkdir(parents=True)
+    (quest / "data" / "raw").mkdir(parents=True)
+    (quest / "data" / "raw" / "data.csv").write_text("price,capacity,revenue\n100,10,1000\n120,8,960\n80,12,960\n")
     (quest / "artifacts").mkdir()
     (quest / "artifacts" / "logo.png").write_bytes(b"fake-logo")
     (quest / "logs").mkdir()
@@ -64,6 +66,14 @@ def test_dashboard_builds_dynamic_experiment_page(tmp_path):
     assert "exp_001" in html
     assert "supervised" in html
     assert "price" in html and "revenue" in html
+    assert "The Data" in html
+    assert "Data source" in html
+    assert "Synthetic" in html
+    assert "Data shape" in html
+    assert "3 rows × 3 columns" in html
+    assert "Descriptive statistics" in html
+    assert "price" in html and "100.000" in html
+    assert html.index("The Data") < html.index("Task + Model")
     assert "Model Architecture" in html
     assert "Validation Technique" in html
     assert "Accuracy" in html
