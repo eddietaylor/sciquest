@@ -72,6 +72,23 @@ def test_dashboard_builds_dynamic_experiment_page(tmp_path):
     assert "sciquest-logo" in html
     assert "data:image/png;base64" in html
     assert "cycle-strip" in html
+    assert "Experiment Verdict" in html
+    assert "Delta vs previous" in html
+    assert "Main improvement" in html
+    assert "Main failure" in html
+    assert "Scientific verdict" in html
+    assert "experiment-timeline" in html
+    assert "score-delta" in html
+    assert "metric-scorecards" in html
+    assert "semantic-state" in html
+    assert "semantic-action" in html
+    assert "semantic-pass" in html
+    assert "semantic-metric" in html
+    assert "semantic-risk" in html
+    assert "semantic-best" in html
+    assert "Recommended Next Experiment" in html
+    assert "model-field-list" in html
+    assert "font-family:JetBrains Mono" in html
 
 
 def test_dashboard_uses_clickable_single_experiment_panes(tmp_path):
