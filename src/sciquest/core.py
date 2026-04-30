@@ -7,6 +7,8 @@ import uuid
 from .io import quest_dir, quests_dir, read_yaml, write_yaml, append_text, utc_now, slugify
 from .templates import AGENTS_MD
 from .notebooks import create_stub_notebook, execute_notebook
+from .methods.ledger import append_method_sections_to_report, load_quest_method_stack, preregister_experiment
+from .methods.resolver import auto_recommend_method_stack, resolve_method_stack
 
 
 def create_quest(root: Path, answers: dict[str, str], slug: str | None = None) -> Path:
@@ -48,6 +50,12 @@ def create_quest(root: Path, answers: dict[str, str], slug: str | None = None) -
         "metrics": [],
         "agent_instructions": "Infer appropriate metrics and formalize this file with name, description, direction, weight, normalization." if not val else "Formalize provided validation description into metrics before scoring.",
     })
+    method_selection = answers.get("method_stack") or answers.get("method")
+    if answers.get("auto_method"):
+        method_stack = auto_recommend_method_stack({**answers, "description": answers.get("problem_statement", "")})
+    else:
+        method_stack = resolve_method_stack(method_selection)
+    write_yaml(qpath / "method_stack.yaml", method_stack.to_dict())
     (qpath / "journal.md").write_text(f"# Research Journal: {qslug}\n\nCreated: {now}\n\n## Quest Started\n\nHero Statement: {answers.get('hero_statement','')}\n\nProblem Statement: {answers.get('problem_statement','')}\n\nInitial Hypothesis: {answers.get('initial_hypothesis','')}\n", encoding="utf-8")
     (qpath / "AGENTS.md").write_text(AGENTS_MD, encoding="utf-8")
     return qpath
@@ -115,11 +123,14 @@ def run_next(qpath: Path, agent_stub: bool = False, execute: bool = False) -> st
                 "artifacts/diagrams/validation_technique.svg",
             ],
         })
+        stack = load_quest_method_stack(qpath)
+        preregister_experiment(qpath, exp_id, exp)
         (exp / "hypothesis.md").write_text("# Hypothesis\n\nAgent must evolve one testable hypothesis for this iteration.\n", encoding="utf-8")
         create_stub_notebook(exp / "notebook.ipynb", exp_id)
         if execute:
             execute_notebook(exp / "notebook.ipynb", exp / "executed_notebook.ipynb", exp)
         (exp / "experiment_report.md").write_text("# Experiment Report\n\n## Evidence\nAgent stub only.\n\n## Speculation\nAgent must interpret substantive results.\n", encoding="utf-8")
+        append_method_sections_to_report(exp / "experiment_report.md", stack)
         append_journal_entry(qpath, exp_id, "Agent stub created experiment scaffold.")
         state = read_yaml(qpath / "state.yaml", {})
         state.update({"current_experiment": None, "last_experiment": exp_id, "last_updated": utc_now()})

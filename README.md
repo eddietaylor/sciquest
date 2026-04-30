@@ -28,6 +28,7 @@ SciQuest intentionally does not hard-code any research domain, dataset, model ar
 - Technical diagrams and experiment artifacts
 - Static dashboard with experiment tabs, embedded SVG plots/diagrams, validation metric definitions, MathJax equations, and logo-based styling
 - Terminal SCI-QUEST banner for `new` and `continue`
+- Method-aware reasoning via data-driven philosophy-of-science method profiles, method stacks, and pre-registered method ledgers
 
 ## Install
 
@@ -111,6 +112,9 @@ Every command accepts `--root PATH`; quests are stored under `PATH/quests/`.
 
 ```bash
 sciquest new
+sciquest new --method popperian_falsificationist
+sciquest new --method-stack-file method_stack.yaml
+sciquest new --auto-method
 sciquest continue --quest <quest_slug> --idea "new idea" --data "new data note"
 sciquest list
 sciquest status --quest <quest_slug>
@@ -142,6 +146,38 @@ Use `--no-splash` with `new` or `continue` to suppress the terminal SCI-QUEST ba
 Inputs are stored in structured YAML and Markdown. If no core data is supplied, SciQuest creates `data_manifest.yaml` with `status: missing_user_data`. The agent must infer required data, find or generate a dataset, store it in `data/raw/`, and document schema, meaning, provenance, and limitations.
 
 If no validation suite is supplied, SciQuest marks `validation.yaml` as `agent_required`. The agent must formalize metrics with name, description, direction, weight, and normalization.
+
+## Method-aware reasoning
+
+SciQuest does not assume one universal scientific method. Each quest stores a `method_stack.yaml` that assigns method lenses to research-cycle phases:
+
+```yaml
+primary_method: strong_inference
+phases:
+  problem_framing: kuhnian
+  hypothesis_generation: feyerabendian_pluralist
+  experiment_design: strong_inference
+  evidence_evaluation: bayesian
+  stress_testing: popperian_falsificationist
+  long_term_tracking: lakatosian
+```
+
+Usage levels:
+
+```bash
+# Simple mode: one practical research style governs all phases
+sciquest new --method popperian_falsificationist
+
+# Advanced mode: compose a method stack by phase
+sciquest new --method-stack-file method_stack.yaml
+
+# Auto-recommend mode: infer a starting stack from quest metadata
+sciquest new --auto-method
+```
+
+Built-in profile files live under `src/sciquest/methods/profiles/`. Profiles are data-driven YAML records defining labels, best/bad fit, phase affinities, hypothesis rules, experiment rules, evidence rules, validation rules, journal sections, scoring transforms, next-step policy, failure modes, tensions, pairings, and agent prompt addenda.
+
+Before each experiment, SciQuest writes `experiments/exp_NNN/method_ledger.yaml`. This is a pre-registration containing the selected method stack, confirmatory/exploratory status, predicted observations placeholder, success/falsification criteria, evaluation rules, and allowed post hoc analysis rules. After results are known, agents must label claims as `confirmatory_result`, `exploratory_observation`, `post_hoc_reinterpretation`, `method_violation`, or `unresolved_anomaly` rather than method-shopping around failed results.
 
 ## Injecting ideas and data
 
@@ -175,6 +211,7 @@ quests/
     data_manifest.yaml
     journal.md
     AGENTS.md
+    method_stack.yaml
     user_injections.yaml
     data/
       raw/
@@ -187,6 +224,7 @@ quests/
         executed_notebook.ipynb
         experiment_report.md
         validation_results.yaml
+        method_ledger.yaml
         logs/
         artifacts/
           data_generation_script.py
@@ -211,22 +249,24 @@ Quest directories are gitignored by default so research artifacts do not acciden
 Each iteration follows this intended lifecycle:
 
 1. Agent reads all quest files and AGENTS.md
-2. Agent evolves exactly one testable hypothesis
-3. Agent creates a new `experiments/exp_NNN/` folder without overwriting history
-4. Agent finds, documents, or generates data if required
-5. Agent formalizes validation metrics if required
-6. Agent writes `experiment.yaml`, `hypothesis.md`, and `notebook.ipynb`
-7. Agent creates technical diagrams under `artifacts/diagrams/`
-8. Agent executes the notebook
-9. If execution fails, agent performs bounded debugging and preserves logs
-10. Agent writes metrics to `validation_results.yaml`
-11. Agent runs `sciquest validate`
-12. Agent runs `sciquest logic-check`
-13. Agent writes `experiment_report.md`
-14. Agent appends `journal.md`
-15. Agent rebuilds the dashboard
-16. Agent updates `state.yaml`
-17. Agent stops after one iteration unless `run-loop` invoked more
+2. Agent applies `method_stack.yaml` to phase-specific reasoning without blending methods
+3. SciQuest records `method_ledger.yaml` as pre-registration before the experiment
+4. Agent evolves exactly one testable hypothesis
+5. Agent creates a new `experiments/exp_NNN/` folder without overwriting history
+6. Agent finds, documents, or generates data if required
+7. Agent formalizes validation metrics if required
+8. Agent writes `experiment.yaml`, `hypothesis.md`, and `notebook.ipynb`
+9. Agent creates technical diagrams under `artifacts/diagrams/`
+10. Agent executes the notebook
+11. If execution fails, agent performs bounded debugging and preserves logs
+12. Agent writes metrics to `validation_results.yaml`
+13. Agent runs `sciquest validate`
+14. Agent runs `sciquest logic-check`
+15. Agent writes `experiment_report.md`, including method-specific sections and claim labels
+16. Agent appends `journal.md`
+17. Agent rebuilds the dashboard
+18. Agent updates `state.yaml`
+19. Agent stops after one iteration unless `run-loop` invoked more
 
 The deterministic scaffold path is still available:
 

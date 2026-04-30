@@ -5,6 +5,10 @@ import shlex
 import subprocess
 from pathlib import Path
 
+from .io import read_yaml
+from .methods.prompt_builder import build_method_prompt_addendum
+from .methods.resolver import resolve_method_stack
+
 SCIQUEST_SPLASH = """
 ███████╗ ██████╗██╗       ██████╗ ██╗   ██╗███████╗███████╗████████╗
 ██╔════╝██╔════╝██║      ██╔═══██╗██║   ██║██╔════╝██╔════╝╚══██╔══╝
@@ -26,15 +30,19 @@ def parse_agent_command(command: str) -> list[str]:
 
 def build_agent_prompt(quest_path: Path) -> str:
     """Create the handoff prompt passed to an external agent process."""
+    stack = resolve_method_stack(read_yaml(quest_path / "method_stack.yaml", {"primary_method": "standard_empirical"}))
+    method_addendum = build_method_prompt_addendum(stack)
     return f"""You are operating SciQuest.
 
 Quest path: {quest_path}
 Agent protocol: {quest_path / 'AGENTS.md'}
+Method stack: {quest_path / 'method_stack.yaml'}
 
 Read every quest file first, then perform exactly one SciQuest iteration.
 Do not overwrite history. Preserve failed experiments and logs.
 Stop after one iteration.
-"""
+
+{method_addendum}"""
 
 
 def resolve_agent_command(agent_command: str | None = None) -> list[str] | None:

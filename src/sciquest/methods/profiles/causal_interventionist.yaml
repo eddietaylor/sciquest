@@ -1,0 +1,39 @@
+id: causal_interventionist
+display_name: Causal interventionist reasoning
+plain_language_label: Estimate causal effects
+description: Frame questions around treatment, outcome, confounders, identification,
+  and counterfactual assumptions.
+best_for:
+- Policy or treatment effects
+- Intervention questions
+bad_for:
+- Pure prediction where causal claims are unnecessary
+phase_affinities:
+- problem_framing
+- experiment_design
+- evidence_evaluation
+hypothesis_generation_rules:
+- State causal estimand, treatment, outcome, and population.
+experiment_design_rules:
+- Use randomization, controls, natural experiments, IV, diff-in-diff, matching, or
+  sensitivity analysis as appropriate.
+evidence_evaluation_rules:
+- Evaluate identification assumptions and counterfactual credibility.
+validation_rules:
+- Separate predictive accuracy from causal identification strength.
+journal_sections:
+- Treatment
+- Outcome
+- Confounders
+- Identification strategy
+- Counterfactual assumptions
+scoring_transform: method_lens_metadata_only_v1
+next_step_policy:
+- Tighten identification, measure confounders, or test sensitivity.
+failure_modes:
+- Method shopping after results are known
+- Overclaiming beyond the method lens
+incompatible_or_tense_with: []
+recommended_pairings:
+- standard_empirical
+prompt_addendum: Force treatment/outcome/confounder/identification thinking.

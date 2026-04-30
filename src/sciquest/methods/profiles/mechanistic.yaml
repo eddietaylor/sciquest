@@ -1,0 +1,39 @@
+id: mechanistic
+display_name: Mechanistic explanation
+plain_language_label: Find the mechanism
+description: Explain outcomes by parts, processes, organization, interventions, and
+  simulations.
+best_for:
+- Systems with interpretable components
+- Process models
+bad_for:
+- Black-box prediction-only goals
+phase_affinities:
+- problem_framing
+- hypothesis_generation
+- experiment_design
+hypothesis_generation_rules:
+- Specify parts, activities, organization, and expected mechanism.
+experiment_design_rules:
+- Isolate mechanism components with interventions or simulations.
+evidence_evaluation_rules:
+- Evaluate whether observed behavior supports the proposed mechanism, not only outcome
+  fit.
+validation_rules:
+- Include mechanism-specific probes or ablations.
+journal_sections:
+- Parts
+- Processes
+- Organization
+- Interventions
+- Simulation checks
+scoring_transform: method_lens_metadata_only_v1
+next_step_policy:
+- Intervene on uncertain mechanism components.
+failure_modes:
+- Method shopping after results are known
+- Overclaiming beyond the method lens
+incompatible_or_tense_with: []
+recommended_pairings:
+- standard_empirical
+prompt_addendum: Search for parts, processes, organization, interventions, and simulations.

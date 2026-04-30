@@ -32,6 +32,9 @@ def new_quest(
     start_agent: bool = typer.Option(False, help="After creating the quest, launch the configured external agent"),
     agent_command: Optional[str] = typer.Option(None, help="External agent command. Also configurable via SCIQUEST_AGENT_COMMAND"),
     splash: bool = typer.Option(True, "--splash/--no-splash", help="Show the SCI-QUEST startup banner"),
+    method: Optional[str] = typer.Option(None, "--method", help="Simple mode: choose one method lens, e.g. bayesian or popperian_falsificationist"),
+    method_stack_file: Optional[Path] = typer.Option(None, "--method-stack-file", help="Advanced mode: YAML file defining primary_method and phase methods"),
+    auto_method: bool = typer.Option(False, "--auto-method", help="Auto-recommend a method stack from quest metadata"),
 ):
     """Create a new quest and initialize all artifacts."""
     if splash:
@@ -45,6 +48,12 @@ def new_quest(
         "validation_suite": typer.prompt("Validation Suite (optional)", default="", show_default=False),
         "validation_weighting_preferences": typer.prompt("Validation weighting preferences (optional, natural language ok)", default="", show_default=False),
     }
+    if method_stack_file:
+        answers["method_stack"] = read_yaml(method_stack_file, {})
+    elif method:
+        answers["method"] = method
+    if auto_method:
+        answers["auto_method"] = True
     if not typer.confirm("Start quest?", default=True):
         raise typer.Abort()
     qpath = create_quest(root, answers, slug)

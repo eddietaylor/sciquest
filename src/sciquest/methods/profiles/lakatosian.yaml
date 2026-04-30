@@ -1,0 +1,35 @@
+id: lakatosian
+display_name: Lakatosian research programme tracking
+plain_language_label: Track a long-term theory programme
+description: Evaluate hard core commitments, auxiliary assumptions, and progressive
+  versus degenerative problem shifts over time.
+best_for:
+- Long-running research programmes
+- Many patches over time
+bad_for:
+- Single isolated experiments
+phase_affinities:
+- long_term_tracking
+hypothesis_generation_rules:
+- Distinguish protected hard core from adjustable auxiliary assumptions.
+experiment_design_rules:
+- Track whether changes predict novel facts or merely patch failures.
+evidence_evaluation_rules:
+- Evaluate the research programme over time, not only a single score.
+validation_rules:
+- Mark progressive versus degenerative problem shifts.
+journal_sections:
+- Hard core
+- Auxiliary assumptions
+- Progressive changes
+- Degenerative patches
+scoring_transform: method_lens_metadata_only_v1
+next_step_policy:
+- Strengthen progressive lines or consider rival programmes if degenerating.
+failure_modes:
+- Method shopping after results are known
+- Overclaiming beyond the method lens
+incompatible_or_tense_with: []
+recommended_pairings:
+- standard_empirical
+prompt_addendum: Log hard core, auxiliaries, and progressive vs degenerative changes.

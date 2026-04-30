@@ -1,0 +1,36 @@
+id: exploratory_inductive
+display_name: Exploratory inductive inquiry
+plain_language_label: Explore patterns first
+description: Start by discovering stable patterns, clusters, anomalies, or regularities
+  before committing to a theory.
+best_for:
+- Early ambiguous topics
+- Unknown feature spaces
+bad_for:
+- Confirmatory claims without follow-up tests
+phase_affinities:
+- problem_framing
+- hypothesis_generation
+hypothesis_generation_rules:
+- Start with pattern candidates rather than one fixed claim.
+experiment_design_rules:
+- Expose structure, clusters, anomalies, and stable relationships.
+evidence_evaluation_rules:
+- Treat findings as exploratory signals until confirmed.
+validation_rules:
+- Do not report exploratory metrics as confirmatory proof.
+journal_sections:
+- Observed patterns
+- Candidate regularities
+- Data quality notes
+- Follow-up confirmatory needs
+scoring_transform: method_lens_metadata_only_v1
+next_step_policy:
+- Convert stable patterns into testable hypotheses.
+failure_modes:
+- Method shopping after results are known
+- Overclaiming beyond the method lens
+incompatible_or_tense_with: []
+recommended_pairings:
+- standard_empirical
+prompt_addendum: Explore patterns first and label claims as exploratory.

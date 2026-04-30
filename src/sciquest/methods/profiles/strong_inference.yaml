@@ -1,0 +1,35 @@
+id: strong_inference
+display_name: Strong inference
+plain_language_label: Compare rival explanations
+description: Generate rival hypotheses and design experiments that discriminate among
+  them.
+best_for:
+- Multiple plausible explanations
+- Model selection
+bad_for:
+- Single unconstrained exploratory analyses
+phase_affinities:
+- hypothesis_generation
+- experiment_design
+hypothesis_generation_rules:
+- Generate multiple rival hypotheses before choosing an experiment.
+experiment_design_rules:
+- Design discriminating tests that separate rivals.
+evidence_evaluation_rules:
+- Score evidence by how well it eliminates or supports rival explanations.
+validation_rules:
+- Metrics should distinguish among rivals, not only improve average fit.
+journal_sections:
+- Rival hypotheses
+- Discriminating predictions
+- Eliminated alternatives
+scoring_transform: method_lens_metadata_only_v1
+next_step_policy:
+- Follow the rival with strongest discriminating support or design a sharper discriminator.
+failure_modes:
+- Method shopping after results are known
+- Overclaiming beyond the method lens
+incompatible_or_tense_with: []
+recommended_pairings:
+- standard_empirical
+prompt_addendum: Require rival hypotheses and discriminating predictions.

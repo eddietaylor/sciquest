@@ -1,0 +1,36 @@
+id: popperian_falsificationist
+display_name: Popperian falsificationist testing
+plain_language_label: Try to disprove my hypothesis
+description: Prefer risky predictions and severe tests that could genuinely refute
+  the hypothesis.
+best_for:
+- Narrow hypotheses
+- Integrity-focused stress tests
+bad_for:
+- Early exploration before hypotheses are precise
+phase_affinities:
+- stress_testing
+- experiment_design
+hypothesis_generation_rules:
+- Make risky predictions that could be wrong.
+experiment_design_rules:
+- Design severe tests with high falsification risk.
+evidence_evaluation_rules:
+- Treat failed risky predictions as serious pressure against the hypothesis.
+validation_rules:
+- Specify falsification criteria before execution.
+journal_sections:
+- Risky predictions
+- Falsification criteria
+- Severe test assessment
+scoring_transform: method_lens_metadata_only_v1
+next_step_policy:
+- If not falsified, make the next test more severe; if falsified, revise or reject.
+failure_modes:
+- Method shopping after results are known
+- Overclaiming beyond the method lens
+incompatible_or_tense_with: []
+recommended_pairings:
+- standard_empirical
+prompt_addendum: Prefer risky predictions and severe tests; do not rescue failures
+  post hoc.

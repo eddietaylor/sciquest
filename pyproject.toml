@@ -28,6 +28,10 @@ sciquest = "sciquest.cli:app"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/sciquest"]
+artifacts = ["src/sciquest/methods/profiles/*.yaml"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/sciquest", "tests", "README.md", "AGENTS.md", "LICENSE"]
 
 [tool.pytest.ini_options]
 addopts = "-q"

@@ -1,0 +1,38 @@
+id: kuhnian
+display_name: Kuhnian anomaly tracking
+plain_language_label: Look for paradigm-breaking anomalies
+description: Track normal puzzle-solving, persistent anomalies, crisis signals, and
+  possible reframing.
+best_for:
+- Paradigm stress
+- Accumulating anomalies
+bad_for:
+- Routine metric optimization only
+phase_affinities:
+- problem_framing
+- stress_testing
+- long_term_tracking
+hypothesis_generation_rules:
+- Identify normal-science assumptions and possible paradigm anomalies.
+experiment_design_rules:
+- Look for persistent anomalies that resist normal puzzle-solving.
+evidence_evaluation_rules:
+- Track anomaly accumulation separately from routine failures.
+validation_rules:
+- Separate ordinary error from paradigm-relevant anomaly.
+journal_sections:
+- Current paradigm
+- Normal puzzle
+- Anomalies
+- Crisis indicators
+- Reframing options
+scoring_transform: method_lens_metadata_only_v1
+next_step_policy:
+- Continue puzzle-solving, accumulate anomaly evidence, or propose reframing.
+failure_modes:
+- Method shopping after results are known
+- Overclaiming beyond the method lens
+incompatible_or_tense_with: []
+recommended_pairings:
+- standard_empirical
+prompt_addendum: Track paradigms, anomalies, normal puzzle-solving, crisis, and reframing.

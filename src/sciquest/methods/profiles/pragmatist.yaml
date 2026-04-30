@@ -1,0 +1,35 @@
+id: pragmatist
+display_name: Pragmatist inquiry
+plain_language_label: Optimize inquiry for useful action
+description: Judge inquiry by consequences for useful action while separating utility
+  from truth claims.
+best_for:
+- Decision support
+- Action-oriented research
+bad_for:
+- Replacing validity with convenience
+phase_affinities:
+- problem_framing
+- next_step_selection
+- evidence_evaluation
+hypothesis_generation_rules:
+- State a testable claim appropriate to this method.
+experiment_design_rules:
+- Design the experiment according to this method lens.
+evidence_evaluation_rules:
+- Evaluate evidence according to this method lens.
+validation_rules:
+- State success criteria before execution.
+journal_sections:
+- Method-specific evidence notes
+scoring_transform: method_lens_metadata_only_v1
+next_step_policy:
+- Choose the next step according to method-specific evidence.
+failure_modes:
+- Method shopping after results are known
+- Overclaiming beyond the method lens
+incompatible_or_tense_with: []
+recommended_pairings:
+- standard_empirical
+prompt_addendum: Judge inquiry by consequences for useful action while separating
+  utility from truth claims.

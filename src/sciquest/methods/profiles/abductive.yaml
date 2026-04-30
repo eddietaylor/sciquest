@@ -1,0 +1,37 @@
+id: abductive
+display_name: Abductive inference
+plain_language_label: Find the best explanation
+description: Infer the most plausible explanation for surprising observations while
+  tracking alternatives.
+best_for:
+- Anomaly explanation
+- Diagnosis
+- Mechanism ideation
+bad_for:
+- Final proof or causal claims without validation
+phase_affinities:
+- hypothesis_generation
+- evidence_evaluation
+hypothesis_generation_rules:
+- Generate explanations for surprising observations and rank plausibility.
+experiment_design_rules:
+- Seek evidence that would make one explanation clearly best.
+evidence_evaluation_rules:
+- Evaluate explanatory scope, simplicity, and fit with observations.
+validation_rules:
+- Require comparison against alternative explanations.
+journal_sections:
+- Surprising observations
+- Candidate explanations
+- Best explanation rationale
+- Alternative explanations
+scoring_transform: method_lens_metadata_only_v1
+next_step_policy:
+- Test the weakest assumption in the best explanation.
+failure_modes:
+- Method shopping after results are known
+- Overclaiming beyond the method lens
+incompatible_or_tense_with: []
+recommended_pairings:
+- standard_empirical
+prompt_addendum: Find the best explanation while preserving alternatives.

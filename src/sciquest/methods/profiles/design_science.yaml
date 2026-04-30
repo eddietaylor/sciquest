@@ -1,0 +1,33 @@
+id: design_science
+display_name: Design science
+plain_language_label: Build and evaluate an artifact
+description: Create an artifact, evaluate its utility, and iterate against design
+  requirements.
+best_for:
+- Tools, systems, prototypes, algorithms
+bad_for:
+- Claims with no artifact or use context
+phase_affinities:
+- experiment_design
+- evidence_evaluation
+hypothesis_generation_rules:
+- State a testable claim appropriate to this method.
+experiment_design_rules:
+- Design the experiment according to this method lens.
+evidence_evaluation_rules:
+- Evaluate evidence according to this method lens.
+validation_rules:
+- State success criteria before execution.
+journal_sections:
+- Method-specific evidence notes
+scoring_transform: method_lens_metadata_only_v1
+next_step_policy:
+- Choose the next step according to method-specific evidence.
+failure_modes:
+- Method shopping after results are known
+- Overclaiming beyond the method lens
+incompatible_or_tense_with: []
+recommended_pairings:
+- standard_empirical
+prompt_addendum: Create an artifact, evaluate its utility, and iterate against design
+  requirements.

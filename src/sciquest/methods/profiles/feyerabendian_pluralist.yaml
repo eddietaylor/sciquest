@@ -1,0 +1,37 @@
+id: feyerabendian_pluralist
+display_name: Feyerabendian pluralist generation
+plain_language_label: Generate unconventional alternatives
+description: Use methodological pluralism to generate heterodox hypotheses and challenge
+  assumptions, then pass candidates through stricter validation.
+best_for:
+- Narrow or stale hypothesis spaces
+- Creative reframing
+bad_for:
+- Unbounded evidence standards or post hoc excuse-making
+phase_affinities:
+- hypothesis_generation
+hypothesis_generation_rules:
+- Generate unconventional and heterodox alternatives; challenge core assumptions.
+experiment_design_rules:
+- After generation, hand candidates to stricter validation rather than weakening evidence
+  standards.
+evidence_evaluation_rules:
+- Pluralism expands hypotheses; it does not make anything count as evidence.
+validation_rules:
+- Label pluralist outputs as candidate hypotheses until validated.
+journal_sections:
+- Challenged assumptions
+- Heterodox alternatives
+- Pluralist generation boundary
+- Validation handoff
+scoring_transform: method_lens_metadata_only_v1
+next_step_policy:
+- Send promising heterodox alternatives through strong inference, Bayesian, or Popperian
+  tests.
+failure_modes:
+- Method shopping after results are known
+- Overclaiming beyond the method lens
+incompatible_or_tense_with: []
+recommended_pairings:
+- standard_empirical
+prompt_addendum: Use pluralism for hypothesis generation only; preserve strict validation.

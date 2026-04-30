@@ -1,0 +1,39 @@
+id: bayesian
+display_name: Bayesian evidence updating
+plain_language_label: Update confidence from evidence
+description: Treat evidence as information that updates explicit prior beliefs into
+  posterior confidence.
+best_for:
+- Noisy partial data
+- Uncertainty tracking
+- Sequential evidence accumulation
+bad_for:
+- When priors cannot be stated even qualitatively
+- Purely exploratory unconstrained searches
+phase_affinities:
+- evidence_evaluation
+- long_term_tracking
+hypothesis_generation_rules:
+- State explicit priors or qualitative confidence before seeing results.
+experiment_design_rules:
+- Choose measurements that maximize expected information gain.
+evidence_evaluation_rules:
+- Update confidence from prior to posterior; report uncertainty.
+validation_rules:
+- Define what evidence would materially increase or decrease posterior confidence.
+journal_sections:
+- Priors
+- Likelihood assumptions
+- Posterior updates
+- Information gain
+scoring_transform: method_lens_metadata_only_v1
+next_step_policy:
+- Prefer experiments with high expected information gain.
+failure_modes:
+- Method shopping after results are known
+- Overclaiming beyond the method lens
+incompatible_or_tense_with: []
+recommended_pairings:
+- standard_empirical
+prompt_addendum: Log priors, likelihood assumptions, posterior updates, and information
+  gain.
