@@ -117,6 +117,23 @@ def test_dashboard_uses_clickable_single_experiment_panes(tmp_path):
     assert "function showExperiment" in html
 
 
+def test_dashboard_ignores_pending_experiment_scores_when_finding_best(tmp_path):
+    quest = make_minimal_valid_experiment(tmp_path)
+    exp2 = quest / "experiments" / "exp_002"
+    exp1 = quest / "experiments" / "exp_001"
+    import shutil
+    shutil.copytree(exp1, exp2)
+    (exp2 / "experiment.yaml").write_text((exp2 / "experiment.yaml").read_text().replace("exp_001", "exp_002"))
+    (exp2 / "validation_results.yaml").write_text("aggregate_score:\nmetrics: {}\nscores: {}\n")
+
+    out = build_dashboard(quest)
+    html = out.read_text()
+
+    assert "exp_002" in html
+    assert "Best score" in html
+    assert "0.800000" in html
+
+
 def test_dashboard_includes_metric_definitions_and_latex_equations(tmp_path):
     quest = make_minimal_valid_experiment(tmp_path)
     out = build_dashboard(quest)

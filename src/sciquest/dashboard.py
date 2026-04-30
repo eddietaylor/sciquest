@@ -530,7 +530,12 @@ def build_dashboard(quest_path: Path, output_dir: Path | None = None) -> Path:
             "report": (exp / "experiment_report.md").read_text(encoding="utf-8", errors="ignore") if (exp / "experiment_report.md").exists() else "",
         })
     active = exp_data[-1] if exp_data else None
-    best_score = max((_num(d["validation"].get("aggregate_score")) for d in exp_data), default=None)
+    numeric_scores = [
+        score
+        for d in exp_data
+        if (score := _num(d["validation"].get("aggregate_score"))) is not None
+    ]
+    best_score = max(numeric_scores, default=None)
     active_exp_id = active["id"] if active else None
     latest_meta = active["meta"] if active else {}
     nav, sections = [], []
