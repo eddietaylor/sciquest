@@ -28,7 +28,7 @@ sciquest = "sciquest.cli:app"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/sciquest"]
-artifacts = ["src/sciquest/methods/profiles/*.yaml"]
+artifacts = ["src/sciquest/methods/profiles/*.yaml", "src/sciquest/vendor/mathjax/*.js"]
 
 [tool.hatch.build.targets.sdist]
 include = ["src/sciquest", "tests", "README.md", "AGENTS.md", "LICENSE"]

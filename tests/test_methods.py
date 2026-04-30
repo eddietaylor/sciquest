@@ -139,3 +139,92 @@ def test_cli_new_accepts_simple_method_choice(tmp_path):
     method_stack = yaml.safe_load((tmp_path / "quests" / "method-demo" / "method_stack.yaml").read_text())
     assert method_stack["primary_method"] == "bayesian"
     assert method_stack["mode"] == "simple"
+
+
+
+def test_cli_methods_list_show_and_recommend(tmp_path):
+    runner = CliRunner()
+    listed = runner.invoke(app, ["methods", "list"])
+    assert listed.exit_code == 0, listed.output
+    assert "bayesian" in listed.output
+    assert "popperian_falsificationist" in listed.output
+
+    shown = runner.invoke(app, ["methods", "show", "bayesian"])
+    assert shown.exit_code == 0, shown.output
+    assert "Bayesian evidence updating" in shown.output
+    assert "profile_version" in shown.output
+
+    quest = create_quest(tmp_path, {
+        "hero_statement": "Estimate treatment effects",
+        "problem_statement": "Causal intervention with counterfactual confounders and repeated anomaly failures",
+        "initial_hypothesis": "Treatment changes outcome",
+    }, slug="causal-demo")
+    state = yaml.safe_load((quest / "state.yaml").read_text())
+    state["failures"] = [{"experiment": "exp_001", "error": "anomaly"}, {"experiment": "exp_002", "error": "anomaly"}]
+    (quest / "state.yaml").write_text(yaml.safe_dump(state))
+
+    recommended = runner.invoke(app, ["methods", "recommend", "--root", str(tmp_path), "--quest", "causal-demo"])
+    assert recommended.exit_code == 0, recommended.output
+    assert "causal_interventionist" in recommended.output
+    assert "kuhnian" in recommended.output or "lakatosian" in recommended.output
+
+
+def test_auto_recommend_uses_history_failures_anomalies_and_validation_trajectory(tmp_path):
+    quest = create_quest(tmp_path, {
+        "hero_statement": "General prediction quest",
+        "problem_statement": "Improve a prediction system",
+        "initial_hypothesis": "A better feature set helps",
+    }, slug="history-demo")
+    state = yaml.safe_load((quest / "state.yaml").read_text())
+    state["failures"] = [
+        {"experiment": "exp_001", "error": "unresolved anomaly"},
+        {"experiment": "exp_002", "error": "unresolved anomaly"},
+    ]
+    (quest / "state.yaml").write_text(yaml.safe_dump(state))
+    for exp_id, score in [("exp_001", 0.82), ("exp_002", 0.72), ("exp_003", 0.60)]:
+        exp = quest / "experiments" / exp_id
+        exp.mkdir(parents=True)
+        (exp / "validation_results.yaml").write_text(yaml.safe_dump({"aggregate_score": score}))
+        (exp / "method_ledger.yaml").write_text(yaml.safe_dump({"post_experiment_classification": {"unresolved_anomaly": ["unexpected pattern"]}}))
+
+    stack = auto_recommend_method_stack({"quest_path": quest})
+    assert stack.primary_method in {"lakatosian", "kuhnian"}
+    assert stack.phases["stress_testing"] == "kuhnian"
+    assert "history" in stack.rationale.lower() or "anomal" in stack.rationale.lower()
+
+
+def test_method_profiles_have_versions_and_ledgers_snapshot_versions(tmp_path):
+    registry = MethodRegistry.default()
+    assert registry.get("bayesian").profile_version
+    quest = create_quest(tmp_path, {
+        "hero_statement": "Hero",
+        "problem_statement": "Problem",
+        "initial_hypothesis": "Hypothesis",
+        "method": "bayesian",
+    }, slug="version-demo")
+    exp_id = run_next(quest, agent_stub=True)
+    ledger = yaml.safe_load((quest / "experiments" / exp_id / "method_ledger.yaml").read_text())
+    assert ledger["pre_registration"]["profile_versions"]["bayesian"] == registry.get("bayesian").profile_version
+
+
+def test_report_claim_parser_classifies_structured_claims():
+    from sciquest.methods.ledger import parse_report_claims, classify_report_claims
+    report = """
+# Report
+
+## Confirmatory Result
+- matched_prediction: true
+- claim: The risky prediction held.
+
+## Exploratory Observation
+- claim: A secondary subgroup pattern appeared.
+
+## Post Hoc Reinterpretation
+- labeled_post_hoc: false
+- claim: We changed the explanation after seeing results.
+"""
+    claims = parse_report_claims(report)
+    classes = classify_report_claims({"predicted_observations": ["x"]}, claims)
+    assert classes["confirmatory_result"]
+    assert classes["exploratory_observation"]
+    assert classes["method_violation"]

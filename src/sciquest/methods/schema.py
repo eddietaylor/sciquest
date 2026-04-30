@@ -34,6 +34,7 @@ class MethodProfile:
     incompatible_or_tense_with: list[str] = field(default_factory=list)
     recommended_pairings: list[str] = field(default_factory=list)
     prompt_addendum: str = ""
+    profile_version: str = "1.0.0"
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> "MethodProfile":

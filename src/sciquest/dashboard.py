@@ -4,11 +4,14 @@ from html import escape
 from pathlib import Path
 from typing import Any
 import base64
+import shutil
 import csv
 import mimetypes
 import re
 
 from .io import read_yaml
+
+MATHJAX_VENDOR = Path(__file__).parent / "vendor" / "mathjax" / "tex-mml-chtml.js"
 
 SEMANTIC_CSS_CLASSES = "semantic-state semantic-action semantic-pass semantic-metric semantic-risk semantic-best"
 
@@ -44,6 +47,26 @@ OPERATOR_EXPLANATIONS: tuple[dict[str, Any], ...] = (
         "aliases": ("law-of-demand pass rate", "law of demand pass rate"),
         "explanation": "This checks whether predicted demand usually decreases when price increases.",
     },
+    {
+        "term": "Counterfactual",
+        "aliases": ("counterfactual", "counterfactual outcome", "counterfactual outcomes"),
+        "explanation": "A what-if estimate: what would likely have happened under a different action, policy, or intervention.",
+    },
+    {
+        "term": "Validation trajectory",
+        "aliases": ("validation trajectory", "declining validation trajectory"),
+        "explanation": "The sequence of experiment scores over time. It tells the operator whether the research loop is improving, drifting, or stuck.",
+    },
+    {
+        "term": "Method ledger",
+        "aliases": ("method ledger", "method_ledger.yaml"),
+        "explanation": "The per-experiment audit record that freezes the scientific method stack, profile versions, preregistered expectations, and post-result claim categories.",
+    },
+    {
+        "term": "Pre-registration",
+        "aliases": ("pre-registration", "preregistration", "pre registered", "pre-registered"),
+        "explanation": "A before-the-results commitment to what will be tested and how it will be judged, reducing post-hoc storytelling.",
+    },
 )
 
 
@@ -68,7 +91,7 @@ def _operator_explain_text(text: str) -> str:
         item = _OPERATOR_ALIAS_MAP[match.group(0).lower()]
         chunks.append(
             '<details class="operator-explain">'
-            f'<summary>{escape(str(item["term"]))}</summary>'
+            f'<summary title="{escape(str(item["explanation"]))}">{escape(str(item["term"]))}</summary>'
             f'<p>{escape(str(item["explanation"]))}</p>'
             '</details>'
         )
@@ -82,7 +105,7 @@ def _operator_glossary_section() -> str:
     for item in OPERATOR_EXPLANATIONS:
         cards.append(
             '<details class="operator-explain operator-card">'
-            f'<summary>{escape(str(item["term"]))}</summary>'
+            f'<summary title="{escape(str(item["explanation"]))}">{escape(str(item["term"]))}</summary>'
             f'<p>{escape(str(item["explanation"]))}</p>'
             '</details>'
         )
@@ -396,6 +419,42 @@ def _data_panel(meta: dict[str, Any], manifest: dict[str, Any], quest_path: Path
       <table class="stats-table"><thead><tr><th>Feature</th><th>Mean</th><th>Min</th><th>Max</th></tr></thead><tbody>{stats_html}</tbody></table>
     </article>'''
 
+def _method_stack_section(quest_path: Path, exp_data: list[dict[str, Any]]) -> str:
+    stack = read_yaml(quest_path / "method_stack.yaml", {})
+    if not stack:
+        return '<section class="panel method-stack"><h3>Scientific Method Stack</h3><p class="muted">No method_stack.yaml found. This may be an older quest.</p></section>'
+    phases = stack.get("phases") or {}
+    phase_rows = "".join(
+        f"<tr><td>{escape(str(phase).replace('_', ' '))}</td><td><strong>{escape(str(method))}</strong></td></tr>"
+        for phase, method in phases.items()
+    ) or '<tr><td colspan="2">No phase overrides documented.</td></tr>'
+    ledger_cards: list[str] = []
+    for item in exp_data:
+        ledger = item.get("ledger") or {}
+        pre = ledger.get("pre_registration", {}) or {}
+        post = ledger.get("post_experiment_classification", {}) or {}
+        versions = pre.get("profile_versions", {}) or {}
+        version_text = ", ".join(f"{escape(str(k))}: profile version {escape(str(v))}" for k, v in versions.items()) or "profile version not snapshotted"
+        violations = len(post.get("method_violation") or [])
+        status = "PASS" if ledger and violations == 0 else ("RISK" if ledger else "MISSING")
+        ledger_cards.append(
+            f'<article class="metric-scorecard method-ledger-card"><span>{escape(item["id"])}</span><strong>{status}</strong>'
+            f'<p>Primary method: {escape(str(pre.get("primary_method", "Not recorded")))}</p>'
+            f'<p>Confirmatory status: {escape(str(pre.get("confirmatory_status", "Not recorded")))}</p>'
+            f'<p>{version_text}</p></article>'
+        )
+    cards = "".join(ledger_cards) or "<p>No experiments yet.</p>"
+    return (
+        '<section class="panel method-stack" id="method-stack">'
+        '<h3>Scientific Method Stack</h3>'
+        f'<p>Primary method: <strong>{escape(str(stack.get("primary_method", "standard_empirical")))}</strong></p>'
+        f'<p class="muted">{escape(str(stack.get("rationale", "No rationale documented.")))}</p>'
+        f'<table><thead><tr><th>Scientific phase</th><th>Method lens</th></tr></thead><tbody>{phase_rows}</tbody></table>'
+        '<h4>Method Ledger Status</h4>'
+        f'<div class="metric-scorecards">{cards}</div>'
+        '</section>'
+    )
+
 
 def _model_abstraction_section(meta: dict[str, Any]) -> str:
     architecture = _operator_explain_text(str(meta.get("model_architecture", "Not documented")))
@@ -467,6 +526,7 @@ def build_dashboard(quest_path: Path, output_dir: Path | None = None) -> Path:
             "id": exp.name,
             "meta": read_yaml(exp / "experiment.yaml", {}),
             "validation": read_yaml(exp / "validation_results.yaml", {}),
+            "ledger": read_yaml(exp / "method_ledger.yaml", {}),
             "report": (exp / "experiment_report.md").read_text(encoding="utf-8", errors="ignore") if (exp / "experiment_report.md").exists() else "",
         })
     active = exp_data[-1] if exp_data else None
@@ -522,6 +582,11 @@ def build_dashboard(quest_path: Path, output_dir: Path | None = None) -> Path:
 </section>
 ''')
         prev_score = score
+    assets_dir = output_dir / "assets" / "mathjax"
+    assets_dir.mkdir(parents=True, exist_ok=True)
+    if MATHJAX_VENDOR.exists():
+        shutil.copyfile(MATHJAX_VENDOR, assets_dir / "tex-mml-chtml.js")
+
     html = DASHBOARD_TEMPLATE.format(
         logo=_logo_html(quest_path),
         title=escape(_human_title(quest, quest_path)),
@@ -533,6 +598,7 @@ def build_dashboard(quest_path: Path, output_dir: Path | None = None) -> Path:
         sections="".join(sections) or '<section class="panel"><h2>No experiments yet</h2></section>',
         operator_glossary=_operator_glossary_section(),
         metric_definitions=METRIC_DEFINITIONS_HTML,
+        method_stack=_method_stack_section(quest_path, exp_data),
         model_abstraction=_model_abstraction_section(latest_meta),
         semantic_classes=SEMANTIC_CSS_CLASSES,
     )
@@ -551,7 +617,7 @@ DASHBOARD_TEMPLATE = """<!doctype html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <script>window.MathJax = {{tex: {{ inlineMath: [['\\\\(', '\\\\)'], ['$', '$']], displayMath: [['\\\\[', '\\\\]']] }}, svg: {{ fontCache: 'global' }}}};</script>
-<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script defer src="assets/mathjax/tex-mml-chtml.js"></script>
 <style>
 :root {{ color-scheme: dark; --bg:#050B16; --panel:#0A1626; --text:#EAF7FF; --muted:#8CA4BD; --cyan:#22E6FF; --orange:#FF9F43; --green:#45FF7A; --purple:#9B6CFF; --red:#FF4F64; --gold:#D6FF4D; --line:rgba(34,230,255,.22); }}
 * {{ box-sizing:border-box; }} body {{ margin:0; font-family:Inter, sans-serif; background:radial-gradient(circle at 20% 0%, rgba(34,230,255,.15), transparent 32%), radial-gradient(circle at 90% 15%, rgba(155,108,255,.13), transparent 30%), #050B16; color:var(--text); }}
@@ -571,7 +637,7 @@ dl {{ display:grid; grid-template-columns:150px 1fr; gap:12px 18px; }} dt {{ col
 </style>
 </head>
 <body>
-<div class="shell"><aside class="sidebar"><div class="brand">{logo}<div class="brand-title">SciQuest Dashboard</div></div><p class="muted">Status: {status}<br>Best score: <span class="mono semantic-best">{best}</span></p><nav class="experiment-timeline">{nav}</nav></aside><main><section class="hero"><div class="cycle-strip"><span>Hypothesize</span><span>Model</span><span>Validate</span><span>Iterate</span></div><p class="eyebrow">Quest</p><h1>{title}</h1><h2>{hero}</h2><p>{problem}</p><span class="sr-only">{semantic_classes}</span></section>{operator_glossary}{sections}{metric_definitions}{model_abstraction}</main></div>
+<div class="shell"><aside class="sidebar"><div class="brand">{logo}<div class="brand-title">SciQuest Dashboard</div></div><p class="muted">Status: {status}<br>Best score: <span class="mono semantic-best">{best}</span></p><nav class="experiment-timeline">{nav}</nav></aside><main><section class="hero"><div class="cycle-strip"><span>Hypothesize</span><span>Model</span><span>Validate</span><span>Iterate</span></div><p class="eyebrow">Quest</p><h1>{title}</h1><h2>{hero}</h2><p>{problem}</p><span class="sr-only">{semantic_classes}</span></section>{operator_glossary}{sections}{metric_definitions}{method_stack}{model_abstraction}</main></div>
 <script>
 function showExperiment(id) {{ document.querySelectorAll('.experiment').forEach(el => el.classList.toggle('active', el.id === id)); document.querySelectorAll('.exp-tab').forEach(el => el.classList.toggle('active', el.dataset.expTarget === id)); history.replaceState(null, '', '#' + id); }}
 window.addEventListener('DOMContentLoaded', () => {{ const requested = location.hash ? location.hash.slice(1) : null; if (requested && document.getElementById(requested)) showExperiment(requested); }});

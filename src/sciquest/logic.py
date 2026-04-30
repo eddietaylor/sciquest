@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Any
 
 from .io import read_yaml
+from .methods.ledger import classify_report_claims, parse_report_claims
 
 
 def run_logic_check(quest_path: Path, experiment_id: str | None = None) -> dict[str, Any]:
@@ -62,11 +63,27 @@ def run_logic_check(quest_path: Path, experiment_id: str | None = None) -> dict[
                 warnings.append("Notebook should be split into readable sections: setup, data, preprocessing/features, model, validation, artifacts.")
         if not results.exists():
             issues.append("validation_results.yaml missing; no silent-failure check possible.")
+        report_text = ""
         if report.exists():
-            rtext = report.read_text(encoding="utf-8", errors="ignore").lower()
+            report_text = report.read_text(encoding="utf-8", errors="ignore")
+            rtext = report_text.lower()
             if "speculation" not in rtext or "evidence" not in rtext:
                 warnings.append("Report should clearly separate speculation vs evidence.")
         else:
             warnings.append("Experiment report missing; conclusions cannot be checked against results.")
+
+        ledger = read_yaml(exp / "method_ledger.yaml", {})
+        if not ledger:
+            warnings.append("method_ledger.yaml missing; older experiment cannot be audited for method-aware pre-registration.")
+        else:
+            pre_registration = ledger.get("pre_registration", {}) or {}
+            if not pre_registration.get("primary_method"):
+                issues.append("Method ledger missing primary method pre-registration.")
+            if not pre_registration.get("profile_versions"):
+                warnings.append("Method ledger should snapshot profile versions for reproducibility.")
+            claims = parse_report_claims(report_text) if report_text else []
+            classified = classify_report_claims(pre_registration, claims) if claims else (ledger.get("post_experiment_classification", {}) or {})
+            if classified.get("method_violation"):
+                issues.append("Method violation detected: post-hoc or method-changing claims are not labeled according to the method ledger.")
 
     return {"passed": not issues, "issues": issues, "warnings": warnings}

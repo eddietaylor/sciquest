@@ -125,7 +125,9 @@ def test_dashboard_includes_metric_definitions_and_latex_equations(tmp_path):
     assert "Weighted aggregate score" in html
     assert "\\sum_i w_i" in html
     assert "MathJax" in html
-    assert "tex-mml-chtml.js" in html
+    assert "assets/mathjax/tex-mml-chtml.js" in html
+    assert "cdn.jsdelivr" not in html
+    assert (out.parent / "assets" / "mathjax" / "tex-mml-chtml.js").exists()
     assert "\\(" in html and "\\)" in html
     assert "WAPE" in html
     assert "RMSE" in html
@@ -173,3 +175,49 @@ def test_dashboard_cli_writes_index(tmp_path):
     result = runner.invoke(app, ["dashboard", "--root", str(tmp_path), "--quest", "demo"])
     assert result.exit_code == 0, result.output
     assert (quest / "reports" / "dashboard" / "index.html").exists()
+
+
+
+def test_logic_check_inspects_method_ledger_and_claim_labels(tmp_path):
+    quest = make_minimal_valid_experiment(tmp_path)
+    exp = quest / "experiments" / "exp_001"
+    (quest / "method_stack.yaml").write_text("mode: simple\nprimary_method: popperian_falsificationist\nphases: {}\n")
+    (exp / "method_ledger.yaml").write_text(yaml.safe_dump({
+        "pre_registration": {"primary_method": "popperian_falsificationist", "predicted_observations": ["accuracy > 0.9"], "profile_versions": {"popperian_falsificationist": "1.0.0"}},
+        "post_experiment_classification": {"confirmatory_result": [], "exploratory_observation": [], "post_hoc_reinterpretation": [], "method_violation": [], "unresolved_anomaly": []},
+    }))
+    (exp / "experiment_report.md").write_text("# Report\n\n## Evidence\nEvidence exists.\n\n## Speculation\nSpeculation exists.\n\n## Post Hoc Reinterpretation\n- labeled_post_hoc: false\n- claim: rescued the hypothesis after results\n")
+    result = run_logic_check(quest, "exp_001")
+    assert not result["passed"]
+    assert any("method violation" in issue.lower() for issue in result["issues"])
+
+
+def test_logic_check_does_not_fail_older_experiments_without_method_ledger(tmp_path):
+    quest = make_minimal_valid_experiment(tmp_path)
+    assert not (quest / "experiments" / "exp_001" / "method_ledger.yaml").exists()
+    result = run_logic_check(quest, "exp_001")
+    assert result["passed"]
+    assert any("method_ledger" in warning.lower() for warning in result["warnings"])
+
+
+def test_dashboard_shows_method_stack_and_ledger_status(tmp_path):
+    quest = make_minimal_valid_experiment(tmp_path)
+    exp = quest / "experiments" / "exp_001"
+    (quest / "method_stack.yaml").write_text(yaml.safe_dump({
+        "mode": "simple",
+        "primary_method": "bayesian",
+        "phases": {"hypothesis_generation": "bayesian", "stress_testing": "popperian_falsificationist"},
+        "rationale": "Need uncertainty-aware stress testing.",
+    }))
+    (exp / "method_ledger.yaml").write_text(yaml.safe_dump({
+        "pre_registration": {"primary_method": "bayesian", "confirmatory_status": "confirmatory", "profile_versions": {"bayesian": "1.0.0"}},
+        "post_experiment_classification": {"confirmatory_result": ["held"], "method_violation": []},
+    }))
+    out = build_dashboard(quest)
+    html = out.read_text()
+    assert "Scientific Method Stack" in html
+    assert "bayesian" in html
+    assert "popperian_falsificationist" in html
+    assert "Method Ledger Status" in html
+    assert "confirmatory" in html
+    assert "profile version" in html.lower()

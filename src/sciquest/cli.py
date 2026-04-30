@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import shutil
 from typing import Optional
 
 import typer
@@ -13,8 +14,12 @@ from .logic import run_logic_check
 from .agent import SCIQUEST_SPLASH, launch_agent
 from .dashboard import build_dashboard
 from .loop import run_iteration_loop
+from .methods.registry import MethodRegistry
+from .methods.resolver import auto_recommend_method_stack
 
 app = typer.Typer(help="SciQuest autonomous research framework")
+methods_app = typer.Typer(help="Inspect and recommend SciQuest scientific method profiles")
+app.add_typer(methods_app, name="methods")
 console = Console()
 
 
@@ -179,10 +184,15 @@ def dashboard_cmd(
     quest: str = typer.Option(..., "--quest", "-q"),
     root: Path = typer.Option(Path.cwd()),
     output_dir: Optional[Path] = typer.Option(None, help="Output directory for static dashboard"),
+    export_html: Optional[Path] = typer.Option(None, "--export-html", help="Also copy the dashboard HTML to this file for sharing/archival export"),
 ):
     """Build a static dashboard for visualizing experiment iterations."""
     out = build_dashboard(_qpath(root, quest), output_dir)
     console.print(f"Dashboard written: {out}")
+    if export_html is not None:
+        export_html.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(out, export_html)
+        console.print(f"Dashboard HTML exported: {export_html}")
 
 
 @app.command("journal")
@@ -196,6 +206,54 @@ def journal_cmd(
     if append is not None:
         append_text(path, f"\n\n## Manual Note\n\n{append}\n")
     console.print(path.read_text(encoding="utf-8"))
+
+
+@methods_app.command("list")
+def methods_list():
+    """List available scientific method profiles."""
+    registry = MethodRegistry.default()
+    for profile in registry.list_profiles():
+        console.print(f"{profile.id}	{profile.plain_language_label}	v{profile.profile_version}")
+
+
+@methods_app.command("show")
+def methods_show(method_id: str = typer.Argument(..., help="Method profile id")):
+    """Show a scientific method profile."""
+    registry = MethodRegistry.default()
+    try:
+        profile = registry.get(method_id)
+    except KeyError as exc:
+        raise typer.BadParameter(str(exc)) from exc
+    console.print({
+        "id": profile.id,
+        "display_name": profile.display_name,
+        "plain_language_label": profile.plain_language_label,
+        "profile_version": profile.profile_version,
+        "description": profile.description,
+        "best_for": profile.best_for,
+        "bad_for": profile.bad_for,
+        "phase_affinities": profile.phase_affinities,
+    })
+
+
+@methods_app.command("recommend")
+def methods_recommend(
+    quest: Optional[str] = typer.Option(None, "--quest", "-q", help="Existing quest slug to inspect"),
+    root: Path = typer.Option(Path.cwd()),
+    hero: str = typer.Option("", help="Hero statement if no quest is provided"),
+    problem: str = typer.Option("", help="Problem statement if no quest is provided"),
+):
+    """Recommend a method stack from quest text and accumulated quest history."""
+    metadata = {"hero_statement": hero, "problem_statement": problem}
+    if quest:
+        metadata["quest_path"] = _qpath(root, quest)
+    stack = auto_recommend_method_stack(metadata)
+    console.print({
+        "primary_method": stack.primary_method,
+        "mode": stack.mode,
+        "rationale": stack.rationale,
+        "phases": stack.phases,
+    })
 
 
 if __name__ == "__main__":
