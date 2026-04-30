@@ -146,6 +146,11 @@ def test_cli_methods_list_show_and_recommend(tmp_path):
     runner = CliRunner()
     listed = runner.invoke(app, ["methods", "list"])
     assert listed.exit_code == 0, listed.output
+    assert "SciQuest Method Stack Library" in listed.output
+    assert "Method" in listed.output
+    assert "Scientific job" in listed.output
+    assert "Best used when" in listed.output
+    assert "Phase affinity" in listed.output
     assert "bayesian" in listed.output
     assert "popperian_falsificationist" in listed.output
 

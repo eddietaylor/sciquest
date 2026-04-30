@@ -5,7 +5,11 @@ import shutil
 from typing import Optional
 
 import typer
+from rich import box
 from rich.console import Console
+from rich.panel import Panel
+from rich.table import Table
+from rich.text import Text
 
 from .core import create_quest, list_quests, run_next, continue_quest, update_state_with_validation
 from .io import quest_dir, read_yaml, append_text
@@ -212,8 +216,39 @@ def journal_cmd(
 def methods_list():
     """List available scientific method profiles."""
     registry = MethodRegistry.default()
+    title = Text("SciQuest Method Stack Library", style="bold cyan")
+    subtitle = Text(
+        "Choose the philosophy-of-science operating mode for a quest or phase.",
+        style="dim",
+    )
+    console.print(Panel.fit(subtitle, title=title, border_style="cyan", box=box.DOUBLE))
+    console.print("[bold bright_black]Columns:[/bold bright_black] Method · Scientific job · Best used when · Phase affinity · Version")
+
+    table = Table(
+        show_header=True,
+        header_style="bold bright_white",
+        box=box.ROUNDED,
+        border_style="bright_black",
+        row_styles=["", "dim"],
+        pad_edge=True,
+    )
+    table.add_column("Method", style="bold cyan", no_wrap=True, ratio=2)
+    table.add_column("Scientific job", style="bright_white", ratio=2)
+    table.add_column("Best used when / Phase affinity", style="green", ratio=4)
+
     for profile in registry.list_profiles():
-        console.print(f"{profile.id}	{profile.plain_language_label}	v{profile.profile_version}")
+        best_for = "; ".join(profile.best_for[:2]) if profile.best_for else "General empirical work"
+        affinities = ", ".join(profile.phase_affinities[:2]) if profile.phase_affinities else "all phases"
+        method_cell = f"[bold cyan]{profile.id}[/bold cyan]\n[bright_blue]v{profile.profile_version}[/bright_blue]"
+        use_cell = f"{best_for}\n[magenta]Phases:[/magenta] {affinities}"
+        table.add_row(
+            method_cell,
+            profile.plain_language_label,
+            use_cell,
+        )
+
+    console.print(table)
+    console.print("[dim]Tip:[/dim] [cyan]sciquest methods show bayesian[/cyan] or [cyan]sciquest new --method strong_inference[/cyan]")
 
 
 @methods_app.command("show")
