@@ -1,0 +1,10 @@
+mode: simple
+primary_method: standard_empirical
+phases:
+  problem_framing: standard_empirical
+  hypothesis_generation: standard_empirical
+  experiment_design: standard_empirical
+  evidence_evaluation: standard_empirical
+  stress_testing: standard_empirical
+  long_term_tracking: standard_empirical
+rationale: ''

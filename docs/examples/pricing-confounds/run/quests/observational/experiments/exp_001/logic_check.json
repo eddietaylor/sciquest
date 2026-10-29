@@ -1,0 +1,9 @@
+{
+  "interpretation": "A valid record does not by itself establish causal identification, novelty, or statistical error control.",
+  "issues": [],
+  "passed": true,
+  "recorded_integrity_verified": true,
+  "scientific_verified": false,
+  "scope": "artifact_schema_and_recorded_integrity",
+  "warnings": []
+}

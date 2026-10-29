@@ -1,0 +1,14 @@
+id: exp_001
+created_at: '2026-10-29T19:35:01+00:00'
+status: evaluated
+task_type: scripted_synthetic_research
+model_architecture: Price-only ordinary least squares with intercept
+input_features:
+- price
+target_features:
+- population mean demand
+validation_technique: Protected analytic intervention means on the same two-price
+  grid
+technical_diagrams: []
+registration_hash: bd216ecda1bd9974db6d5fc7fa5f0c2ac5be228a71dcd5d033baa7702e4cdc67
+comparison_group: b02bda75cbaff9b8e008438abc324b2f6d184c160e853917cf6ba3175537c19a

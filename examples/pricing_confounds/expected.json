@@ -1,0 +1,18 @@
+{
+  "observational": {
+    "fitted_intercept": -20.0,
+    "fitted_slope": 2.0,
+    "mean_demand_rmse": 20.0,
+    "selected_price": 40.0,
+    "policy_value": 1600.0,
+    "regret": 200.0
+  },
+  "randomized": {
+    "fitted_intercept": 120.0,
+    "fitted_slope": -2.0,
+    "mean_demand_rmse": 0.0,
+    "selected_price": 30.0,
+    "policy_value": 1800.0,
+    "regret": 0.0
+  }
+}

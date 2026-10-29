@@ -1,0 +1,24 @@
+question: Does price-only OLS fitted to this prescribed design recover the intervention
+  means and best listed price?
+hypothesis: Price-only OLS recovers population intervention means (RMSE <= 1e-10)
+  and selects a zero-regret listed price.
+scope: Noiseless balanced-Z synthetic population; finite prices30/40; one fixed analysis
+  per design.
+assumptions: UniformZ, affine mean model, fixed sampling/assignment; no statistical
+  uncertainty or real-market validity implied.
+data_access: This arm's training price/demand and evaluation price/population features.
+  Evaluation labels and generator are not staged. Owner and public reader know the
+  generator.
+stopping_rule: One fit and one supervisor evaluation; no tuning or replacement.
+action: hypothesis_test
+confirmatory_status: exploratory
+scientist_information_mode: black_box_v2
+predictions:
+- id: mean_recovery
+  metric: mean_demand_rmse
+  operator: <=
+  threshold: 1.0e-10
+- id: optimal_listed_price
+  metric: regret
+  operator: <=
+  threshold: 1.0e-10

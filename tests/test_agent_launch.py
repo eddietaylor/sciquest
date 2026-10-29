@@ -1,11 +1,20 @@
 from typer.testing import CliRunner
 
-from sciquest.agent import SCIQUEST_SPLASH, build_agent_prompt, build_agent_argv, parse_agent_command
+from sciquest.agent import (
+    SCIQUEST_SPLASH,
+    build_agent_prompt,
+    build_agent_argv,
+    parse_agent_command,
+)
 from sciquest.cli import app
 
 
 def test_parse_agent_command_respects_shell_quoting():
-    assert parse_agent_command('python -c "print(123)"') == ["python", "-c", "print(123)"]
+    assert parse_agent_command('python -c "print(123)"') == [
+        "python",
+        "-c",
+        "print(123)",
+    ]
 
 
 def test_build_agent_prompt_points_agent_at_quest_and_protocol(tmp_path):
@@ -33,25 +42,39 @@ def test_build_agent_argv_supports_prompt_and_quest_placeholders(tmp_path):
     assert str(quest) in argv[-1]
 
 
-def test_new_with_start_agent_runs_configured_agent_command(tmp_path):
+def test_new_with_start_agent_cannot_claim_completion_without_concrete_data(tmp_path):
     runner = CliRunner()
     marker = tmp_path / "agent-ran.txt"
     inputs = "Hero\nProblem\nHypothesis\n\n\n\nweights\ny\n"
-    command = f"python -c \"from pathlib import Path; Path(r'{marker}').write_text('ran')\""
+    command = (
+        f"python -c \"from pathlib import Path; Path(r'{marker}').write_text('ran')\""
+    )
     result = runner.invoke(
         app,
-        ["new", "--root", str(tmp_path), "--slug", "demo", "--start-agent", "--agent-command", command, "--no-splash"],
+        [
+            "new",
+            "--root",
+            str(tmp_path),
+            "--slug",
+            "demo",
+            "--start-agent",
+            "--agent-command",
+            command,
+            "--no-splash",
+        ],
         input=inputs,
     )
-    assert result.exit_code == 0, result.output
-    assert marker.read_text() == "ran"
-    assert "Agent completed" in result.output
+    assert result.exit_code != 0
+    assert not marker.exists()
+    assert "Agent completed" not in result.output
 
 
 def test_new_prints_sciquest_banner_by_default(tmp_path):
     runner = CliRunner()
     inputs = "Hero\nProblem\nHypothesis\n\n\n\n\ny\n"
-    result = runner.invoke(app, ["new", "--root", str(tmp_path), "--slug", "splash-demo"], input=inputs)
+    result = runner.invoke(
+        app, ["new", "--root", str(tmp_path), "--slug", "splash-demo"], input=inputs
+    )
     assert result.exit_code == 0, result.output
     assert "SCI-QUEST" in result.output
     assert "autonomous research framework" in result.output
@@ -60,8 +83,18 @@ def test_new_prints_sciquest_banner_by_default(tmp_path):
 def test_continue_prints_sciquest_banner_by_default(tmp_path):
     runner = CliRunner()
     inputs = "Hero\nProblem\nHypothesis\n\n\n\n\ny\n"
-    assert runner.invoke(app, ["new", "--root", str(tmp_path), "--slug", "demo", "--no-splash"], input=inputs).exit_code == 0
-    result = runner.invoke(app, ["continue", "--root", str(tmp_path), "--quest", "demo", "--idea", "next idea"])
+    assert (
+        runner.invoke(
+            app,
+            ["new", "--root", str(tmp_path), "--slug", "demo", "--no-splash"],
+            input=inputs,
+        ).exit_code
+        == 0
+    )
+    result = runner.invoke(
+        app,
+        ["continue", "--root", str(tmp_path), "--quest", "demo", "--idea", "next idea"],
+    )
     assert result.exit_code == 0, result.output
     assert "SCI-QUEST" in result.output
     assert "Quest updated with injection" in result.output

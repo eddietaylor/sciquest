@@ -1,0 +1,24 @@
+status: ready
+question: Price-only OLS recovers population intervention means (RMSE <= 1e-10) and
+  selects a zero-regret listed price.
+claim_scope: Known noiseless synthetic generator, equal Z population, exactly prices30/40;
+  no autonomous-discovery, real-market or philosophy comparison claim.
+estimand: E[D|do(P=p)] and p*E[D|do(P=p)] on the two listed prices.
+rivals:
+- The observationally equivalent demand=-20+2*price law has the opposite intervention
+  slope.
+assumptions:
+- Equal population proportions Z=0/1.
+- No noise, interference, capacity limits, costs, or dynamics.
+- Balanced stratified assignment within each simulator-known Z in the randomized arm.
+observation_access:
+- Eight price/demand training rows for this arm.
+intervention_access:
+- Prescribed design only; no adaptive choice.
+uncertainty_and_stopping: One registered fit per arm. No sampling uncertainty, p-value,
+  or coverage estimate.
+resource_budget:
+  experiments: 1
+  timeout_seconds: 120
+  external_agent_calls: 0
+evaluation_mode: analytic_reproduction

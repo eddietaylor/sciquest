@@ -1,0 +1,12 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.2.0, pluggy-1.7.0
+rootdir: /home/edtaylor/code/sciquest-publication
+configfile: pyproject.toml
+plugins: platformdirs-4.14.0
+collected 2 items
+
+../home/edtaylor/code/sciquest-publication/examples/pricing_confounds/test_end_to_end.py . [ 50%]
+.                                                                        [100%]
+
+--------- generated xml file: /tmp/sciquest-pricing-integration-v3.xml ---------
+============================== 2 passed in 7.51s ===============================

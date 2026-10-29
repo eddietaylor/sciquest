@@ -1,0 +1,45 @@
+status: ready
+metrics:
+- name: mean_demand_rmse
+  role: primary
+  direction: minimize
+  weight: 1
+  normalization:
+    type: minmax
+    min: 0
+    max: 40
+  computation:
+    kind: rmse
+    truth: data/1/eval.csv
+    key: id
+    target: mean_demand
+    prediction: predicted_mean_demand
+- name: policy_value
+  role: diagnostic
+  direction: maximize
+  computation:
+    kind: policy_value
+    truth: data/1/eval.csv
+    key: id
+    target: expected_revenue
+    prediction: predicted_revenue
+    group_by: &id001
+    - population
+    action: price
+    objective: maximize
+    tie_break: lowest_action
+    value_semantics: expected_interventional
+- name: regret
+  role: diagnostic
+  direction: minimize
+  computation:
+    kind: regret
+    truth: data/1/eval.csv
+    key: id
+    target: expected_revenue
+    prediction: predicted_revenue
+    group_by: *id001
+    action: price
+    objective: maximize
+    tie_break: lowest_action
+    value_semantics: expected_interventional

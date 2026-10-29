@@ -1,0 +1,53 @@
+{
+  "scope": "Critical review of the reproducible pricing example; agent code review is not human scientific validation.",
+  "issues": [
+    {
+      "id": "P01",
+      "finding": "Initial proposal changed price coverage as well as assignment, confounding attribution of the contrast.",
+      "resolution": "Both designs and evaluation now use prices30/40, eight units per arm and the same price-only estimator. Randomized design balances strata within each price.",
+      "verification": "Independent analytic counterexamples and actual CSV cell counts, OLS fits and supervisor metrics.",
+      "status": "fixed_before_final_example"
+    },
+    {
+      "id": "P02",
+      "finding": "Initial generated IDs contained explicit stratum labels despite stratum being omitted from estimator features.",
+      "resolution": "Assign opaque unit IDs after row shuffling. Published generator remains transparent; no arbitrary-agent ignorance claim is made.",
+      "verification": "Source re-review and final generated CSVs; actual analysis reads price/demand only.",
+      "status": "fixed"
+    },
+    {
+      "id": "P03",
+      "finding": "Copied post-evaluation comparison figure could be mistaken for worker-authored output in a standalone dashboard.",
+      "resolution": "Figure itself and scripted report explicitly label owner-side comparison after supervisor evaluation.",
+      "verification": "Source re-review, rendered dashboard inspection and final SVG title.",
+      "status": "fixed"
+    },
+    {
+      "id": "P04",
+      "finding": "Unconditional dashboard glossary described ridge/log-demand/rank-aware modeling as though used by this OLS example.",
+      "resolution": "Use conditional generic definitions and explicit applicability notice; label suggested next steps as templates rather than agent decisions.",
+      "verification": "Dashboard regression checks, real installed-wheel dashboard assertions and rendered inspection.",
+      "status": "fixed"
+    },
+    {
+      "id": "P05",
+      "finding": "Reviewers initially claimed that pytest.approx with an explicit abs tolerance still retained its default relative tolerance.",
+      "resolution": "Withdrawn after independently checking actual comparisons and pytest behavior. Explicit rel0/abs1e-10 retained for clarity; coefficient checks now use that explicit tolerance too.",
+      "verification": "1600.0016 fails the original abs1e-10 check; original default coefficient check allowed2.000001 versus2.0. Actual final arithmetic checked independently.",
+      "status": "metric_objection_withdrawn_coefficient_tolerance_clarified"
+    },
+    {
+      "id": "P06",
+      "finding": "Initial installed integration assertion expected machine metric name in a dashboard that replaces underscores with spaces.",
+      "resolution": "Assert the actual human-readable label. Supervisor metric keys and arithmetic checks stay unchanged.",
+      "verification": "Original1fail/1pass log retained; corrected2pass installed run repeats the full workflow twice.",
+      "status": "test_harness_corrected"
+    }
+  ],
+  "limits": [
+    "No external scientific-agent reasoning is demonstrated; development used AI-assisted coding and critical review.",
+    "No noisy-sample inference, confidence interval, calibration, real-market generalization or philosophical comparison.",
+    "The finite two-price experiment cannot identify off-grid behavior; independent human scientific review remains separate.",
+    "This example does not qualify the experimental demand/assessment components or repair the unresolved external private-review service."
+  ]
+}

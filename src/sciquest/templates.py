@@ -1,31 +1,44 @@
-AGENTS_MD = """# SciQuest Agent Protocol
+AGENTS_MD = """# SciQuest research worker protocol
 
-SciQuest Core is deterministic infrastructure. The agent supplies scientific reasoning and creativity.
+The supervisor owns registration, execution, evaluation, state, and research history.
+The worker prepares scientific proposals in its assigned workspace. Do not update
+state.yaml, the supervisor database, registered inputs, or previous experiments.
 
-For every `sciquest run-next --quest <quest_slug>` iteration:
+1. Read handoff.yaml, quest.yaml, research_contract.yaml, hypotheses.yaml,
+   method_stack.yaml, validation.yaml, and data_manifest.yaml when present.
+2. If handoff mode is propose_setup, write setup_proposal.yaml with action:
+   propose_setup, a concrete reason, candidate data sources, metric definitions,
+   assumptions, rivals, intervention access, resource budget, and stopping rules.
+   A setup proposal is not an experiment or confirmation.
+3. Otherwise choose one useful research action. A new hypothesis is optional:
+   rival tests, replication, measurement, data acquisition, and stopping are valid.
+   Preserve the user's hypothesis as a candidate that evidence may contradict.
+4. Apply the assigned philosophy-inspired inquiry policy to observable decisions.
+   Maintain explicit rivals and discriminating predictions where appropriate.
+   Numerical Bayesian updates require an explicit likelihood and model assumptions.
+5. Write experiment_plan.yaml with concrete question, hypothesis, scope,
+   assumptions, data_access, stopping_rule, action, confirmatory_status, and
+   measurable predictions (id, metric, operator, threshold). Use existing metric
+   definitions; propose future amendments separately.
+6. Write notebook.ipynb using staged training data under data/INDEX/FILENAME and
+   evaluation features under data/INDEX/features.csv. Evaluation labels are hidden.
+   Emit the complete prediction CSV required by validation.yaml. Preserve model
+   parameters, feature definitions, dependencies, and reloadable prediction code.
+   Decision metrics require predicted objective values for every listed action;
+   protected truth determines policy value, regret and constraint violations.
+   Treat primary, diagnostic and constraint roles separately. Decision utility
+   does not establish scientific understanding or causal identification.
+7. Do not execute the notebook during preparation. The supervisor freezes inputs,
+   runs the notebook in a bounded isolated process, and computes metrics from
+   registered truth. Agent-written scores do not establish results.
+8. Reports, plots, and diagrams are optional explanatory artifacts, generated when
+   scientifically useful. Distinguish observations, assumptions, and speculation.
+9. If the question is unidentifiable with current evidence, or further work is
+   unwarranted, write decision.yaml with action: needs_data or stop and a concrete
+   reason. Inconclusive and negative outcomes are legitimate.
+10. Stop after the proposal. Never declare scientific confirmation or completion;
+    those depend on the supervisor's recorded evidence and the claim's limits.
 
-1. Read all quest files first: `quest.yaml`, `state.yaml`, `hypotheses.yaml`, `validation.yaml`, `data_manifest.yaml`, `method_stack.yaml`, and `journal.md`.
-2. Apply method-aware reasoning. Treat `method_stack.yaml` as phase-level governance, not a vague blend. Use the assigned method for problem framing, hypothesis generation, experiment design, evidence evaluation, stress testing, and long-term tracking.
-3. Before notebook execution, create or update `experiments/exp_NNN/method_ledger.yaml` as a pre-registration: selected method stack, confirmatory vs exploratory status, predicted observations, falsification/success criteria, evaluation rules, and allowed post hoc analysis rules.
-4. Generate exactly one evolved, testable hypothesis for this iteration. For the first experiment, operationalize the user's initial hypothesis rather than discarding it. If the method stack requires rival or plural hypotheses, record them as alternatives while selecting one primary experiment.
-5. If `data_manifest.yaml` status is `missing_user_data`, infer required data, find or generate suitable open data, store it under `data/raw/`, and document schema, meaning, provenance, and limitations. If synthetic/generated data is used, preserve the generator code under `experiments/exp_NNN/artifacts/` as `data_generation_script.py` or `data_generator.py`.
-6. If `validation.yaml` status is `agent_required`, define a domain-appropriate validation suite with metric name, description, direction, weight, and normalization.
-7. Create a new `experiments/exp_NNN/` folder without overwriting history, including `logs/`, `artifacts/plots/`, and `artifacts/diagrams/`.
-8. Write `experiment.yaml`, `hypothesis.md`, and a Jupyter `notebook.ipynb`.
-9. In `experiment.yaml`, document dashboard metadata: `task_type` (supervised, unsupervised, generative, simulation, causal, etc.), `model_architecture`, `input_features`, `target_features`, `validation_technique`, and `technical_diagrams`.
-10. Create technical SVG diagrams under `artifacts/diagrams/`:
-   - `model_architecture.svg`: data/features → model components → outputs.
-   - `validation_technique.svg`: train/validation/test/counterfactual flow, metrics, aggregate score.
-11. The notebook must be split into readable sections: setup, data loading/generation, dataset preview, preprocessing/features, model/baseline, validation, plots/artifacts, and interpretation handoff.
-12. The notebook must show a dataset preview, report dataset size before/after transforms, document preprocessing and features, define target and inputs, include docstrings, generate plots, save metrics to `validation_results.yaml`, save artifacts to `artifacts/`, and run in a clean environment.
-13. Compare against the strongest reasonable baseline available for the iteration, not only a trivial baseline. If a weak baseline is used, explicitly justify it and propose the stronger next baseline.
-14. Execute the notebook. Debug failures with a bounded retry loop and preserve logs.
-15. Run `sciquest validate --quest <quest_slug> --experiment exp_NNN`.
-16. Run `sciquest logic-check --quest <quest_slug> --experiment exp_NNN` and fix any issues before stopping.
-17. Write `experiment_report.md` separating evidence from speculation, including graph interpretation and method-specific journal sections.
-18. Classify results against the method ledger as `confirmatory_result`, `exploratory_observation`, `post_hoc_reinterpretation`, `method_violation`, or `unresolved_anomaly`. Do not switch methods after seeing results except as a pre-registered future experiment.
-19. Append a journal entry with hypothesis, method, results, scores, interpretation, debug notes, next direction, user injections, and method-specific sections.
-20. Update `state.yaml` and stop after one iteration unless an external scheduler invokes another run.
-
-Never overwrite prior experiments. Preserve failed experiments and logs.
+For package development, preserve legacy research artifacts. Add meaningful
+regression, integration, and adversarial checks for observed failure modes.
 """

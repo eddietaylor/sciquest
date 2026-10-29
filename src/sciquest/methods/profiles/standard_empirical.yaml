@@ -13,18 +13,21 @@ phase_affinities:
 - experiment_design
 - evidence_evaluation
 hypothesis_generation_rules:
-- State a testable claim appropriate to this method.
+- State a testable claim, scope, estimand and plausible alternatives; the initial
+  hypothesis may be false.
 experiment_design_rules:
-- Design the experiment according to this method lens.
+- Define sampling, measurement, controls, stopping and evaluation rules before execution.
 evidence_evaluation_rules:
-- Evaluate evidence according to this method lens.
+- Compare registered predictions with independent evidence; separate uncertainty,
+  negative results and speculation.
 validation_rules:
-- State success criteria before execution.
+- Keep exploratory adaptation separate from confirmation on fresh evidence.
 journal_sections:
 - Method-specific evidence notes
 scoring_transform: method_lens_metadata_only_v1
 next_step_policy:
-- Choose the next step according to method-specific evidence.
+- Replicate, refine a rival, improve measurement, acquire data or stop according to
+  the recorded evidence.
 failure_modes:
 - Method shopping after results are known
 - Overclaiming beyond the method lens
@@ -35,3 +38,4 @@ recommended_pairings:
 - popperian_falsificationist
 prompt_addendum: 'A general empirical cycle: state a testable hypothesis, collect
   or generate data, run an experiment, evaluate metrics, and iterate.'
+profile_version: 1.1.0

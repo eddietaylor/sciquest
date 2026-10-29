@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         python-version: ['3.10', '3.11', '3.12']
@@ -21,6 +21,11 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install -e '.[test]'
+      - name: Install isolated execution runtime
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y bubblewrap
+          bwrap --ro-bind / / --proc /proc --dev /dev --unshare-pid -- true
       - name: Run tests
         run: pytest tests -q
       - name: Build package
@@ -28,3 +33,47 @@ jobs:
         run: |
           python -m pip install build
           python -m build
+
+  pricing-reproduction:
+    name: Installed-wheel scientific example
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install isolated execution runtime
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y bubblewrap
+          bwrap --ro-bind / / --proc /proc --dev /dev --unshare-pid -- true
+      - name: Build wheel and install a fresh pinned environment
+        run: |
+          python -m pip install build
+          python -m build --wheel
+          python -m venv "$RUNNER_TEMP/sciquest-wheel"
+          "$RUNNER_TEMP/sciquest-wheel/bin/python" -m pip install -r examples/pricing_confounds/requirements.txt
+          "$RUNNER_TEMP/sciquest-wheel/bin/python" -m pip install --no-deps dist/*.whl
+      - name: Reproduce twice and independently check actual results
+        run: |
+          cd "$RUNNER_TEMP"
+          env -u PYTHONPATH "$RUNNER_TEMP/sciquest-wheel/bin/python" -m pytest \
+            "$GITHUB_WORKSPACE/examples/pricing_confounds/test_end_to_end.py" -v \
+            --basetemp "$RUNNER_TEMP/pricing-integration" \
+            --junitxml "$RUNNER_TEMP/pricing-tests.xml"
+      - name: Produce inspectable research artifacts
+        run: |
+          cd "$RUNNER_TEMP"
+          env -u PYTHONPATH "$RUNNER_TEMP/sciquest-wheel/bin/python" \
+            "$GITHUB_WORKSPACE/examples/pricing_confounds/run.py" \
+            --output "$RUNNER_TEMP/pricing-example"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pricing-reproduction
+          include-hidden-files: true
+          if-no-files-found: error
+          path: |
+            ${{ runner.temp }}/pricing-example
+            ${{ runner.temp }}/pricing-integration
+            ${{ runner.temp }}/pricing-tests.xml

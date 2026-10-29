@@ -1,0 +1,49 @@
+{
+  "format": "sciquest-pricing-confounds-v1",
+  "seed": 42,
+  "price_grid": [
+    30,
+    40
+  ],
+  "proposal_author": "prewritten example script",
+  "external_agent_calls": 0,
+  "genuine_external_agent_reasoning_demonstrated": false,
+  "experiments": [
+    {
+      "arm": "observational",
+      "metrics": {
+        "mean_demand_rmse": 20.0,
+        "policy_value": 1600.0,
+        "regret": 200.0
+      },
+      "fitted_intercept": -20.0,
+      "fitted_slope": 2.0,
+      "selected_price": 40.0,
+      "prediction_outcomes": {
+        "mean_recovery": "contradicted",
+        "optimal_listed_price": "contradicted"
+      },
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "isolated_execution": true
+    },
+    {
+      "arm": "randomized",
+      "metrics": {
+        "mean_demand_rmse": 0.0,
+        "policy_value": 1800.0,
+        "regret": 0.0
+      },
+      "fitted_intercept": 120.0,
+      "fitted_slope": -2.0,
+      "selected_price": 30.0,
+      "prediction_outcomes": {
+        "mean_recovery": "supported",
+        "optimal_listed_price": "supported"
+      },
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "isolated_execution": true
+    }
+  ]
+}

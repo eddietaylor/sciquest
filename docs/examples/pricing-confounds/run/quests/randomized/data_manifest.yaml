@@ -1,0 +1,36 @@
+status: ready
+datasets:
+- path: data/raw/train.csv
+  role: training
+  provenance: Synthetic noiseless analytic world; see the published generator and
+    protocol. Eight training units; evaluation rows are population means, not sampled
+    individuals.
+  generator: data/generate.py
+  generator_args:
+  - --kind
+  - randomized
+  - --seed
+  - '42'
+  - --output
+  - output.csv
+  generated_output: output.csv
+  seed: 42
+- path: data/raw/eval.csv
+  role: evaluation
+  provenance: Synthetic noiseless analytic world; see the published generator and
+    protocol. Eight training units; evaluation rows are population means, not sampled
+    individuals.
+  generator: data/generate.py
+  generator_args:
+  - --kind
+  - evaluation
+  - --seed
+  - '42'
+  - --output
+  - output.csv
+  generated_output: output.csv
+  seed: 42
+  input_columns:
+  - id
+  - population
+  - price

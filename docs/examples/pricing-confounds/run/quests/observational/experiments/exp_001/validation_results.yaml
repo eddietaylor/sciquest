@@ -1,0 +1,100 @@
+aggregate_score: 0.5
+scores:
+  mean_demand_rmse:
+    raw: 20.0
+    normalized: 0.5
+    weight: 1.0
+suite_hash: 3fa78353294c00fff2eb9e9b951cff2335528fcfdbca0315c54c357cd5756839
+validation_status: scored
+metric_roles:
+  mean_demand_rmse: primary
+  policy_value: diagnostic
+  regret: diagnostic
+constraint_outcomes: {}
+experiment_id: exp_001
+metrics:
+  mean_demand_rmse: 20.0
+  policy_value: 1600.0
+  regret: 200.0
+undefined_metrics: {}
+decision_evidence:
+  policy_value:
+    objective: maximize
+    tie_break: lowest_action
+    group_by:
+    - population
+    action: price
+    group_count: 1
+    weighting: equal_per_group
+    selection_tie_groups: 0
+    trace_sample:
+    - group:
+      - balanced_population
+      selected_id: evaluation_40
+      action: 40.0
+      truth: 1600.0
+      oracle_value: 1800.0
+      regret: 200.0
+    trace_sample_limit: 100
+    trace_truncated: false
+    scope: Registered finite action grid; truth semantics and causal identification
+      are owner assumptions. No sequential-policy guarantee or implicit feasibility
+      filtering.
+    selected_value: 1600.0
+    oracle_value: 1800.0
+    value_semantics: expected_interventional
+  regret:
+    objective: maximize
+    tie_break: lowest_action
+    group_by:
+    - population
+    action: price
+    group_count: 1
+    weighting: equal_per_group
+    selection_tie_groups: 0
+    trace_sample:
+    - group:
+      - balanced_population
+      selected_id: evaluation_40
+      action: 40.0
+      truth: 1600.0
+      oracle_value: 1800.0
+      regret: 200.0
+    trace_sample_limit: 100
+    trace_truncated: false
+    scope: Registered finite action grid; truth semantics and causal identification
+      are owner assumptions. No sequential-policy guarantee or implicit feasibility
+      filtering.
+    selected_value: 1600.0
+    oracle_value: 1800.0
+    value_semantics: expected_interventional
+prediction_outcomes: &id001
+  mean_recovery: contradicted
+  optimal_listed_price: contradicted
+registration_hash: 90e60b6edf5a81e994f3cfde216435cebcdcc4f0dcff684b0b8721aceb334036
+created_at: '2026-10-29T19:35:02+00:00'
+policy_evidence:
+  contract:
+    enforced_plan_contracts: []
+    guidance_only_methods:
+    - standard_empirical
+    inactive_plan_extensions: []
+    phase_governance:
+      evidence_evaluation: standard_empirical
+      experiment_design: standard_empirical
+      hypothesis_generation: standard_empirical
+      long_term_tracking: standard_empirical
+      problem_framing: standard_empirical
+      stress_testing: standard_empirical
+    requirements: {}
+    scope: Registered planning constraints and numerical evidence updates; not a guarantee
+      of philosophical fidelity or test severity
+    version: 2
+  observed_prediction_outcomes: *id001
+comparison_group: c6b9050dbbac11ab74d8b4d73732aa399bfc4e7b7beef8acd1d6b89a8e0b4cde
+evidence_source: supervisor_computed
+isolated_execution: true
+confirmatory_status: exploratory
+scientific_status: registered_rule_evaluated
+evaluation_scope: Registered decision rules; not automatic causal identification or
+  statistical error control

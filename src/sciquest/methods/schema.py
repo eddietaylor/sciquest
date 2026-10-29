@@ -3,7 +3,6 @@ from __future__ import annotations
 from dataclasses import MISSING, dataclass, field
 from typing import Any
 
-
 METHOD_PHASES = (
     "problem_framing",
     "hypothesis_generation",
@@ -38,6 +37,8 @@ class MethodProfile:
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> "MethodProfile":
+        if not isinstance(data, dict) or set(data) - cls.__dataclass_fields__.keys():
+            raise ValueError("Method profile must be a mapping with known field names")
         values: dict[str, Any] = {}
         for dataclass_field in cls.__dataclass_fields__.values():
             if dataclass_field.name in data:
@@ -47,7 +48,35 @@ class MethodProfile:
             elif dataclass_field.default is not MISSING:
                 values[dataclass_field.name] = dataclass_field.default
             else:
-                raise ValueError(f"Method profile missing required field: {dataclass_field.name}")
+                raise ValueError(
+                    f"Method profile missing required field: {dataclass_field.name}"
+                )
+        for name, value in values.items():
+            if name in {
+                "id",
+                "display_name",
+                "plain_language_label",
+                "description",
+                "profile_version",
+                "scoring_transform",
+            }:
+                if not isinstance(value, str) or not value.strip():
+                    raise ValueError(f"Method profile {name} requires nonempty text")
+            elif name == "prompt_addendum":
+                if not isinstance(value, str):
+                    raise ValueError("Method prompt_addendum must be text")
+            elif not isinstance(value, list) or any(
+                not isinstance(v, str) or not v.strip() for v in value
+            ):
+                raise ValueError(
+                    f"Method profile {name} requires a list of nonempty strings"
+                )
+        if set(values["phase_affinities"]) - set(METHOD_PHASES):
+            raise ValueError("Method profile has unknown phase affinities")
+        if values["scoring_transform"] not in {"none", "method_lens_metadata_only_v1"}:
+            raise ValueError(
+                "Method profiles cannot silently transform evaluation scores"
+            )
         return cls(**values)
 
 
@@ -60,7 +89,11 @@ class MethodStack:
 
     @property
     def methods_used(self) -> list[str]:
-        methods = [self.primary_method, *self.phases.values()]
+        methods = (
+            [self.primary_method]
+            if not self.phases or self.primary_method in self.phases.values()
+            else []
+        ) + list(self.phases.values())
         return list(dict.fromkeys(methods))
 
     def to_dict(self) -> dict[str, Any]:

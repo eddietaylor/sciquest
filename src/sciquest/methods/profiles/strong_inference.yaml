@@ -18,7 +18,10 @@ experiment_design_rules:
 evidence_evaluation_rules:
 - Score evidence by how well it eliminates or supports rival explanations.
 validation_rules:
-- Metrics should distinguish among rivals, not only improve average fit.
+- Declare rival predictions that imply different outcomes under the registered discriminating
+  decision rule.
+- Rule compatibility is conditional on the declared rival predictions and does not
+  establish a uniquely true explanation.
 journal_sections:
 - Rival hypotheses
 - Discriminating predictions
@@ -33,3 +36,4 @@ incompatible_or_tense_with: []
 recommended_pairings:
 - standard_empirical
 prompt_addendum: Require rival hypotheses and discriminating predictions.
+profile_version: 1.1.0

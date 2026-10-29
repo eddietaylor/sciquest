@@ -13,18 +13,27 @@ phase_affinities:
 - hypothesis_generation
 - evidence_evaluation
 hypothesis_generation_rules:
-- State a testable claim appropriate to this method.
+- Develop tentative concepts through documented coding, constant comparison and analytic
+  memos; do not force all observations into the initial hypothesis.
 experiment_design_rules:
-- Design the experiment according to this method lens.
+- Use theoretical sampling to seek contrasting cases and negative cases; preserve
+  the coding trail and revision rationale.
 evidence_evaluation_rules:
-- Evaluate evidence according to this method lens.
+- Inspect grounding in observations, negative cases, coding consistency and the stated
+  basis for theoretical saturation.
 validation_rules:
-- State success criteria before execution.
+- Treat categories as provisional; a numeric prediction score does not validate a
+  qualitative theory.
+- The current managed CSV evaluator does not implement qualitative coding or independently
+  verify saturation.
 journal_sections:
-- Method-specific evidence notes
+- Coding decisions and analytic memos
+- Negative cases and theoretical sampling
+- Saturation rationale and limits
 scoring_transform: method_lens_metadata_only_v1
 next_step_policy:
-- Choose the next step according to method-specific evidence.
+- Collect or inspect cases that could revise an emerging category; stop only with
+  an explicit scope and saturation argument.
 failure_modes:
 - Method shopping after results are known
 - Overclaiming beyond the method lens
@@ -33,3 +42,4 @@ recommended_pairings:
 - standard_empirical
 prompt_addendum: Build concepts and theory from coded observations while documenting
   saturation and memoing.
+profile_version: 1.1.0

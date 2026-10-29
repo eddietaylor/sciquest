@@ -1,0 +1,43 @@
+{
+  "format": "pricing-example-local-validation-v1",
+  "python": "3.12.3",
+  "wheel_sha256": "282158dd914d900a39a9386a6236ad65400129da5c730640816d9298d859e28f",
+  "installed_package_root": "/tmp/sciquest-example-wheel-v2/lib/python3.12/site-packages/sciquest",
+  "source_wheel_installed_files_identical": 94,
+  "core_tests": {
+    "passed": 185,
+    "failed": 0,
+    "skipped": 0,
+    "log": "validation/core.log",
+    "junit": "validation/core.xml"
+  },
+  "installed_integration_tests": {
+    "passed": 2,
+    "failed": 0,
+    "skipped": 0,
+    "complete_reproductions": 2,
+    "cwd": "/tmp",
+    "log": "validation/integration.log",
+    "junit": "validation/integration.xml"
+  },
+  "retained_initial_integration_failure": "First installed run:1pass/1failure because test expected underscore metric label while dashboard intentionally displays spaces. Corrected harness label; unchanged application wheel. Original log/XML retained.",
+  "published_run": {
+    "source": "/tmp/sciquest-pricing-published-v1",
+    "manifest_entries_verified": 87,
+    "actual_external_agent_calls": 0,
+    "scientific_results": "run/results.json",
+    "authority": "Actual supervisor records and frozen snapshots preserved under each quest/.sciquest; this is a deterministic analytic reproduction, not scientific-agent qualification."
+  },
+  "source_inputs": {
+    "examples/pricing_confounds/README.md": "96c6545f78d4de675174b31983a2625f9ec5449bb7b67cbcc1fd7c5f65b73d0a",
+    "examples/pricing_confounds/analysis.py": "85b95fc1047de21c9d70a2e03975a75b377d684640d085e04942b02c2861a109",
+    "examples/pricing_confounds/expected.json": "79c7fcb90b7ea612f7b8b0da65ae5601c694ac84ea5894b6054973d97b68b144",
+    "examples/pricing_confounds/generate.py": "3895cf0fc0d6e87370d3c769a8772a5b322debfbf7999b71a03f4214567c078d",
+    "examples/pricing_confounds/plots.py": "8a188b8fee7acded22088715ad8b262b6ba6f9f601aaafdd761903aa05ba9c59",
+    "examples/pricing_confounds/requirements.txt": "a6b5e6100099cb9b150d12c420be8317b9a21f82056cf8e097c5eeff31d9d790",
+    "examples/pricing_confounds/run.py": "f4c220466da3aa166d69434881e459179a481b061d2a0651f569b5156db80dea",
+    "examples/pricing_confounds/test_end_to_end.py": "305fb558358d289fd45df5595221271224dc9549afb5af3a644508c53737f7b1"
+  },
+  "runtime_evidence": "run/runtime.json",
+  "ci_status": "Workflow added; remote result not yet observed. Local installed-wheel evidence only at this snapshot."
+}
