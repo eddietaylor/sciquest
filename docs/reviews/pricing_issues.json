@@ -42,6 +42,13 @@
       "resolution": "Assert the actual human-readable label. Supervisor metric keys and arithmetic checks stay unchanged.",
       "verification": "Original1fail/1pass log retained; corrected2pass installed run repeats the full workflow twice.",
       "status": "test_harness_corrected"
+    },
+    {
+      "id": "P07",
+      "finding": "A built source archive omitted committed saved quest evidence because Hatch respected the quests/ VCS ignore rule.",
+      "resolution": "Source-distribution configuration explicitly ignores VCS exclusion while selecting only intended source/example paths and excluding Python caches.",
+      "verification": "check_sdist.py independently verifies all87 saved-run hashes inside the built archive; CI runs the same check and uploads distributions.",
+      "status": "fixed_with_actual_archive_regression"
     }
   ],
   "limits": [

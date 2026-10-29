@@ -62,6 +62,10 @@ files matched. An initial integration assertion expected underscores in a
 human-readable dashboard label; its failed log is retained alongside the
 corrected passing result. No application result was rewritten to fix that test.
 
+[Source-archive verification](PACKAGING_VALIDATION.json) checks all 87 saved-run
+hashes inside the built distribution. A deliberately omitted supervisor database
+makes the same check fail. CI also runs this archive-completeness check.
+
 See the [scientific review](../../reviews/pricing_simulator.md),
 [design review](../../reviews/pricing_design.md),
 [evaluation review](../../reviews/pricing_evaluation.md), and

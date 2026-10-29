@@ -1,0 +1,15 @@
+{
+  "format": "pricing-example-source-archive-validation-v1",
+  "source_archive_sha256": "e4fd5062ce4bef683233721252f65bd80a210b71dcbe41cd91c21f1b01718894",
+  "saved_artifact_hashes_verified": 87,
+  "negative_control": "Removing observational supervisor database while retaining manifest causes checker failure.",
+  "source_selection": "Hatch ignore-vcs=true only for explicitly included source/example/review directories; Python caches excluded.",
+  "build_log": "validation/sdist-build.log",
+  "positive_log": "validation/sdist-positive.log",
+  "negative_log": "validation/sdist-missing-database-negative.log",
+  "runtime_code_changed": false,
+  "previous_scientific_results_changed": false,
+  "scope": "Archive completeness, not new scientific evidence or qualification.",
+  "archive_hash_scope": "Actual local archive used for these checks before this validation record was written. Future archives include newer metadata/logs and need not have this whole-archive digest; all87 immutable saved-run hashes must still match.",
+  "configuration_reference": "https://hatch.pypa.io/latest/config/build/#vcs"
+}

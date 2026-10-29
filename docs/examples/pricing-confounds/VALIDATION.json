@@ -39,5 +39,22 @@
     "examples/pricing_confounds/test_end_to_end.py": "305fb558358d289fd45df5595221271224dc9549afb5af3a644508c53737f7b1"
   },
   "runtime_evidence": "run/runtime.json",
-  "ci_status": "Workflow added; remote result not yet observed. Local installed-wheel evidence only at this snapshot."
+  "ci_status": "Workflow added; remote result not yet observed. Local installed-wheel evidence only at this snapshot.",
+  "source_input_scope": "Hashes at the original local runtime/integration validation snapshot. Later source-archive completeness changes and documentation are recorded separately; scientific runtime and results unchanged.",
+  "post_validation_changes": [
+    "Source-distribution selection now preserves ignored saved quest records; positive87hashcheck and missing-database negative control added.",
+    "README adds archive-check instructions; new check_sdist.py is packaging-only.",
+    "CI adds source-archive completeness check and distribution uploads."
+  ],
+  "current_example_sources": {
+    "examples/pricing_confounds/README.md": "4accaa52862fa18483b40452c5ba2cf187ddd761606b63a06d71652c6ce9cb14",
+    "examples/pricing_confounds/analysis.py": "85b95fc1047de21c9d70a2e03975a75b377d684640d085e04942b02c2861a109",
+    "examples/pricing_confounds/check_sdist.py": "697ab4815503421777e2b0ac815486523ac95933db1ae4598bdddc656dc43218",
+    "examples/pricing_confounds/expected.json": "79c7fcb90b7ea612f7b8b0da65ae5601c694ac84ea5894b6054973d97b68b144",
+    "examples/pricing_confounds/generate.py": "3895cf0fc0d6e87370d3c769a8772a5b322debfbf7999b71a03f4214567c078d",
+    "examples/pricing_confounds/plots.py": "8a188b8fee7acded22088715ad8b262b6ba6f9f601aaafdd761903aa05ba9c59",
+    "examples/pricing_confounds/requirements.txt": "a6b5e6100099cb9b150d12c420be8317b9a21f82056cf8e097c5eeff31d9d790",
+    "examples/pricing_confounds/run.py": "f4c220466da3aa166d69434881e459179a481b061d2a0651f569b5156db80dea",
+    "examples/pricing_confounds/test_end_to_end.py": "305fb558358d289fd45df5595221271224dc9549afb5af3a644508c53737f7b1"
+  }
 }

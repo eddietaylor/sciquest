@@ -177,6 +177,8 @@ and compares scientific outputs. An altered-training test checks that coefficien
 are fitted rather than copied from analytic expectations. There are no execution
 mocks or isolation skips. CI uploads run artifacts, including hidden `.sciquest`
 records, for inspection.
+The Python3.12 package job also checks every saved-run hash inside the built
+source archive and uploads the wheel and source distribution.
 
 ## What this says about agents
 

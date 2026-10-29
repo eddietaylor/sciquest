@@ -151,3 +151,34 @@ GitHub Actions success until its actual run completes.
 
 Reviewed VALIDATION.json SHA256:
 `5fb21c6eaf8ead56ee5f7d7afbbdeea53f89686e4c92204d804c8f42934b81d4`.
+
+## Source-distribution completeness follow-up
+
+Reviewed the packaging-only correction, checker source and retained build/
+positive/missing-database-negative logs without executing them. Independently
+read the actual tar archive as data. Its SHA256 equals the recorded
+`e4fd5062ce4bef683233721252f65bd80a210b71dcbe41cd91c21f1b01718894`.
+The archived saved-run manifest equals the source reference; all 87 recorded
+artifact byte hashes match, including both hidden supervisor databases and frozen
+snapshots. All nine current example files and four review files are included.
+There are no archived Python caches or top-level historical quest directories.
+All nine current source hashes in VALIDATION.json match. The 94 packaged runtime
+files still match the retained wheel; this is not another scientific execution.
+
+`ignore-vcs=true` applies to the explicitly selected sdist inputs, with cache
+exclusions; it closes the demonstrated omission caused by the `quests/` ignore
+rule. The checker binds the archived manifest to the actual source manifest,
+then hashes each saved artifact; it cannot declare an archive complete merely
+because its own manifest was shortened. The retained negative log fails exactly
+on absent observational `.sciquest/state.sqlite3`, a scientifically consequential
+missing provenance artifact, rather than on an unrelated parser error.
+
+CI now builds the sdist, runs this checker and uploads the distributions. Its
+new metadata/checker version has no independently observed remote result in this
+review. Earlier remote success must remain attributed to the earlier commit.
+The saved archive digest is correctly scoped to the archive before subsequently
+added packaging metadata/review logs, not promised as the hash of every future
+build. Original runtime-validation source hashes remain explicitly historical;
+new current-source hashes are separate. No concrete remaining packaging omission
+was found. P07 is resolved for the inspected archive, without changing the saved
+scientific results, runtime validation or qualification claims.
