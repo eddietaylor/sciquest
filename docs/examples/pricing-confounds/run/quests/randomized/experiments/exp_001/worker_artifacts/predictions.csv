@@ -1,0 +1,3 @@
+id,predicted_mean_demand,predicted_revenue,fitted_intercept,fitted_slope
+evaluation_30,60.0,1800.0,120.0,-2.0
+evaluation_40,40.0,1600.0,120.0,-2.0

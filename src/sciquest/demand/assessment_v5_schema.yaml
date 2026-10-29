@@ -1,0 +1,1376 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Scientific assessment v5 data contract",
+  "description": "Machine-checkable provenance and stage shapes; semantic judgments and expert identity remain separately validated.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/public_packet"
+    },
+    {
+      "$ref": "#/$defs/truth_packet"
+    },
+    {
+      "$ref": "#/$defs/public_review"
+    },
+    {
+      "$ref": "#/$defs/freeze"
+    },
+    {
+      "$ref": "#/$defs/release"
+    },
+    {
+      "$ref": "#/$defs/truth_review"
+    },
+    {
+      "$ref": "#/$defs/adjudication"
+    },
+    {
+      "$ref": "#/$defs/later_critique"
+    }
+  ],
+  "$defs": {
+    "hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "span": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "quote": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "quote"
+      ],
+      "additionalProperties": false
+    },
+    "context_span": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ],
+      "additionalProperties": false
+    },
+    "reviewer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "human",
+            "agent"
+          ]
+        },
+        "expertise": {
+          "type": "string",
+          "minLength": 1
+        },
+        "conflicts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "identity_attestation_ref": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "expertise",
+        "conflicts",
+        "identity_attestation_ref"
+      ],
+      "additionalProperties": false
+    },
+    "asset_ref": {
+      "type": "object",
+      "properties": {
+        "campaign_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "artifact_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "manifest_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "raw_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "producer_source_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "available_revision": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "campaign_id",
+        "artifact_id",
+        "manifest_hash",
+        "raw_sha256",
+        "bytes",
+        "producer_source_id",
+        "source_revision",
+        "available_revision"
+      ],
+      "additionalProperties": false
+    },
+    "source": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "authored_prose",
+            "authored_code",
+            "public_contract",
+            "observation",
+            "execution_output",
+            "operational_record",
+            "artifact_manifest",
+            "asset_inspection",
+            "private_truth"
+          ]
+        },
+        "visibility": {
+          "type": "string",
+          "enum": [
+            "actor_public",
+            "reviewer_public",
+            "private_truth"
+          ]
+        },
+        "text": {
+          "type": "string"
+        },
+        "text_utf8_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "origin": {
+          "type": "string",
+          "enum": [
+            "authored",
+            "generated",
+            "provided"
+          ]
+        },
+        "event_revision": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "available_revision": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "authoring_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "actor_cutoff": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "provenance_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "operation_kind": {
+          "type": "string",
+          "enum": [
+            "query",
+            "analysis",
+            "stop",
+            "prepare",
+            "predict",
+            "system"
+          ]
+        },
+        "asset_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/asset_ref"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "visibility",
+        "text",
+        "text_utf8_sha256",
+        "origin",
+        "event_revision",
+        "available_revision",
+        "authoring_id",
+        "actor_cutoff",
+        "provenance_ref",
+        "operation_kind",
+        "asset_ref"
+      ],
+      "additionalProperties": false
+    },
+    "target": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "span": {
+          "$ref": "#/$defs/span"
+        },
+        "context_span": {
+          "$ref": "#/$defs/context_span"
+        },
+        "actor_cutoff": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "endorsement_source_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "physical_assertion",
+            "working_assumption",
+            "conditional_result",
+            "static_code_behavior",
+            "observed_result",
+            "prospective_commitment",
+            "ambiguous"
+          ]
+        },
+        "force": {
+          "type": "string",
+          "enum": [
+            "asserted",
+            "conjectured",
+            "stipulated",
+            "conditional",
+            "intended",
+            "recorded",
+            "ambiguous"
+          ]
+        },
+        "proposition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "endpoint": {
+          "type": "string",
+          "enum": [
+            "scientific_conclusion",
+            "predictor_fidelity",
+            "code_computation",
+            "operational_delivery"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "source_id",
+        "span",
+        "context_span",
+        "actor_cutoff",
+        "endorsement_source_id",
+        "kind",
+        "force",
+        "proposition",
+        "endpoint"
+      ],
+      "additionalProperties": false
+    },
+    "public_packet": {
+      "type": "object",
+      "properties": {
+        "document_type": {
+          "const": "claim-review-v5-public-packet-v1.0"
+        },
+        "campaign_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "instrument_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "review_asof_revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "scientific_stop_revision": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/source"
+          }
+        },
+        "targets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/target"
+          }
+        },
+        "required_target_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required_code_source_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "scientific_decision_target_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "presentation_mode": {
+          "type": "string",
+          "enum": [
+            "actor_cutoff",
+            "retrospective_public"
+          ]
+        },
+        "frame_cutoff": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "selection_rule": {
+          "type": "string",
+          "minLength": 1
+        },
+        "unreviewed_scope": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "required": [
+        "document_type",
+        "campaign_id",
+        "instrument_version",
+        "review_asof_revision",
+        "scientific_stop_revision",
+        "sources",
+        "targets",
+        "required_target_ids",
+        "required_code_source_ids",
+        "scientific_decision_target_ids",
+        "presentation_mode",
+        "frame_cutoff",
+        "selection_rule",
+        "unreviewed_scope"
+      ],
+      "additionalProperties": false
+    },
+    "truth_packet": {
+      "type": "object",
+      "properties": {
+        "document_type": {
+          "const": "claim-review-v5-truth-packet-v1.0"
+        },
+        "public_packet_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "public_packet": {
+          "$ref": "#/$defs/public_packet"
+        },
+        "private_sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/source"
+          }
+        }
+      },
+      "required": [
+        "document_type",
+        "public_packet_hash",
+        "public_packet",
+        "private_sources"
+      ],
+      "additionalProperties": false
+    },
+    "actor_ref": {
+      "type": "object",
+      "properties": {
+        "source_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "purpose": {
+          "type": "string",
+          "enum": [
+            "measurement",
+            "execution_result",
+            "authored_premise",
+            "static_program",
+            "provided_contract",
+            "prior_operational_fact"
+          ]
+        }
+      },
+      "required": [
+        "source_id",
+        "purpose"
+      ],
+      "additionalProperties": false
+    },
+    "critique_ref": {
+      "type": "object",
+      "properties": {
+        "source_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "purpose": {
+          "type": "string",
+          "enum": [
+            "context",
+            "negative_warrant",
+            "counterexample",
+            "fulfillment",
+            "code_check"
+          ]
+        },
+        "span": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/span"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "source_id",
+        "purpose",
+        "span"
+      ],
+      "additionalProperties": false
+    },
+    "support": {
+      "type": "object",
+      "properties": {
+        "verdict": {
+          "type": "string",
+          "enum": [
+            "supported",
+            "assumption_dependent",
+            "unsupported",
+            "not_applicable",
+            "adjudication_needed"
+          ]
+        },
+        "basis_modes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "empirical",
+              "conditional",
+              "operational"
+            ]
+          }
+        },
+        "actor_basis_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/actor_ref"
+          }
+        },
+        "assumptions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "verdict",
+        "basis_modes",
+        "actor_basis_refs",
+        "assumptions",
+        "rationale"
+      ],
+      "additionalProperties": false
+    },
+    "materiality": {
+      "type": "object",
+      "properties": {
+        "judgment": {
+          "type": "string",
+          "enum": [
+            "material",
+            "ancillary",
+            "not_applicable",
+            "adjudication_needed"
+          ]
+        },
+        "endpoint": {
+          "type": "string",
+          "enum": [
+            "scientific_conclusion",
+            "predictor_fidelity",
+            "code_computation",
+            "operational_delivery"
+          ]
+        },
+        "dependent_target_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dependency_refs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "source_id": {
+                "$ref": "#/$defs/id"
+              },
+              "span": {
+                "$ref": "#/$defs/span"
+              },
+              "endpoint": {
+                "type": "string",
+                "enum": [
+                  "scientific_conclusion",
+                  "predictor_fidelity",
+                  "code_computation",
+                  "operational_delivery"
+                ]
+              }
+            },
+            "required": [
+              "source_id",
+              "span",
+              "endpoint"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "judgment",
+        "endpoint",
+        "dependent_target_ids",
+        "rationale",
+        "dependency_refs"
+      ],
+      "additionalProperties": false
+    },
+    "public_annotation": {
+      "type": "object",
+      "properties": {
+        "target_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "interpretation_status": {
+          "type": "string",
+          "enum": [
+            "accepted",
+            "disputed",
+            "adjudication_needed"
+          ]
+        },
+        "interpretation_rationale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "actor_support": {
+          "$ref": "#/$defs/support"
+        },
+        "critique_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/critique_ref"
+          }
+        },
+        "critique_rationale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "materiality": {
+          "$ref": "#/$defs/materiality"
+        },
+        "interpretation": {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": [
+                "physical_assertion",
+                "working_assumption",
+                "conditional_result",
+                "static_code_behavior",
+                "observed_result",
+                "prospective_commitment",
+                "ambiguous"
+              ]
+            },
+            "force": {
+              "type": "string",
+              "enum": [
+                "asserted",
+                "conjectured",
+                "stipulated",
+                "conditional",
+                "intended",
+                "recorded",
+                "ambiguous"
+              ]
+            },
+            "proposition": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "kind",
+            "force",
+            "proposition"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "target_id",
+        "interpretation_status",
+        "interpretation_rationale",
+        "actor_support",
+        "critique_refs",
+        "critique_rationale",
+        "materiality",
+        "interpretation"
+      ],
+      "additionalProperties": false
+    },
+    "revision": {
+      "type": "object",
+      "properties": {
+        "original_target_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "later_source_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "later_span": {
+          "$ref": "#/$defs/span"
+        },
+        "relation": {
+          "type": "string",
+          "enum": [
+            "retraction",
+            "narrowing",
+            "abandonment",
+            "reaffirmation",
+            "unclear"
+          ]
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "original_target_id",
+        "later_source_id",
+        "later_span",
+        "relation",
+        "rationale"
+      ],
+      "additionalProperties": false
+    },
+    "code_check": {
+      "type": "object",
+      "properties": {
+        "source_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "span": {
+          "$ref": "#/$defs/span"
+        },
+        "scope": {
+          "type": "string",
+          "enum": [
+            "static",
+            "unverified"
+          ]
+        },
+        "judgment": {
+          "type": "string",
+          "enum": [
+            "valid",
+            "invalid",
+            "unverified"
+          ]
+        },
+        "critique_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/critique_ref"
+          }
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "source_id",
+        "span",
+        "scope",
+        "judgment",
+        "critique_refs",
+        "rationale"
+      ],
+      "additionalProperties": false
+    },
+    "public_review": {
+      "type": "object",
+      "properties": {
+        "document_type": {
+          "const": "claim-review-v5-public-review-v1.0"
+        },
+        "public_packet_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "target_manifest_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "rubric_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "reviewer": {
+          "$ref": "#/$defs/reviewer"
+        },
+        "annotations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/public_annotation"
+          }
+        },
+        "revision_relations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/revision"
+          }
+        },
+        "code_checks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/code_check"
+          }
+        },
+        "unreviewed_scope": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "presentation_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "document_type",
+        "public_packet_hash",
+        "target_manifest_hash",
+        "rubric_hash",
+        "reviewer",
+        "annotations",
+        "revision_relations",
+        "code_checks",
+        "unreviewed_scope",
+        "presentation_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "freeze": {
+      "type": "object",
+      "properties": {
+        "document_type": {
+          "const": "claim-review-v5-public-freeze-v1.0"
+        },
+        "reviewer_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "public_packet_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "target_manifest_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "rubric_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "public_review_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "ledger_sequence": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "previous_record_hash": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recorded_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "presentation_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "document_type",
+        "reviewer_id",
+        "public_packet_hash",
+        "target_manifest_hash",
+        "rubric_hash",
+        "public_review_hash",
+        "ledger_sequence",
+        "previous_record_hash",
+        "recorded_at",
+        "presentation_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "release": {
+      "type": "object",
+      "properties": {
+        "document_type": {
+          "const": "claim-review-v5-truth-release-v1.0"
+        },
+        "reviewer_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "public_freeze_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "truth_packet_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "ledger_sequence": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "previous_record_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "recorded_at": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "document_type",
+        "reviewer_id",
+        "public_freeze_hash",
+        "truth_packet_hash",
+        "ledger_sequence",
+        "previous_record_hash",
+        "recorded_at"
+      ],
+      "additionalProperties": false
+    },
+    "truth_annotation": {
+      "type": "object",
+      "properties": {
+        "target_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "judgment": {
+          "type": "string",
+          "enum": [
+            "consistent",
+            "contradicted",
+            "unresolved",
+            "not_applicable",
+            "adjudication_needed"
+          ]
+        },
+        "truth_evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "target_id",
+        "judgment",
+        "truth_evidence_ids",
+        "rationale"
+      ],
+      "additionalProperties": false
+    },
+    "truth_review": {
+      "type": "object",
+      "properties": {
+        "document_type": {
+          "const": "claim-review-v5-truth-review-v1.0"
+        },
+        "reviewer": {
+          "$ref": "#/$defs/reviewer"
+        },
+        "public_freeze_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "truth_release_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "truth_packet_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "annotations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/truth_annotation"
+          }
+        },
+        "unreviewed_scope": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "required": [
+        "document_type",
+        "reviewer",
+        "public_freeze_hash",
+        "truth_release_hash",
+        "truth_packet_hash",
+        "annotations",
+        "unreviewed_scope"
+      ],
+      "additionalProperties": false
+    },
+    "adjudication_item": {
+      "type": "object",
+      "properties": {
+        "target_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dimension": {
+          "type": "string",
+          "enum": [
+            "target_interpretation",
+            "actor_warrant",
+            "truth",
+            "revision",
+            "materiality",
+            "code_adequacy"
+          ]
+        },
+        "review_hashes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "decision": {
+          "type": "string",
+          "enum": [
+            "accepted_alternative",
+            "unresolved",
+            "needs_information"
+          ]
+        },
+        "chosen_review_hash": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "target_id",
+        "dimension",
+        "review_hashes",
+        "decision",
+        "chosen_review_hash",
+        "rationale"
+      ],
+      "additionalProperties": false
+    },
+    "adjudication": {
+      "type": "object",
+      "properties": {
+        "document_type": {
+          "const": "claim-review-v5-adjudication-v1.0"
+        },
+        "reviewer": {
+          "$ref": "#/$defs/reviewer"
+        },
+        "public_freeze_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "truth_release_hash": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/adjudication_item"
+          }
+        },
+        "ledger_sequence": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "previous_record_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "recorded_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "exposure": {
+          "type": "string",
+          "enum": [
+            "public_only",
+            "truth_released",
+            "external_unknown"
+          ]
+        }
+      },
+      "required": [
+        "document_type",
+        "reviewer",
+        "public_freeze_hash",
+        "truth_release_hash",
+        "items",
+        "ledger_sequence",
+        "previous_record_hash",
+        "recorded_at",
+        "exposure"
+      ],
+      "additionalProperties": false
+    },
+    "critique_annotation": {
+      "type": "object",
+      "properties": {
+        "target_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "critique_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/critique_ref"
+          }
+        },
+        "critique_rationale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "materiality": {
+          "$ref": "#/$defs/materiality"
+        }
+      },
+      "required": [
+        "target_id",
+        "critique_refs",
+        "critique_rationale",
+        "materiality"
+      ],
+      "additionalProperties": false
+    },
+    "later_critique": {
+      "type": "object",
+      "properties": {
+        "document_type": {
+          "const": "claim-review-v5-later-critique-v1.0"
+        },
+        "reviewer": {
+          "$ref": "#/$defs/reviewer"
+        },
+        "public_freeze_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "later_public_packet_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "target_manifest_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "exposure": {
+          "type": "string",
+          "enum": [
+            "public_only",
+            "private_informed",
+            "external_unknown"
+          ]
+        },
+        "truth_release_hash": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "annotations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/critique_annotation"
+          }
+        },
+        "revision_relations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/revision"
+          }
+        },
+        "code_checks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/code_check"
+          }
+        },
+        "unreviewed_scope": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "required": [
+        "document_type",
+        "reviewer",
+        "public_freeze_hash",
+        "later_public_packet_hash",
+        "target_manifest_hash",
+        "exposure",
+        "truth_release_hash",
+        "annotations",
+        "revision_relations",
+        "code_checks",
+        "unreviewed_scope"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

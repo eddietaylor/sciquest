@@ -12,9 +12,15 @@ def make_loop_quest(tmp_path: Path) -> Path:
     (quest / "reports").mkdir()
     (quest / "artifacts").mkdir()
     (quest / "logs").mkdir()
-    (quest / "quest.yaml").write_text("slug: loop-demo\nhero_statement: Hero\nproblem_statement: Problem\n")
-    (quest / "state.yaml").write_text("quest_status: idle\ncurrent_experiment: null\nlast_experiment: null\nlast_score: null\nbest_score: null\nfailures: []\nlock_id: null\n")
-    (quest / "hypotheses.yaml").write_text("hypotheses:\n- id: h001\n  claim: initial\n")
+    (quest / "quest.yaml").write_text(
+        "slug: loop-demo\nhero_statement: Hero\nproblem_statement: Problem\n"
+    )
+    (quest / "state.yaml").write_text(
+        "quest_status: idle\ncurrent_experiment: null\nlast_experiment: null\nlast_score: null\nbest_score: null\nfailures: []\nlock_id: null\n"
+    )
+    (quest / "hypotheses.yaml").write_text(
+        "hypotheses:\n- id: h001\n  claim: initial\n"
+    )
     (quest / "validation.yaml").write_text("status: ready\nmetrics: []\n")
     (quest / "data_manifest.yaml").write_text("status: ready\ndatasets: []\n")
     (quest / "journal.md").write_text("# Journal\n")
@@ -26,12 +32,14 @@ def test_run_iteration_loop_defaults_to_three_completed_stub_iterations(tmp_path
     quest = make_loop_quest(tmp_path)
     result = run_iteration_loop(quest, agent_stub=True)
     assert result["requested_iterations"] == 3
-    assert result["completed_iterations"] == 3
+    assert result["completed_iterations"] == 0
+    assert result["prepared_iterations"] == 3
     assert result["experiments"] == ["exp_001", "exp_002", "exp_003"]
     state = yaml.safe_load((quest / "state.yaml").read_text())
     assert state["quest_status"] == "idle"
     assert state["lock_id"] is None
-    assert state["last_experiment"] == "exp_003"
+    assert state["last_experiment"] is None
+    assert state["last_prepared_experiment"] == "exp_003"
 
 
 def test_run_iteration_loop_stops_when_previous_iteration_fails(tmp_path, monkeypatch):
@@ -41,11 +49,14 @@ def test_run_iteration_loop_stops_when_previous_iteration_fails(tmp_path, monkey
     def fake_runner(qpath, **kwargs):
         calls.append(qpath)
         if len(calls) == 1:
-            return "exp_001"
+            from sciquest.core import run_next
+
+            return run_next(qpath, agent_stub=True)
         raise RuntimeError("boom")
 
     result = run_iteration_loop(quest, max_iterations=3, iteration_runner=fake_runner)
-    assert result["completed_iterations"] == 1
+    assert result["completed_iterations"] == 0
+    assert result["prepared_iterations"] == 1
     assert result["failed"] is True
     assert "boom" in result["error"]
     assert len(calls) == 2
@@ -54,17 +65,34 @@ def test_run_iteration_loop_stops_when_previous_iteration_fails(tmp_path, monkey
 def test_run_loop_cli_defaults_to_three_iterations(tmp_path):
     quest = make_loop_quest(tmp_path)
     runner = CliRunner()
-    result = runner.invoke(app, ["run-loop", "--root", str(tmp_path), "--quest", "loop-demo", "--agent-stub"])
+    result = runner.invoke(
+        app,
+        ["run-loop", "--root", str(tmp_path), "--quest", "loop-demo", "--agent-stub"],
+    )
     assert result.exit_code == 0, result.output
-    assert "Completed 3/3 iterations" in result.output
+    assert "Completed 0/3 iterations" in result.output
+    assert "Prepared 3 drafts" in result.output
     assert (quest / "experiments" / "exp_003").exists()
 
 
 def test_run_loop_cli_accepts_max_iterations(tmp_path):
     quest = make_loop_quest(tmp_path)
     runner = CliRunner()
-    result = runner.invoke(app, ["run-loop", "--root", str(tmp_path), "--quest", "loop-demo", "--max-iterations", "2", "--agent-stub"])
+    result = runner.invoke(
+        app,
+        [
+            "run-loop",
+            "--root",
+            str(tmp_path),
+            "--quest",
+            "loop-demo",
+            "--max-iterations",
+            "2",
+            "--agent-stub",
+        ],
+    )
     assert result.exit_code == 0, result.output
-    assert "Completed 2/2 iterations" in result.output
+    assert "Completed 0/2 iterations" in result.output
+    assert "Prepared 2 drafts" in result.output
     assert (quest / "experiments" / "exp_002").exists()
     assert not (quest / "experiments" / "exp_003").exists()

@@ -10,21 +10,29 @@ bad_for:
 - Replacing validity with convenience
 phase_affinities:
 - problem_framing
-- next_step_selection
+- experiment_design
 - evidence_evaluation
+- long_term_tracking
 hypothesis_generation_rules:
-- State a testable claim appropriate to this method.
+- State the practical problem, affected stakeholders, proposed action and consequences
+  that would count as improvement.
 experiment_design_rules:
-- Design the experiment according to this method lens.
+- Compare action policies using explicit objectives, baselines, uncertainty, resource
+  costs and constraints.
 evidence_evaluation_rules:
-- Evaluate evidence according to this method lens.
+- Evaluate expected consequences and constraint violations separately; useful action
+  does not establish that an explanation is true.
 validation_rules:
-- State success criteria before execution.
+- Preregister the utility objective and constraints; report harms and transfer limits
+  alongside benefits.
 journal_sections:
-- Method-specific evidence notes
+- Practical objective and stakeholders
+- Decision value and constraints
+- Consequences, uncertainty and limits
 scoring_transform: method_lens_metadata_only_v1
 next_step_policy:
-- Choose the next step according to method-specific evidence.
+- Choose a useful next inquiry or stop using expected consequences and information
+  value, while preserving evidence standards.
 failure_modes:
 - Method shopping after results are known
 - Overclaiming beyond the method lens
@@ -33,3 +41,4 @@ recommended_pairings:
 - standard_empirical
 prompt_addendum: Judge inquiry by consequences for useful action while separating
   utility from truth claims.
+profile_version: 1.1.0

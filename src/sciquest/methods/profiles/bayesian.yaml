@@ -16,9 +16,11 @@ phase_affinities:
 hypothesis_generation_rules:
 - State explicit priors or qualitative confidence before seeing results.
 experiment_design_rules:
-- Choose measurements that maximize expected information gain.
+- Compare candidate measurements using expected information gain under explicit predictive
+  assumptions when feasible; document approximations.
 evidence_evaluation_rules:
-- Update confidence from prior to posterior; report uncertainty.
+- Update explicit priors with a registered likelihood event; report uncertainty, model
+  dependence and evidence that all stated rivals may be inadequate.
 validation_rules:
 - Define what evidence would materially increase or decrease posterior confidence.
 journal_sections:
@@ -28,7 +30,8 @@ journal_sections:
 - Information gain
 scoring_transform: method_lens_metadata_only_v1
 next_step_policy:
-- Prefer experiments with high expected information gain.
+- Use recorded posterior evidence to plan further tests; linked updates require verified
+  prior provenance and fresh evidence.
 failure_modes:
 - Method shopping after results are known
 - Overclaiming beyond the method lens
@@ -37,3 +40,4 @@ recommended_pairings:
 - standard_empirical
 prompt_addendum: Log priors, likelihood assumptions, posterior updates, and information
   gain.
+profile_version: 1.1.0

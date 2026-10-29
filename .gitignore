@@ -9,3 +9,4 @@ build/
 quests/
 .ipynb_checkpoints/
 .DS_Store
+/pricing-run/

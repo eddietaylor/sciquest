@@ -1,0 +1,12 @@
+slug: randomized
+created_at: '2026-10-29T19:35:01+00:00'
+hero_statement: 'Pricing under confounding: randomized'
+problem_statement: Can the prescribed price-only estimator recover intervention means
+  and select a price on {30,40}?
+ontology:
+- Quest
+- Hypothesis
+- Experiment
+- Validation Suite
+- Research Journal
+- Agent Protocol

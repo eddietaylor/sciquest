@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 from pathlib import Path
+import sys
 
 import nbformat
-from nbclient import NotebookClient
 
 
 def create_stub_notebook(path: Path, experiment_id: str) -> None:
@@ -39,8 +39,35 @@ with open(EXP / "validation_results.yaml", "w", encoding="utf-8") as f:
     nbformat.write(nb, path)
 
 
-def execute_notebook(notebook_path: Path, output_path: Path, cwd: Path, timeout: int = 600) -> None:
-    nb = nbformat.read(notebook_path, as_version=4)
-    client = NotebookClient(nb, timeout=timeout, kernel_name="python3", resources={"metadata": {"path": str(cwd)}})
-    client.execute()
-    nbformat.write(nb, output_path)
+def execute_notebook(
+    notebook_path: Path, output_path: Path, cwd: Path, timeout: int = 600
+) -> None:
+    """Explicit trusted-local convenience execution, with a wall-time bound and logs.
+
+    Managed research runs use the isolated supervisor path instead. Neither path
+    infers scientific support from successful notebook execution.
+    """
+    from .execution import run_command
+
+    source = notebook_path.resolve()
+    destination = output_path.resolve()
+    result = run_command(
+        [
+            sys.executable,
+            "-m",
+            "sciquest.worker",
+            "notebook",
+            str(source),
+            str(destination),
+            str(timeout),
+        ],
+        cwd.resolve(),
+        cwd / "logs/notebook_execution.log",
+        hidden_root=cwd,
+        timeout=timeout,
+        isolated=False,
+    )
+    if result["status"] != "succeeded":
+        raise RuntimeError(
+            f"Notebook execution {result['status']}; inspect logs/notebook_execution.log"
+        )

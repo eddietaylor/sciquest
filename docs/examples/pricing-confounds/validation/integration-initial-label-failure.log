@@ -1,0 +1,107 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.2.0, pluggy-1.7.0
+rootdir: /home/edtaylor/code/sciquest-publication
+configfile: pyproject.toml
+plugins: platformdirs-4.14.0
+collected 2 items
+
+../home/edtaylor/code/sciquest-publication/examples/pricing_confounds/test_end_to_end.py F [ 50%]
+.                                                                        [100%]
+
+=================================== FAILURES ===================================
+_____________ test_installed_wheel_reproduces_scientific_workflow ______________
+
+tmp_path = PosixPath('/tmp/sciquest-pricing-integration-v2/test_installed_wheel_reproduce0')
+
+    def test_installed_wheel_reproduces_scientific_workflow(tmp_path):
+        package = Path(sciquest.__file__).resolve()
+        assert package.is_relative_to(Path(sys.prefix).resolve()), f"Requires an installed wheel, got {package}"
+        expected = json.loads((HERE / "expected.json").read_text())
+        produced = []
+        for index in range(2):
+            output = tmp_path / f"run-{index}"
+            env = dict(os.environ)
+            env.pop("PYTHONPATH", None)
+            subprocess.run([sys.executable, str(HERE / "run.py"), "--output", str(output)],
+                           cwd=tmp_path, env=env, check=True, capture_output=True, text=True, timeout=240)
+            results = json.loads((output / "results.json").read_text())
+            assert results["external_agent_calls"] == 0
+            assert results["genuine_external_agent_reasoning_demonstrated"] is False
+            barrier = json.loads((output / "before_execution.json").read_text())
+            assert barrier["executions_started"] == 0
+            assert set(barrier["registrations"]) == {"observational", "randomized"}
+            first_execution_time = min(get_record(output / "quests" / arm, "execution", "exp_001")["started_at"]
+                                       for arm in expected)
+            manifest = json.loads((output / "manifest.json").read_text())
+            for rel, digest in manifest["sha256"].items():
+                assert hashlib.sha256((output / rel).read_bytes()).hexdigest() == digest, rel
+            for entry in results["experiments"]:
+                arm = entry["arm"]
+                quest = output / "quests" / arm
+                exp = quest / "experiments/exp_001"
+                registration = get_record(quest, "registration", "exp_001")
+                assert registration["registration_hash"] == barrier["registrations"][arm]
+                assert registration["created_at"] <= first_execution_time
+                assert registration["plan"]["scientist_information_mode"] == "black_box_v2"
+                assert len(registration["generation_replays"]) == 2
+                assert all(r["execution"]["isolated"] for r in registration["generation_replays"].values())
+                evaluation = get_record(quest, "evaluation", "exp_001")
+                assert evaluation == read_yaml(exp / "validation_results.yaml")
+                assert evaluation["evidence_source"] == "supervisor_computed"
+                execution = get_record(quest, "execution", "exp_001")
+                assert execution["isolated"] is True
+                assert execution["blind_filesystem"] is True
+                assert execution["network"] is False
+                assert get_record(quest, "completion", "exp_001")
+                check = run_logic_check(quest, "exp_001")
+                assert check["recorded_integrity_verified"] and not check["scientific_verified"]
+                predictions = {r["id"]: r for r in rows(exp / "worker_artifacts/predictions.csv")}
+                training = rows(quest / "data/raw/train.csv")
+                assert len(training) == len({r["id"] for r in training}) == 8
+                assert {r["id"] for r in training}.isdisjoint(predictions)
+                cells = Counter((float(r["price"]), (float(r["demand"]) - 100 + 2 * float(r["price"])) / 40)
+                                for r in training)
+                assert cells == ({(30, 0): 4, (40, 1): 4} if arm == "observational" else
+                                 {(30, 0): 2, (30, 1): 2, (40, 0): 2, (40, 1): 2})
+                truth = rows(quest / "data/raw/eval.csv")
+                assert set(predictions) == {"evaluation_30", "evaluation_40"}
+                # Independent oracle arithmetic; do not call the demo generator or
+                # SciQuest's evaluator to compute these expected values.
+                errors = []
+                values = []
+                for row in truth:
+                    price = float(row["price"])
+                    assert float(row["mean_demand"]) == 120 - 2 * price
+                    assert float(row["expected_revenue"]) == price * (120 - 2 * price)
+                    pred = predictions[row["id"]]
+                    mean = float(pred["predicted_mean_demand"])
+                    revenue = float(pred["predicted_revenue"])
+                    assert revenue == pytest.approx(price * mean, rel=0, abs=1e-10)
+                    errors.append((mean - (120 - 2 * price)) ** 2)
+                    values.append((revenue, -price, price * (120 - 2 * price)))
+                    assert float(pred["fitted_intercept"]) == pytest.approx(expected[arm]["fitted_intercept"], rel=0, abs=1e-10)
+                    assert float(pred["fitted_slope"]) == pytest.approx(expected[arm]["fitted_slope"], rel=0, abs=1e-10)
+                independent = dict(mean_demand_rmse=math.sqrt(sum(errors) / len(errors)),
+                                   policy_value=max(values)[2], regret=1800 - max(values)[2])
+                assert entry["metrics"] == pytest.approx(independent, rel=0, abs=1e-10)
+                for name, value in independent.items():
+                    assert value == pytest.approx(expected[arm][name], rel=0, abs=1e-10)
+                assert entry["selected_price"] == expected[arm]["selected_price"]
+                outcomes = {"mean_recovery": "contradicted", "optimal_listed_price": "contradicted"} if arm == "observational" else {"mean_recovery": "supported", "optimal_listed_price": "supported"}
+                assert evaluation["prediction_outcomes"] == outcomes
+                notebook = nbformat.read(exp / "executed_notebook.ipynb", as_version=4)
+                assert all(c.execution_count is not None for c in notebook.cells if c.cell_type == "code")
+                assert "owner files and supervisor package excluded" in json.dumps(notebook)
+                assert "Supervisor evaluation recorded" in (quest / "journal.md").read_text()
+                assert "<!-- sciquest-evaluation:exp_001 -->" in (quest / "journal.md").read_text()
+                assert (exp / "artifacts/plots/comparison.svg").stat().st_size > 1000
+                dashboard = (quest / "reports/dashboard/index.html").read_text()
+                assert "Result Graphs" in dashboard and "<svg" in dashboard
+>               assert "mean_demand_rmse" in dashboard and "Supervisor computed" in dashboard
+E               assert ('mean_demand_rmse' in '<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,...null; if (requested && document.getElementById(requested)) showExperiment(requested); });\n</script>\n</body>\n</html>')
+
+/home/edtaylor/code/sciquest-publication/examples/pricing_confounds/test_end_to_end.py:116: AssertionError
+--------- generated xml file: /tmp/sciquest-pricing-integration-v2.xml ---------
+=========================== short test summary info ============================
+FAILED ../home/edtaylor/code/sciquest-publication/examples/pricing_confounds/test_end_to_end.py::test_installed_wheel_reproduces_scientific_workflow
+========================= 1 failed, 1 passed in 4.07s ==========================

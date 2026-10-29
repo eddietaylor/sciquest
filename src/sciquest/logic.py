@@ -3,87 +3,186 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
-from .io import read_yaml
+import nbformat
+
+from .io import contained_path, content_hash, experiment_dir, file_hash, read_yaml
 from .methods.ledger import classify_report_claims, parse_report_claims
+from .state import authority_dir, get_record
+from .validation import compute_aggregate_score
 
 
-def run_logic_check(quest_path: Path, experiment_id: str | None = None) -> dict[str, Any]:
+def run_logic_check(
+    quest_path: Path, experiment_id: str | None = None
+) -> dict[str, Any]:
+    """Check artifact structure and recorded integrity, with explicit evidence scope."""
     issues: list[str] = []
     warnings: list[str] = []
-    hyp = read_yaml(quest_path / "hypotheses.yaml", {})
-    val = read_yaml(quest_path / "validation.yaml", {})
-    data = read_yaml(quest_path / "data_manifest.yaml", {})
-
-    if not hyp.get("hypotheses"):
-        issues.append("No hypothesis recorded; hypothesis must be testable in notebook.")
-    if val.get("status") == "agent_required" or not val.get("metrics"):
-        issues.append("Validation suite is missing or agent_required; metrics cannot yet align with problem.")
-    if data.get("status") == "missing_user_data":
-        warnings.append("Core data missing; agent must document discovered/generated data provenance and limitations.")
-
-    if experiment_id:
-        exp = quest_path / "experiments" / experiment_id
-        nb = exp / "notebook.ipynb"
-        report = exp / "experiment_report.md"
-        results = exp / "validation_results.yaml"
-        experiment_meta = read_yaml(exp / "experiment.yaml", {})
-        diagrams_dir = exp / "artifacts" / "diagrams"
-        plots_dir = exp / "artifacts" / "plots"
-
-        if not (exp / "experiment.yaml").exists():
-            issues.append("experiment.yaml missing; experiment metadata cannot be audited.")
-        for dirname, path in [("artifacts/plots", plots_dir), ("artifacts/diagrams", diagrams_dir), ("logs", exp / "logs")]:
-            if not path.exists() or not path.is_dir():
-                issues.append(f"Required experiment directory missing: {dirname}.")
-
-        for field in ["task_type", "model_architecture", "input_features", "target_features", "validation_technique"]:
-            if not experiment_meta.get(field):
-                warnings.append(f"experiment.yaml should document dashboard field: {field}.")
-
-        declared_diagrams = experiment_meta.get("technical_diagrams") or []
-        if not declared_diagrams and not list(diagrams_dir.glob("*.svg")):
-            issues.append("Technical diagrams are missing; add model and validation architecture diagrams under artifacts/diagrams/.")
-        for rel in declared_diagrams:
-            if not (exp / rel).exists():
-                issues.append(f"Declared technical diagram is missing: {rel}.")
-
-        generated_datasets = [d for d in data.get("datasets", []) or [] if "synthetic" in (d.get("provenance", "") + d.get("name", "")).lower()]
-        if generated_datasets and not any((exp / "artifacts").glob("*generation*.py")) and not any((exp / "artifacts").glob("*generator*.py")):
-            issues.append("Synthetic/generated data was used but no data generation script artifact was preserved.")
-
-        if not nb.exists():
-            issues.append("Experiment notebook is missing; hypothesis is not testable in notebook.")
+    verified = False
+    try:
+        hypotheses = read_yaml(quest_path / "hypotheses.yaml", {})
+        if not isinstance(hypotheses, dict) or not hypotheses.get("hypotheses"):
+            issues.append("No hypothesis registry recorded.")
+        suite = read_yaml(quest_path / "validation.yaml", {})
+        if experiment_id:
+            exp = experiment_dir(quest_path, experiment_id)
+            meta = read_yaml(exp / "experiment.yaml", {})
+            if not isinstance(meta, dict) or not meta:
+                issues.append("experiment.yaml missing or invalid.")
+                meta = {}
+            if meta.get("status") in {"draft", "agent_stub", "agent_required"}:
+                issues.append("Experiment is a draft, not a completed execution.")
+            if not (exp / "logs").is_dir():
+                issues.append("Execution logs directory missing.")
+            for relative in meta.get("technical_diagrams", []) or []:
+                if not contained_path(exp, relative).is_file():
+                    issues.append(f"Declared technical diagram is missing: {relative}.")
+            nb_path, executed_path = (
+                exp / "notebook.ipynb",
+                exp / "executed_notebook.ipynb",
+            )
+            if not nb_path.is_file() or not executed_path.is_file():
+                issues.append(
+                    "Source and executed notebooks are required to inspect execution."
+                )
+            else:
+                source = nbformat.read(nb_path, as_version=4)
+                executed = nbformat.read(executed_path, as_version=4)
+                nbformat.validate(source)
+                nbformat.validate(executed)
+                sources = lambda nb: [(c.cell_type, c.source) for c in nb.cells]
+                if sources(source) != sources(executed):
+                    issues.append(
+                        "Executed notebook source differs from the proposed notebook."
+                    )
+                cells = [
+                    c
+                    for c in executed.cells
+                    if c.cell_type == "code" and c.source.strip()
+                ]
+                if not cells or any(c.get("execution_count") is None for c in cells):
+                    issues.append(
+                        "Notebook contains unexecuted code or no executable cells."
+                    )
+                if any(
+                    o.output_type == "error"
+                    for c in cells
+                    for o in c.get("outputs", [])
+                ):
+                    issues.append("Executed notebook contains an error.")
+            registration = get_record(quest_path, "registration", experiment_id)
+            evaluation = get_record(quest_path, "evaluation", experiment_id)
+            execution = get_record(quest_path, "execution", experiment_id)
+            completion = get_record(quest_path, "completion", experiment_id)
+            if registration:
+                frozen = {
+                    key: value
+                    for key, value in registration.items()
+                    if key != "registration_hash"
+                }
+                if content_hash(frozen) != registration["registration_hash"]:
+                    issues.append("Supervisor registration hash is invalid.")
+                snapshot = authority_dir(quest_path) / "snapshots" / experiment_id
+                for relative, expected in registration["file_hashes"].items():
+                    if file_hash(contained_path(snapshot, relative)) != expected:
+                        issues.append(f"Registered input changed: {relative}.")
+                suite = registration["validation_suite"]
+                if not execution or execution.get("status") != "succeeded":
+                    issues.append("Successful supervisor execution is not recorded.")
+                if not evaluation or not completion:
+                    issues.append("Supervisor evaluation/finalization is incomplete.")
+                elif (
+                    completion.get("evaluation_hash") != content_hash(evaluation)
+                    or evaluation.get("registration_hash")
+                    != registration["registration_hash"]
+                ):
+                    issues.append(
+                        "Evaluation is not bound to the registered experiment."
+                    )
+                else:
+                    verified = True
+            else:
+                warnings.append(
+                    "No authoritative registration exists; legacy artifacts cannot establish preregistration or independent evaluation."
+                )
+            results = read_yaml(exp / "validation_results.yaml")
+            computed = compute_aggregate_score(suite, results)
+            if results.get("aggregate_score") != computed["aggregate_score"]:
+                issues.append(
+                    "Stored aggregate score does not match the complete metric suite."
+                )
+            if (
+                evaluation
+                and evaluation.get("validation_status") != computed["validation_status"]
+            ):
+                issues.append(
+                    "Stored validation status does not match metric roles and constraints."
+                )
+            if (
+                evaluation
+                and "constraint_outcomes" in evaluation
+                and evaluation["constraint_outcomes"] != computed["constraint_outcomes"]
+            ):
+                issues.append(
+                    "Stored constraint outcomes do not match registered requirements."
+                )
+            if execution and execution.get("status") == "succeeded":
+                if file_hash(executed_path) != execution.get("output_notebook_hash"):
+                    issues.append(
+                        "Published executed notebook differs from the execution record."
+                    )
+                for name, expected in execution.get(
+                    "prediction_artifact_hashes", {}
+                ).items():
+                    if (
+                        file_hash(contained_path(exp / "worker_artifacts", name))
+                        != expected
+                    ):
+                        issues.append(
+                            f"Prediction artifact changed after execution: {name}."
+                        )
+                for name, expected in (
+                    execution.get("model_export_verification", {})
+                    .get("model_artifact_hashes", {})
+                    .items()
+                ):
+                    if (
+                        file_hash(contained_path(exp / "worker_artifacts", name))
+                        != expected
+                    ):
+                        issues.append(f"Exported model artifact changed: {name}.")
+            if evaluation and results != evaluation:
+                issues.append(
+                    "Published results differ from the supervisor evaluation."
+                )
+            report = exp / "experiment_report.md"
+            if report.exists():
+                classes = classify_report_claims(
+                    registration or {},
+                    parse_report_claims(report.read_text()),
+                    evaluation,
+                )
+                if classes.get("method_violation"):
+                    issues.append(
+                        "Method violation: report contains an unlabeled post-hoc change."
+                    )
+                if classes.get("unverified_claim"):
+                    warnings.append(
+                        "Report includes confirmatory claims without linked authoritative evidence."
+                    )
+            else:
+                warnings.append("No interpretation report exists.")
         else:
-            text = nb.read_text(encoding="utf-8", errors="ignore").lower()
-            for term in ["preview", "dataset", "target", "feature", "validation_results"]:
-                if term not in text:
-                    warnings.append(f"Notebook may not document required element: {term}.")
-            section_markers = ["setup", "data", "preprocess", "feature", "model", "validation", "artifact"]
-            if sum(1 for marker in section_markers if marker in text) < 4:
-                warnings.append("Notebook should be split into readable sections: setup, data, preprocessing/features, model, validation, artifacts.")
-        if not results.exists():
-            issues.append("validation_results.yaml missing; no silent-failure check possible.")
-        report_text = ""
-        if report.exists():
-            report_text = report.read_text(encoding="utf-8", errors="ignore")
-            rtext = report_text.lower()
-            if "speculation" not in rtext or "evidence" not in rtext:
-                warnings.append("Report should clearly separate speculation vs evidence.")
-        else:
-            warnings.append("Experiment report missing; conclusions cannot be checked against results.")
+            from .validation import validate_suite
 
-        ledger = read_yaml(exp / "method_ledger.yaml", {})
-        if not ledger:
-            warnings.append("method_ledger.yaml missing; older experiment cannot be audited for method-aware pre-registration.")
-        else:
-            pre_registration = ledger.get("pre_registration", {}) or {}
-            if not pre_registration.get("primary_method"):
-                issues.append("Method ledger missing primary method pre-registration.")
-            if not pre_registration.get("profile_versions"):
-                warnings.append("Method ledger should snapshot profile versions for reproducibility.")
-            claims = parse_report_claims(report_text) if report_text else []
-            classified = classify_report_claims(pre_registration, claims) if claims else (ledger.get("post_experiment_classification", {}) or {})
-            if classified.get("method_violation"):
-                issues.append("Method violation detected: post-hoc or method-changing claims are not labeled according to the method ledger.")
-
-    return {"passed": not issues, "issues": issues, "warnings": warnings}
+            validate_suite(suite)
+    except (ValueError, TypeError, KeyError, OSError, nbformat.ValidationError) as exc:
+        issues.append(str(exc))
+    return {
+        "passed": not issues,
+        "scope": "artifact_schema_and_recorded_integrity",
+        "recorded_integrity_verified": verified and not issues,
+        "scientific_verified": False,
+        "interpretation": "A valid record does not by itself establish causal identification, novelty, or statistical error control.",
+        "issues": issues,
+        "warnings": warnings,
+    }

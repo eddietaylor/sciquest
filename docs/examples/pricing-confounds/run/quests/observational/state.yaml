@@ -1,0 +1,17 @@
+best_score: null
+current_experiment: null
+failures: []
+heartbeat: '2026-10-29T19:35:01+00:00'
+last_experiment: exp_001
+last_prepared_experiment: exp_001
+last_score: 0.5
+last_updated: '2026-10-29T19:35:02+00:00'
+lock_id: null
+owner_host: null
+owner_pid: null
+quest_status: idle
+schema_version: 2
+score_groups:
+  c6b9050dbbac11ab74d8b4d73732aa399bfc4e7b7beef8acd1d6b89a8e0b4cde:
+    best_score: 0.5
+    experiment: exp_001

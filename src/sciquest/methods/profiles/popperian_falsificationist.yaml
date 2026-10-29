@@ -1,8 +1,8 @@
 id: popperian_falsificationist
 display_name: Popperian falsificationist testing
 plain_language_label: Try to disprove my hypothesis
-description: Prefer risky predictions and severe tests that could genuinely refute
-  the hypothesis.
+description: Prefer risky predictions and diagnostic attempts at refutation while
+  examining auxiliary assumptions and measurement.
 best_for:
 - Narrow hypotheses
 - Integrity-focused stress tests
@@ -14,9 +14,11 @@ phase_affinities:
 hypothesis_generation_rules:
 - Make risky predictions that could be wrong.
 experiment_design_rules:
-- Design severe tests with high falsification risk.
+- Design tests sensitive to specified alternatives; preregister risky predictions
+  and checks of measurement and auxiliary assumptions.
 evidence_evaluation_rules:
-- Treat failed risky predictions as serious pressure against the hypothesis.
+- A failed risky prediction puts the hypothesis-plus-auxiliaries under pressure; a
+  surviving test does not verify the theory.
 validation_rules:
 - Specify falsification criteria before execution.
 journal_sections:
@@ -25,7 +27,8 @@ journal_sections:
 - Severe test assessment
 scoring_transform: method_lens_metadata_only_v1
 next_step_policy:
-- If not falsified, make the next test more severe; if falsified, revise or reject.
+- Review failed predictions together with measurement and auxiliaries before implementing
+  the registered reject, revise or replicate response.
 failure_modes:
 - Method shopping after results are known
 - Overclaiming beyond the method lens
@@ -34,3 +37,4 @@ recommended_pairings:
 - standard_empirical
 prompt_addendum: Prefer risky predictions and severe tests; do not rescue failures
   post hoc.
+profile_version: 1.1.0
