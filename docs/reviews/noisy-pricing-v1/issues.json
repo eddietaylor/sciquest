@@ -1,0 +1,75 @@
+{
+  "scope": "Development review before first full allocation. Same-model reviewers are not independent human scientific validation.",
+  "scientific_tuning": "No generator, estimator, family, seed, or performance metric was changed in response to observed scores. Development smoke runs test software; no confirmatory study claim.",
+  "issues": [
+    {
+      "id": "N01",
+      "finding": "Exact equations/oracle integration unspecified in draft",
+      "resolution": "Specified complete DGP, ranges, mean-zero independent disturbances, observable-context conditional oracle, positive demand bound; no clipping.",
+      "verification": "test_world_oracle_integration_positivity_independence_and_balance",
+      "status": "resolved; final installed-wheel test suite passed"
+    },
+    {
+      "id": "N02",
+      "finding": "Ridge scaling, RNG stream independence, summary/pair definitions incomplete",
+      "resolution": "Frozen sum-loss penalty, family/seed/component streams, per-family paired left-minus-right summaries, explicit quantiles and MCSE; no pooled headline.",
+      "verification": "test_campaign_statistics_pairing_and_failure_denominators",
+      "status": "resolved; final installed-wheel test suite passed"
+    },
+    {
+      "id": "N03",
+      "finding": "Failure semantics ambiguous; dashboard failure could drop valid endpoint",
+      "resolution": "All planned slots retained; ordinary failures continue without retry; science completion separated from reporting_error. Atomic persisted ledger.",
+      "verification": "test_slot_failure_is_retained_without_retry_and_later_slots_execute",
+      "status": "resolved; final installed-wheel test suite passed"
+    },
+    {
+      "id": "N04",
+      "finding": "Model artifact could self-label another basis or omit coefficients",
+      "resolution": "Allocated model/ridge/n/exact finite dimension and exact registered notebook estimator source required; alternate augmented solver verifies fitted predictions.",
+      "verification": "test_audit_model_is_bound_to_allocation_and_missing_authority_is_read_only",
+      "status": "resolved; final installed-wheel test suite passed"
+    },
+    {
+      "id": "N05",
+      "finding": "Total evaluation rows alone cannot enforce context/action grid",
+      "resolution": "Validate exact contexts and every declared action; complete unique prediction IDs; raw training/eval hashes match frozen snapshots.",
+      "verification": "test_exact_context_action_grid_cannot_be_replaced_by_same_row_count",
+      "status": "resolved; final installed-wheel test suite passed"
+    },
+    {
+      "id": "N06",
+      "finding": "Self-manifest alone does not bind actual execution predictions",
+      "resolution": "Check raw predictions against authoritative execution hashes, succeeded execution/notebook hash, registration/completion/evaluation links. Tamper test also refreshes self-manifest.",
+      "verification": "test_installed_wheel_reproduces_full_smoke_workflow_twice",
+      "status": "resolved; final installed-wheel test suite passed"
+    },
+    {
+      "id": "N07",
+      "finding": "Audit authority reads defaulted to write-capable transactions; frozen summarizer attribution unbound",
+      "resolution": "Read-only DB context, malformed DB negative, current summary SHA bound to frozen source; no arbitrary archive-code import by auditor.",
+      "verification": "test_audit_model_is_bound_to_allocation_and_missing_authority_is_read_only",
+      "status": "resolved; final installed-wheel test suite passed"
+    },
+    {
+      "id": "N08",
+      "finding": "Development smoke audit used unsanitized underscore quest paths",
+      "resolution": "Use hyphen slot IDs consistent with create_quest slug sanitation; verify actual dashboard links and authority paths through complete workflow. Initial failed XML retained.",
+      "verification": "test_installed_wheel_reproduces_full_smoke_workflow_twice",
+      "status": "resolved; final installed-wheel test suite passed"
+    },
+    {
+      "id": "N09",
+      "finding": "Running archived audit helpers could create caches inside evidence",
+      "resolution": "Set dont_write_bytecode before helper imports; execute saved auditor and check unchanged inventory/no cache.",
+      "verification": "test_installed_wheel_reproduces_full_smoke_workflow_twice",
+      "status": "resolved; final installed-wheel test suite passed"
+    }
+  ],
+  "remaining_limits": [
+    "Four hand-specified synthetic families; no real-market validity or new-family generalization.",
+    "Intermediate-price identification requires shape assumptions.",
+    "Descriptive small Monte Carlo allocation; no confidence interval/p-value/superiority claim.",
+    "No external scientific agent or philosophy comparison; no guarantee against model pretraining knowledge."
+  ]
+}

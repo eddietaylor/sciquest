@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="5" time="19.101" timestamp="2026-11-05T17:55:11.747550+01:00" hostname="spark-6fad"><testcase classname="examples.noisy_pricing.test_noisy_pricing" name="test_world_oracle_integration_positivity_independence_and_balance" time="0.024" /><testcase classname="examples.noisy_pricing.test_noisy_pricing" name="test_metrics_distinguish_forecast_error_from_correct_decision_and_ties" time="0.000" /><testcase classname="examples.noisy_pricing.test_noisy_pricing" name="test_campaign_statistics_pairing_and_failure_denominators" time="0.002" /><testcase classname="examples.noisy_pricing.test_noisy_pricing" name="test_slot_failure_is_retained_without_retry_and_later_slots_execute" time="0.011" /><testcase classname="examples.noisy_pricing.test_noisy_pricing" name="test_installed_wheel_reproduces_full_smoke_workflow_twice" time="18.953"><failure message="ValueError: Completed slot lacks blind isolated execution">tmp_path = PosixPath('/tmp/sciquest-noisy-integration-v1/test_installed_wheel_reproduce0')
+
+    def test_installed_wheel_reproduces_full_smoke_workflow_twice(tmp_path):
+        import sciquest
+        assert Path(sciquest.__file__).resolve().is_relative_to(Path(sys.prefix).resolve()), 'Use a wheel installation'
+        runs=[]
+        for i in range(2):
+            output=tmp_path/f'run-{i}'
+            env=dict(os.environ); env.pop('PYTHONPATH',None)
+            p=subprocess.run([sys.executable,str(HERE/'run.py'),'--profile','smoke','--output',str(output)],
+                             cwd=tmp_path,env=env,capture_output=True,text=True,timeout=600)
+            assert p.returncode==0,p.stdout+'\n'+p.stderr
+&gt;           checked=audit.audit(output)
+                    ^^^^^^^^^^^^^^^^^^^
+
+examples/noisy_pricing/test_noisy_pricing.py:133: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+output = PosixPath('/tmp/sciquest-noisy-integration-v1/test_installed_wheel_reproduce0/run-0')
+
+    def audit(output: Path) -&gt; dict:
+        manifest = json.loads((output / "manifest.json").read_text())["sha256"]
+        actual = {str(p.relative_to(output)) for p in output.rglob("*") if p.is_file() and p != output / "manifest.json"}
+        if actual != set(manifest):
+            raise ValueError("Manifest file inventory mismatch")
+        for rel, digest in manifest.items():
+            if hashlib.sha256((output / rel).read_bytes()).hexdigest() != digest:
+                raise ValueError(f"Manifest hash mismatch: {rel}")
+        protocol = json.loads((output / "allocation.json").read_text())
+        results = json.loads((output / "results.json").read_text())
+        outcomes = json.loads((output / "outcomes.json").read_text())
+        if outcomes != results["outcomes"]:
+            raise ValueError("Incremental and final outcomes differ")
+        expected = {(f,s,b["name"]) for f in protocol["families"] for s in protocol["replicate_seeds"] for b in protocol["baselines"]}
+        if len(outcomes) != len(expected) or {(r["family"],r["seed"],r["baseline"]) for r in outcomes} != expected:
+            raise ValueError("Allocation rows missing or duplicated")
+        barrier = json.loads((output / "before_execution.json").read_text())
+        for name, filename in [("source_commitment_sha256", "source_commitment.json"), ("allocation_sha256", "allocation.json")]:
+            if barrier[name] != hashlib.sha256((output / filename).read_bytes()).hexdigest():
+                raise ValueError("Barrier commitment mismatch")
+        for name, digest in json.loads((output / "source_commitment.json").read_text()).items():
+            if hashlib.sha256((output / "owner_source" / name).read_bytes()).hexdigest() != digest:
+                raise ValueError("Frozen source mismatch")
+        registrations, starts, eval_hashes, random_hashes = [], [], defaultdict(set), defaultdict(set)
+        checked = 0
+        for r in outcomes:
+            quest = output / "quests" / r["slot"]
+            registration = get_record(quest, "registration", "exp_001") if quest.exists() else None
+            if registration:
+                if registration["registration_hash"] != barrier["registrations"][r["slot"]]:
+                    raise ValueError("Registration/barrier mismatch")
+                registrations.append(registration["created_at"])
+                if len(registration["generation_replays"]) != 2 or not all(v["execution"]["isolated"] for v in registration["generation_replays"].values()):
+                    raise ValueError("Generator replay isolation not verified")
+            execution = get_record(quest, "execution", "exp_001") if quest.exists() else None
+            if execution:
+                starts.append(execution["started_at"])
+            if r["status"] != "completed":
+                continue
+            if not registration or not execution or not execution["isolated"] or not execution["blind_filesystem"] or execution["network"]:
+&gt;               raise ValueError("Completed slot lacks blind isolated execution")
+E               ValueError: Completed slot lacks blind isolated execution
+
+examples/noisy_pricing/audit.py:101: ValueError</failure></testcase></testsuite></testsuites>

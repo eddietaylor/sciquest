@@ -53,6 +53,29 @@ never overwritten. CI builds and installs a wheel in a fresh environment, runs
 outside the checkout, independently recalculates the metrics, and reproduces
 the scientific outputs twice. No model credentials are required.
 
+## Benchmark with noisy finite samples
+
+[Noisy pricing benchmark v1](examples/noisy_pricing/README.md) is separate from
+the exact sanity check above. Four declared response families vary world
+parameters, latent confounding, finite random assignment, and observation noise.
+Three fixed estimators are evaluated on independent customer contexts and nine
+prices, including four intermediate prices absent from training. The full
+allocation has48 world/data campaigns and144 estimator executions, with paired
+comparisons and campaign-level variability reported separately for each family.
+
+```bash
+python examples/noisy_pricing/run.py --profile full --output ./noisy-pricing-full
+python examples/noisy_pricing/audit.py ./noisy-pricing-full
+python -m http.server 8000 --directory ./noisy-pricing-full
+```
+
+Use the pinned environment above. [Protocol and limitations](examples/noisy_pricing/README.md)
+include exact equations, fixed baselines, failure accounting and reproduction
+commands. This is a descriptive synthetic benchmark with **zero external-agent
+calls**; it does not compare philosophies or establish agent discovery capability.
+CI executes the complete frozen allocation from an installed wheel and uploads
+all notebooks, journals, dashboards and hidden supervisor records.
+
 ## Package workflow
 
 Python 3.10+ on Linux is supported for the core package. The pinned example

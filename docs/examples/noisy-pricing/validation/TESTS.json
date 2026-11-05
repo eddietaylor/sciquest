@@ -1,0 +1,27 @@
+{
+  "phase": "before first full allocation",
+  "tests": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "7",
+    "time": "41.094",
+    "timestamp": "2026-11-05T18:00:07.850624+01:00",
+    "hostname": "spark-6fad"
+  },
+  "command": "/tmp/sciquest-example-wheel-v2/bin/python -m pytest examples/noisy_pricing/test_noisy_pricing.py -v --basetemp /tmp/sciquest-noisy-integration-v5 --junitxml /tmp/sciquest-noisy-tests-v5.xml",
+  "source_sha256": {
+    "README.md": "73d0fdc823d2a66c7b0bb46885e1439cb6682a93b68b2713e02a75ec030a319e",
+    "analysis.py": "d0e73baef8c89bbbb7634446c998d394a39d18b4a1a35aecaf9b9282a6eec641",
+    "audit.py": "04cb28f7addb39510cab2ee04b77a224b3246b30caf52163e4ed28314a90e26c",
+    "generate.py": "eb95ec3062471276195c15d06bc5f2ee962a154c27609311988d0c8379ad99d7",
+    "protocol.json": "565614592de282f3ab1d252d5ae625056aea3bb2a0877429fb3c044b5ed0f0fd",
+    "report.py": "ef34a14824466385956776597197056e6116c326b3d7a31f637912cd3f92c077",
+    "run.py": "1b81a1e8f485f2cf7b74ad41380bebb4c2aa73dc83f51cd1c14185b8cbbfde93",
+    "summarize.py": "60b9ebde2dbde3deae1caf7acf9289da262b89489fd65365d434d7c54161a2e1",
+    "test_noisy_pricing.py": "51f33f084c66c799c4415fc8441f8d8ee78f924e2d09412f2739b9cd74f4a571"
+  },
+  "validation_scope": "Actual installed SciQuest wheel; two complete smoke allocations,24 isolated notebook executions, independent arithmetic and augmented ridge checks, source/label/history exclusion probes, frozen-source auditor invocation, failure/manifest/model/grid negatives. No external scientific-agent calls.",
+  "development_failures": "development-v1.xml retains initial path-audit failure; development-v2/v3/v4 and final-tests passed. No scientific performance threshold used to select source changes."
+}

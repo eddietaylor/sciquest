@@ -10,3 +10,6 @@ quests/
 .ipynb_checkpoints/
 .DS_Store
 /pricing-run/
+
+/noisy-pricing-smoke/
+/noisy-pricing-full/

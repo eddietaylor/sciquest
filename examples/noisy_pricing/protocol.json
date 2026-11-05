@@ -1,0 +1,80 @@
+{
+  "version": "sciquest-noisy-pricing-v1",
+  "families": [
+    "affine",
+    "quadratic",
+    "interaction",
+    "threshold"
+  ],
+  "replicate_seeds": [
+    1101,
+    1102,
+    1103,
+    1104,
+    1105,
+    1106,
+    1107,
+    1108,
+    1109,
+    1110,
+    1111,
+    1112
+  ],
+  "training_units": 160,
+  "evaluation_contexts": 64,
+  "training_prices": [
+    20,
+    30,
+    40,
+    50,
+    60
+  ],
+  "evaluation_prices": [
+    20,
+    25,
+    30,
+    35,
+    40,
+    45,
+    50,
+    55,
+    60
+  ],
+  "baselines": [
+    {
+      "name": "observational_linear",
+      "design": "observational",
+      "model": "linear"
+    },
+    {
+      "name": "randomized_linear",
+      "design": "randomized",
+      "model": "linear"
+    },
+    {
+      "name": "randomized_quadratic",
+      "design": "randomized",
+      "model": "quadratic"
+    }
+  ],
+  "ridge_penalty": 0.01,
+  "primary_metric": "regret",
+  "paired_comparisons": [
+    [
+      "observational_linear",
+      "randomized_linear"
+    ],
+    [
+      "randomized_linear",
+      "randomized_quadratic"
+    ]
+  ],
+  "stopping_rule": "One execution opportunity per registered slot, timeout120 seconds, maximum144 full-profile notebook opportunities. Record ordinary slot failure and continue all other planned slots without retry/replacement. Interruptions retain planned/registered/running slots as noncompleted; output directories cannot be resumed or overwritten.",
+  "evaluation_semantics": "Independent contexts from the same context distribution; exact conditional intervention means on a finite grid, plus independent realized potential outcomes. Intermediate evaluation prices are absent from training; endpoints are shared. No price-domain extrapolation or new-family generalization claim; fresh x may exceed the finite training x range.",
+  "uncertainty": "Across the 12 independent family-specific world/data draws, report mean, sample SD, MCSE, and empirical quantiles; paired differences share each campaign. No row-level independence, confidence interval, p-value, or universal superiority claim.",
+  "external_agent_calls": 0,
+  "ridge_objective": "sum squared residuals + 0.01 * sum(non-intercept coefficients squared)",
+  "summary_levels": "Per-family baseline distributions and paired left-minus-right differences across campaign seeds, with planned/completed denominators. Quantiles use h=(n-1)*q linear interpolation. No pooled headline. MCSE=sample SD/sqrt(n), unavailable if n<2. Available-case summaries explicitly labeled.",
+  "subset_metrics": "Owner-side seen_price_rmse and unseen_price_rmse: RMSE of predicted versus oracle mean over all context-action rows with price respectively in or outside the five training price support points.",
+  "generator_specification": "generate.py is normative; family/seed/component SHA256-derived independent PRNG streams, no rejection or outcome-based selection."
+}
