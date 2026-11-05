@@ -1,0 +1,9 @@
+{
+  "planned": 144,
+  "completed": 144,
+  "all_planned_completed": true,
+  "manifest_files_verified": 5780,
+  "independently_recomputed_metrics": true,
+  "independent_augmented_ridge_solver": true,
+  "external_agent_calls": 0
+}
