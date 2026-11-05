@@ -1,0 +1,24 @@
+{
+  "source_commit_local": "d65acc7",
+  "source_commit_remote": "4fbcf5f6dfadb234bdfb8306c82a6892b9d9ea4f",
+  "source_tree": "91e0c48b882915d4f7674b1d79eb49dfc20dc26e",
+  "archive_sha256": "880c8ecf5ea460935566411e268b5dcb4ea99ce7318ad356c10df6f3a344f473",
+  "archive_bytes": 3370940,
+  "archive_git_blob_sha": "526ff5fd7fdfe0c6accedda98eaf79ca86fb33b8",
+  "manifest_sha256": "ac1acd0981284f392e3690c1b2faad2f8e28a0472b36799a848842a0ab009e04",
+  "scope": "One complete local full allocation; repeated CI runs reproduce these scientific data and outputs rather than creating independent scientific replications.",
+  "all_planned_completed": true,
+  "notebook_execution_opportunities": 144,
+  "notebook_executions_completed": 144,
+  "external_scientific_agent_calls": 0,
+  "mean_demand_rmse_zero_slots": 0,
+  "regret_zero_slots": 45,
+  "reporting_errors": 0,
+  "original_teaching_fixture_hashes_verified_unchanged": 87,
+  "critical_review_sha256": {
+    "design.md": "8bd694d4112fbb704f0ae9c578e1c8e38593f0a58711e931eb3f90c3efb1c57e",
+    "evaluation.md": "e5610c10575a3f1c4e067cdf27f284e0c33579f7903f58ada733a40694c3fec3",
+    "issues.json": "540aa090bb6d793bd885781109998677edf18a907d733288119256eb2f3ddf79",
+    "simulator.md": "4ef1b44ffbe3e16f6a20285a48db9e3faf0246f3540823075861f7083031964f"
+  }
+}

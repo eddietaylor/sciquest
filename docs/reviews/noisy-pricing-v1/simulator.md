@@ -55,3 +55,19 @@ Current reviewed SHA256:
 - `examples/noisy_pricing/generate.py`: `eb95ec3062471276195c15d06bc5f2ee962a154c27609311988d0c8379ad99d7`
 - `examples/noisy_pricing/analysis.py`: `d0e73baef8c89bbbb7634446c998d394a39d18b4a1a35aecaf9b9282a6eec641`
 - `examples/noisy_pricing/run.py`: `6a5003473bca33b4a8a121ab39238cc9638d251bd002a914b4ae3917bc563c84`
+
+## Terminal full-run outcome assessment, 2026-11-05
+
+No new allocation, tests, backend/model calls or estimator/notebook reruns. Reviewed the saved full allocation `/tmp/sciquest-noisy-pricing-full-v1`, report, source commitment, raw CSVs and coordinator audit. **No DGP/metric/interpretation inconsistency found within this descriptive benchmark's scope.**
+
+Independent inert checks: all 144 planned rows are retained and completed; incremental outcomes equal final outcomes. The exact 5,780-file manifest inventory and every raw hash match. All frozen owner-source files match current benchmark sources. I independently recomputed all six reported metrics from each of the 144 prediction/truth CSV pairs, including context-level finite-grid selection, revenue consistency, individual errors and seen/unseen subsets: no discrepancy at the declared audit tolerances. Independently recomputed means, sample SDs, MCSEs and interpolated quantiles for all 12 family/baseline groups and eight paired comparison groups: no discrepancy. This did not use the generator, evaluator or summarizer functions.
+
+For an additional scientific check, used the declared SHA-keyed parameter recipe in independent standard-library arithmetic for seed1101 in each of the four families. All 576 protected means per selected family exactly matched the declared equation. Realized-minus-mean disturbances are shared across each context's potential prices to floating-point precision, and those selected observed outcomes satisfy the demand bound. This is a four-campaign equation check, not an independent examination of every oracle row's generation. Coordinator audit `/tmp/sciquest-noisy-pricing-full-v1-audit.json` reports all144 independent augmented-ridge checks; I read that result but did not rerun its solver. Coordinator reports final seven-test validation passed; this assessment does not independently certify that test execution.
+
+The results exhibit the intended distinction from the old two-price sanity example: **none** of144 fits has zero mean-demand RMSE; **45** have zero finite-grid regret. For example, threshold/seed1112 randomized-linear has RMSE2.5411109776 with regret0; randomized-quadratic has RMSE1.2358423757 with regret0. Correct action selection does not require exact mean recovery.
+
+Better forecast error also does not guarantee better decisions: quadratic/seed1101 randomized-linear (`slot-0038`) has mean RMSE4.3335483502 and regret1.2363835792; randomized-quadratic (`slot-0039`) has lower RMSE1.2777132722 but higher regret4.2449252769. The report properly retains this distinction: the quadratic family aggregate has lower quadratic-model forecast error but slightly higher mean regret. No universal model-ranking claim should replace the complete paired results.
+
+The final report continues to identify fixed scripted estimators, owner-side plotting, observed-context rather than latent-aware oracles, campaign-level replication, available-case denominators, intermediate-price assumptions, bounded physical noise and finite action support. Zero scientific-agent calls and completed software execution do not demonstrate autonomous discovery, philosophical merit, human scientific validity, real-market transfer or absence of future model pretraining exposure. No further gate, replacement seed or new allocation is requested.
+
+Actual full-run `results.json` SHA256: `9c2b6804685daac9ea0a3329f0a4fa306d451c170b22be57595afec95f2623d4`.

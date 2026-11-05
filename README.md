@@ -75,6 +75,8 @@ commands. This is a descriptive synthetic benchmark with **zero external-agent
 calls**; it does not compare philosophies or establish agent discovery capability.
 CI executes the complete frozen allocation from an installed wheel and uploads
 all notebooks, journals, dashboards and hidden supervisor records.
+The [executed benchmark report and permanent evidence archive](docs/examples/noisy-pricing/README.md)
+contain all 144 completed fits and mixed forecast-versus-decision results.
 
 ## Package workflow
 

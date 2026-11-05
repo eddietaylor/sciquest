@@ -1,0 +1,5597 @@
+{
+  "external_agent_calls": 0,
+  "format": "sciquest-noisy-pricing-v1",
+  "genuine_external_agent_reasoning_demonstrated": false,
+  "outcomes": [
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "46c7afd52f13d572faf1e77d7c17efcd646a1efbededa89f43b9602ca8849cba",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.205910112143286,
+        "mean_demand_rmse": 5.135282203940089,
+        "policy_value": 4708.621924002028,
+        "regret": 111.20413386471395,
+        "seen_price_rmse": 5.6239879657740754,
+        "unseen_price_rmse": 4.449547916111137
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1101,
+      "slot": "slot-0001",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "1a5855e62535b714b7f447e6751830440c981f543cc243cd30767f3ef48c5b9e"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "46c7afd52f13d572faf1e77d7c17efcd646a1efbededa89f43b9602ca8849cba",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 8.916313345959756,
+        "mean_demand_rmse": 1.2805427676044978,
+        "policy_value": 4815.862494042772,
+        "regret": 3.963563823970034,
+        "seen_price_rmse": 1.285119025660187,
+        "unseen_price_rmse": 1.274799343662439
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1101,
+      "slot": "slot-0002",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "11668360b24b1f2a4b737a4ba31f9d8068eeb64fcb0ca37843be9efd60a598ab"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "46c7afd52f13d572faf1e77d7c17efcd646a1efbededa89f43b9602ca8849cba",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 8.953169392641215,
+        "mean_demand_rmse": 1.407820777724786,
+        "policy_value": 4819.599069381869,
+        "regret": 0.22698848487227963,
+        "seen_price_rmse": 1.3781788178317878,
+        "unseen_price_rmse": 1.4440178158649457
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1101,
+      "slot": "slot-0003",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "11668360b24b1f2a4b737a4ba31f9d8068eeb64fcb0ca37843be9efd60a598ab"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "4ce10e96db5404c2e79539429786b3b418b10a46f2018b3e740fe78ec2459f7b",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 12.496059429822761,
+        "mean_demand_rmse": 5.394342879739801,
+        "policy_value": 4395.2352249425585,
+        "regret": 116.85258943760945,
+        "seen_price_rmse": 5.90009447748518,
+        "unseen_price_rmse": 4.686012209798962
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1102,
+      "slot": "slot-0004",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "5a23b21bcd84fb01c166f0c1674b51169e55d7405777c3e22bb9361aabb6f110"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "4ce10e96db5404c2e79539429786b3b418b10a46f2018b3e740fe78ec2459f7b",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 11.293515729475146,
+        "mean_demand_rmse": 0.6688604294633196,
+        "policy_value": 4511.991276249317,
+        "regret": 0.09653813085077445,
+        "seen_price_rmse": 0.6689288925098874,
+        "unseen_price_rmse": 0.6687748407992379
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1102,
+      "slot": "slot-0005",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "a0071895c57aab598e1eaead845240397f09a341d71356ec2df35bcf00b26ae8"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "4ce10e96db5404c2e79539429786b3b418b10a46f2018b3e740fe78ec2459f7b",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 11.37861004291835,
+        "mean_demand_rmse": 1.5652107886112756,
+        "policy_value": 4511.057704055321,
+        "regret": 1.0301103248469587,
+        "seen_price_rmse": 1.6374970288162316,
+        "unseen_price_rmse": 1.4698622995162043
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1102,
+      "slot": "slot-0006",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "a0071895c57aab598e1eaead845240397f09a341d71356ec2df35bcf00b26ae8"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "3229bfdca5066230de2b16087c23c84d2458fae9e069a5639e9aa1899124fe55",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.761933139894026,
+        "mean_demand_rmse": 5.683181029865575,
+        "policy_value": 4772.812167676426,
+        "regret": 62.31094364664078,
+        "seen_price_rmse": 6.204518710755964,
+        "unseen_price_rmse": 4.9549636074196135
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1103,
+      "slot": "slot-0007",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "0e16f26c8a02272fd6b7fe3fb4e59bc75317f6fb5ce32b180550a9d00ee007e4"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "3229bfdca5066230de2b16087c23c84d2458fae9e069a5639e9aa1899124fe55",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 9.16043524172781,
+        "mean_demand_rmse": 0.4671377793949141,
+        "policy_value": 4835.123111323067,
+        "regret": 0.0,
+        "seen_price_rmse": 0.47029910306448613,
+        "unseen_price_rmse": 0.4631557817640308
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1103,
+      "slot": "slot-0008",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "e8a2df1e0ca05120446d5bef39a14a0a72187efc0b0c0dad60b5b04100805d16"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "3229bfdca5066230de2b16087c23c84d2458fae9e069a5639e9aa1899124fe55",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 9.085744905349003,
+        "mean_demand_rmse": 1.369759589518581,
+        "policy_value": 4835.123111323067,
+        "regret": 0.0,
+        "seen_price_rmse": 1.4364859093181945,
+        "unseen_price_rmse": 1.281475044563335
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1103,
+      "slot": "slot-0009",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "e8a2df1e0ca05120446d5bef39a14a0a72187efc0b0c0dad60b5b04100805d16"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "b99773a67ad1ede1e6f5f779c1c4c545643178ea615632f5ed97f7618059669e",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 9.576326434886319,
+        "mean_demand_rmse": 4.343266308706487,
+        "policy_value": 4606.409927467208,
+        "regret": 11.633074522058692,
+        "seen_price_rmse": 4.748451699122546,
+        "unseen_price_rmse": 3.7761320276377006
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1104,
+      "slot": "slot-0010",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "3303ff28d2372b44fcba5e7f2f585faa353c6adb7134a2908b8bf6269acd611f"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "b99773a67ad1ede1e6f5f779c1c4c545643178ea615632f5ed97f7618059669e",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 8.699098478160789,
+        "mean_demand_rmse": 0.8468999765241189,
+        "policy_value": 4617.841028885236,
+        "regret": 0.2019731040303725,
+        "seen_price_rmse": 0.8470439907989756,
+        "unseen_price_rmse": 0.8467199242349418
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1104,
+      "slot": "slot-0011",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "4b814d1c33d2532fedfb08150e69f44eeeb37109ff7828a3fb965890aae373ef"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "b99773a67ad1ede1e6f5f779c1c4c545643178ea615632f5ed97f7618059669e",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 8.85379743251893,
+        "mean_demand_rmse": 1.4408847134862515,
+        "policy_value": 4618.0430019892665,
+        "regret": 0.0,
+        "seen_price_rmse": 1.5648962972474503,
+        "unseen_price_rmse": 1.2689401790797028
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1104,
+      "slot": "slot-0012",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "4b814d1c33d2532fedfb08150e69f44eeeb37109ff7828a3fb965890aae373ef"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "b5c33f797dee310fa58bc01a6f15c7c8cca702bfbf947896d361dd03579320c2",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.966028368114323,
+        "mean_demand_rmse": 5.424984533588569,
+        "policy_value": 4737.231776122346,
+        "regret": 77.07004666473806,
+        "seen_price_rmse": 5.941326842199222,
+        "unseen_price_rmse": 4.700459857234495
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1105,
+      "slot": "slot-0013",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "fcbf053ee03b2ba91d5777917b8ca82c53288e1ce522e4367f7387c84340c657"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "b5c33f797dee310fa58bc01a6f15c7c8cca702bfbf947896d361dd03579320c2",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 9.794461480052158,
+        "mean_demand_rmse": 1.2958834346505665,
+        "policy_value": 4814.301822787083,
+        "regret": 0.0,
+        "seen_price_rmse": 1.3273228706950033,
+        "unseen_price_rmse": 1.255477485905823
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1105,
+      "slot": "slot-0014",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "127e6cd917f7b8355246ecaeb5acda9ebd6eba29697f9f7b0674350638cc5de7"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "b5c33f797dee310fa58bc01a6f15c7c8cca702bfbf947896d361dd03579320c2",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.312519177631394,
+        "mean_demand_rmse": 2.5487153248094723,
+        "policy_value": 4808.997467146132,
+        "regret": 5.304355640951869,
+        "seen_price_rmse": 2.6603971439344094,
+        "unseen_price_rmse": 2.4018213633093155
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1105,
+      "slot": "slot-0015",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "127e6cd917f7b8355246ecaeb5acda9ebd6eba29697f9f7b0674350638cc5de7"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "909af3314a270711f00d1d481ac2fa7056bee16c71d2665951db4993a9edf6b6",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 8.818728589420004,
+        "mean_demand_rmse": 4.423846403936961,
+        "policy_value": 4365.247418262941,
+        "regret": 26.21487820404019,
+        "seen_price_rmse": 4.836426324397999,
+        "unseen_price_rmse": 3.8463832067925914
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1106,
+      "slot": "slot-0016",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "5e5b61d7043402a56fe57ac1529f9e488a7aea5f1bbc6bbc7956fcabe53c8034"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "909af3314a270711f00d1d481ac2fa7056bee16c71d2665951db4993a9edf6b6",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 7.657293162985015,
+        "mean_demand_rmse": 0.8204153064751439,
+        "policy_value": 4391.462296466982,
+        "regret": 0.0,
+        "seen_price_rmse": 0.822722088983733,
+        "unseen_price_rmse": 0.8175226751258265
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1106,
+      "slot": "slot-0017",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "94705eb7846da86bccf37378d3667d7f1aedef227152ce5262834863b44aec97"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "909af3314a270711f00d1d481ac2fa7056bee16c71d2665951db4993a9edf6b6",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 7.598565499108869,
+        "mean_demand_rmse": 0.9939399084270591,
+        "policy_value": 4391.010081441394,
+        "regret": 0.45221502558818827,
+        "seen_price_rmse": 1.024080065407493,
+        "unseen_price_rmse": 0.9549278732253603
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1106,
+      "slot": "slot-0018",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "94705eb7846da86bccf37378d3667d7f1aedef227152ce5262834863b44aec97"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "9b706de4abae6d2195f2bc9924dfbca6be9d397d960c446d3d06566b2a624d6a",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 12.126135632357686,
+        "mean_demand_rmse": 5.804131548970669,
+        "policy_value": 4340.168756534639,
+        "regret": 34.968759716811675,
+        "seen_price_rmse": 6.31602622222532,
+        "unseen_price_rmse": 5.092409821013541
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1107,
+      "slot": "slot-0019",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "84f96516b52bcf22f6d2942b41c3e948de83310ec0f75abeb415461491f1d934"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "9b706de4abae6d2195f2bc9924dfbca6be9d397d960c446d3d06566b2a624d6a",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.737465062699487,
+        "mean_demand_rmse": 1.434108856537142,
+        "policy_value": 4375.137516251451,
+        "regret": 0.0,
+        "seen_price_rmse": 1.4503210543651592,
+        "unseen_price_rmse": 1.4135821613820407
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1107,
+      "slot": "slot-0020",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "127c6b310ea010367474c16fac8f326fea6d9b04732b26592dac60e54d8d64c1"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "9b706de4abae6d2195f2bc9924dfbca6be9d397d960c446d3d06566b2a624d6a",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.769584798611278,
+        "mean_demand_rmse": 1.5813582104556667,
+        "policy_value": 4375.137516251451,
+        "regret": 0.0,
+        "seen_price_rmse": 1.6218620688640957,
+        "unseen_price_rmse": 1.5292204922671648
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1107,
+      "slot": "slot-0021",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "127c6b310ea010367474c16fac8f326fea6d9b04732b26592dac60e54d8d64c1"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "f4d7b5089ba31b9930fcf24ee4d5720a1f3e6ce38f7c84e10b8e6a4924558670",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 11.185209215529751,
+        "mean_demand_rmse": 5.502975084622026,
+        "policy_value": 4347.674726277068,
+        "regret": 100.95477683132543,
+        "seen_price_rmse": 6.01560356990252,
+        "unseen_price_rmse": 4.78558203060551
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1108,
+      "slot": "slot-0022",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "dcf591563b2eb119b539e35d539874f73e4bce3cec9591a510aeaa2815e63498"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "f4d7b5089ba31b9930fcf24ee4d5720a1f3e6ce38f7c84e10b8e6a4924558670",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 9.839483675543306,
+        "mean_demand_rmse": 1.3977729365194524,
+        "policy_value": 4448.629503108393,
+        "regret": 0.0,
+        "seen_price_rmse": 1.407412753076676,
+        "unseen_price_rmse": 1.3856288600290458
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1108,
+      "slot": "slot-0023",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "4dd1dd1d1ecf4b1b997f264a5a47481a0403902998aa2f5e16f72872fd378d81"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "f4d7b5089ba31b9930fcf24ee4d5720a1f3e6ce38f7c84e10b8e6a4924558670",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 9.983694415213021,
+        "mean_demand_rmse": 2.0019930657549714,
+        "policy_value": 4448.629503108393,
+        "regret": 0.0,
+        "seen_price_rmse": 1.9933374557526768,
+        "unseen_price_rmse": 2.01276023506565
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1108,
+      "slot": "slot-0024",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "4dd1dd1d1ecf4b1b997f264a5a47481a0403902998aa2f5e16f72872fd378d81"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "e899dfc4245991e8dbec9d946c110ee099a19181b3b3082cf4aa7c2917edd13f",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 8.302576114600758,
+        "mean_demand_rmse": 3.6781003228642524,
+        "policy_value": 4669.752325050142,
+        "regret": 0.0,
+        "seen_price_rmse": 4.0261797199339195,
+        "unseen_price_rmse": 3.1900306495177744
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1109,
+      "slot": "slot-0025",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "305822da938a4b3614ff545d71aafac87debac20d829fc2cb8538f996c909829"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "e899dfc4245991e8dbec9d946c110ee099a19181b3b3082cf4aa7c2917edd13f",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 7.484968080621003,
+        "mean_demand_rmse": 0.5195206105309009,
+        "policy_value": 4669.752325050142,
+        "regret": 0.0,
+        "seen_price_rmse": 0.5524982533998654,
+        "unseen_price_rmse": 0.47509035531362115
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1109,
+      "slot": "slot-0026",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "f4220b109994b7bbb4af09ce990911c66ac5a33ae0421e78bb89aac7c75533a4"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "e899dfc4245991e8dbec9d946c110ee099a19181b3b3082cf4aa7c2917edd13f",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 7.474939051627962,
+        "mean_demand_rmse": 0.5414783495610397,
+        "policy_value": 4669.752325050142,
+        "regret": 0.0,
+        "seen_price_rmse": 0.5901797045498668,
+        "unseen_price_rmse": 0.4736108130831916
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1109,
+      "slot": "slot-0027",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "f4220b109994b7bbb4af09ce990911c66ac5a33ae0421e78bb89aac7c75533a4"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "c65a013fc848c590a2afe3aa4deb599daf8ff48537c6d6e2efe4c6681bfe0508",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 11.642914518665073,
+        "mean_demand_rmse": 6.381041545640787,
+        "policy_value": 4397.43105333844,
+        "regret": 85.83588366865459,
+        "seen_price_rmse": 6.979142130233567,
+        "unseen_price_rmse": 5.5433991488692715
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1110,
+      "slot": "slot-0028",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "325282c80bb6eb35a433507707e963ee244bfbb9e126716ee788085e1f951ba9"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "c65a013fc848c590a2afe3aa4deb599daf8ff48537c6d6e2efe4c6681bfe0508",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 9.750206427405042,
+        "mean_demand_rmse": 0.3018590210726568,
+        "policy_value": 4483.266937007094,
+        "regret": 0.0,
+        "seen_price_rmse": 0.3231210540903457,
+        "unseen_price_rmse": 0.2729623323117145
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1110,
+      "slot": "slot-0029",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "6bcc7dd0c4004064d2e35a88054d59460a969e06013f8dbe676899eb80f4f8e0"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "c65a013fc848c590a2afe3aa4deb599daf8ff48537c6d6e2efe4c6681bfe0508",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 9.865931757606294,
+        "mean_demand_rmse": 0.92930953507339,
+        "policy_value": 4483.266937007094,
+        "regret": 0.0,
+        "seen_price_rmse": 0.9321739394415053,
+        "unseen_price_rmse": 0.9257165658201497
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1110,
+      "slot": "slot-0030",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "6bcc7dd0c4004064d2e35a88054d59460a969e06013f8dbe676899eb80f4f8e0"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "29bfb8275be274d796b850e588f3e8792383a8e696524cea4f04cfd255192cfc",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 8.97783304309173,
+        "mean_demand_rmse": 3.566218118941822,
+        "policy_value": 4479.27680996701,
+        "regret": 12.135334579376462,
+        "seen_price_rmse": 3.899890318465892,
+        "unseen_price_rmse": 3.099011236124376
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1111,
+      "slot": "slot-0031",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "2e5ba3707d216925511fba46ee808eea76ab3eed1f6771ba7c83abb3d27cd8f1"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "29bfb8275be274d796b850e588f3e8792383a8e696524cea4f04cfd255192cfc",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 8.314516945438674,
+        "mean_demand_rmse": 1.0816762020219868,
+        "policy_value": 4491.189018842233,
+        "regret": 0.22312570415348887,
+        "seen_price_rmse": 1.183636229480307,
+        "unseen_price_rmse": 0.9387807299224081
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1111,
+      "slot": "slot-0032",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "975a456defba7875bcccc4cc580aa4306ece3dfa54797d47b798cec4dd2b4224"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "29bfb8275be274d796b850e588f3e8792383a8e696524cea4f04cfd255192cfc",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 8.35148177641646,
+        "mean_demand_rmse": 1.283103339780799,
+        "policy_value": 4491.189018842233,
+        "regret": 0.22312570415348887,
+        "seen_price_rmse": 1.3950701665387402,
+        "unseen_price_rmse": 1.1276173749523397
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1111,
+      "slot": "slot-0033",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "975a456defba7875bcccc4cc580aa4306ece3dfa54797d47b798cec4dd2b4224"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "5d1c734050d6f3b97b420fcd9d8f57893a6dffd88cfbbb18924a16eeb0ef77b2",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 11.37294251762582,
+        "mean_demand_rmse": 4.408172335596104,
+        "policy_value": 4720.975618729588,
+        "regret": 1.5245245239429295,
+        "seen_price_rmse": 4.82008564437382,
+        "unseen_price_rmse": 3.831504990448936
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1112,
+      "slot": "slot-0034",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "9a134bbc1d26985c57b726657c8c1bf566a6823fdef8811c619c1bf10b4f01b3"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "5d1c734050d6f3b97b420fcd9d8f57893a6dffd88cfbbb18924a16eeb0ef77b2",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.59216174516854,
+        "mean_demand_rmse": 1.0833174699767134,
+        "policy_value": 4717.806970608263,
+        "regret": 4.693172645267566,
+        "seen_price_rmse": 1.1347482375512385,
+        "unseen_price_rmse": 1.015372204376616
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1112,
+      "slot": "slot-0035",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "829560b66247153a505c7f1954eeaeeda71a4d42a9fb666778e5f4285b094b39"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "5d1c734050d6f3b97b420fcd9d8f57893a6dffd88cfbbb18924a16eeb0ef77b2",
+      "family": "affine",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.612546549032643,
+        "mean_demand_rmse": 1.2288048937482403,
+        "policy_value": 4720.049939939313,
+        "regret": 2.450203314217532,
+        "seen_price_rmse": 1.2534803723579502,
+        "unseen_price_rmse": 1.197245587031279
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1112,
+      "slot": "slot-0036",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "829560b66247153a505c7f1954eeaeeda71a4d42a9fb666778e5f4285b094b39"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "eb2590f8ace6516208eabc7d2232661c81c70ccf80c744c132087e49d8fbcec8",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 13.152710658853387,
+        "mean_demand_rmse": 7.702927050627009,
+        "policy_value": 4372.364246025341,
+        "regret": 89.43662637732746,
+        "seen_price_rmse": 8.131116529882439,
+        "unseen_price_rmse": 7.131628253998076
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1101,
+      "slot": "slot-0037",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "ec997285dac1a37068917f7bc102461b0eb58a388386d8c69df2b3aab095478a"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "eb2590f8ace6516208eabc7d2232661c81c70ccf80c744c132087e49d8fbcec8",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.984402535753183,
+        "mean_demand_rmse": 4.333548350161619,
+        "policy_value": 4460.564488823508,
+        "regret": 1.2363835791610853,
+        "seen_price_rmse": 4.856418726455384,
+        "unseen_price_rmse": 3.573959900983913
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1101,
+      "slot": "slot-0038",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "90401e8825d8db0b2c76daebc98a2290cb7eab2db545c4e1928c4f2e95c3cb65"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "eb2590f8ace6516208eabc7d2232661c81c70ccf80c744c132087e49d8fbcec8",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.111630243717165,
+        "mean_demand_rmse": 1.2777132721618425,
+        "policy_value": 4457.555947125797,
+        "regret": 4.244925276872436,
+        "seen_price_rmse": 1.3834121652190396,
+        "unseen_price_rmse": 1.1317922466542327
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1101,
+      "slot": "slot-0039",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "90401e8825d8db0b2c76daebc98a2290cb7eab2db545c4e1928c4f2e95c3cb65"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "0559d30a44ddb4acd8950163af2fac59bdb0d7fb5645c9a6409bbda9c27c1cef",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 11.540652800621496,
+        "mean_demand_rmse": 5.687073323595386,
+        "policy_value": 4590.567233255413,
+        "regret": 106.59468864185993,
+        "seen_price_rmse": 6.170784828357532,
+        "unseen_price_rmse": 5.017277645848266
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1102,
+      "slot": "slot-0040",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "f78fbaad59466dfd068f61ecb4dc13b19e6299f3dca1c6bb520a42b993572d7a"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "0559d30a44ddb4acd8950163af2fac59bdb0d7fb5645c9a6409bbda9c27c1cef",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.60791173408471,
+        "mean_demand_rmse": 2.7735689891840587,
+        "policy_value": 4697.161921897274,
+        "regret": 0.0,
+        "seen_price_rmse": 2.9842099785659215,
+        "unseen_price_rmse": 2.4852876321971893
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1102,
+      "slot": "slot-0041",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "1c6954b900a638a057a5ac6e8977136404feb338795f54eca29ded6e58ff466e"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "0559d30a44ddb4acd8950163af2fac59bdb0d7fb5645c9a6409bbda9c27c1cef",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.411653006383688,
+        "mean_demand_rmse": 1.6872050814292467,
+        "policy_value": 4697.161921897274,
+        "regret": 0.0,
+        "seen_price_rmse": 1.7674690032821838,
+        "unseen_price_rmse": 1.5811558662406955
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1102,
+      "slot": "slot-0042",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "1c6954b900a638a057a5ac6e8977136404feb338795f54eca29ded6e58ff466e"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "b2b7cbff07f852045973b30800bac5be25f1ff9ae974582e1199e2799f384c86",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 11.838641117855994,
+        "mean_demand_rmse": 6.918887647204752,
+        "policy_value": 4730.570714914019,
+        "regret": 14.020666818656906,
+        "seen_price_rmse": 7.4276622955302605,
+        "unseen_price_rmse": 6.224713258246786
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1103,
+      "slot": "slot-0043",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "bba0290a6078f6166a658be7e381690185cc635ccd850f53051b032fecffdd8e"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "b2b7cbff07f852045973b30800bac5be25f1ff9ae974582e1199e2799f384c86",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.68534045342989,
+        "mean_demand_rmse": 4.424676038419577,
+        "policy_value": 4744.591381732676,
+        "regret": 0.0,
+        "seen_price_rmse": 4.7723427154208204,
+        "unseen_price_rmse": 3.9472632113126296
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1103,
+      "slot": "slot-0044",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "3cf37521b8a4154a68642412407d618a7b0547ccf3494ce6004e4631c8d8df12"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "b2b7cbff07f852045973b30800bac5be25f1ff9ae974582e1199e2799f384c86",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 9.846701304802728,
+        "mean_demand_rmse": 1.186002171924101,
+        "policy_value": 4744.591381732676,
+        "regret": 0.0,
+        "seen_price_rmse": 1.168016778733292,
+        "unseen_price_rmse": 1.2081074444420996
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1103,
+      "slot": "slot-0045",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "3cf37521b8a4154a68642412407d618a7b0547ccf3494ce6004e4631c8d8df12"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "4cce7ae890370d7e444533bd4786e8f9c8f40f41e4211d0d50c77474554b1354",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 9.979261522842322,
+        "mean_demand_rmse": 6.49568977662859,
+        "policy_value": 4487.767430830212,
+        "regret": 130.3825352746989,
+        "seen_price_rmse": 6.748985744045079,
+        "unseen_price_rmse": 6.164451074531212
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1104,
+      "slot": "slot-0046",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "15ab3ad2eff0e93c7e302822ae24e6ef05f5540e3f7342bf53703f90e68a5293"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "4cce7ae890370d7e444533bd4786e8f9c8f40f41e4211d0d50c77474554b1354",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 8.806293088045718,
+        "mean_demand_rmse": 4.435629420497907,
+        "policy_value": 4618.149966104911,
+        "regret": 0.0,
+        "seen_price_rmse": 4.838354017411996,
+        "unseen_price_rmse": 3.873787785064039
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1104,
+      "slot": "slot-0047",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "c04f418e4644213b2c7a907304e84947c37da31e4d6f230eb848e3bbe845eefd"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "4cce7ae890370d7e444533bd4786e8f9c8f40f41e4211d0d50c77474554b1354",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 7.688281967933208,
+        "mean_demand_rmse": 1.4026915252351027,
+        "policy_value": 4618.149966104911,
+        "regret": 0.0,
+        "seen_price_rmse": 1.5497616481286012,
+        "unseen_price_rmse": 1.193637906218425
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1104,
+      "slot": "slot-0048",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "c04f418e4644213b2c7a907304e84947c37da31e4d6f230eb848e3bbe845eefd"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "86e5923deb4c70bf92640526f67cf32dce3a56e35f87360e4843d2967e906d98",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 12.331563116174122,
+        "mean_demand_rmse": 6.459853720365051,
+        "policy_value": 4498.464287184019,
+        "regret": 123.99431883353891,
+        "seen_price_rmse": 6.787410287647704,
+        "unseen_price_rmse": 6.025419046263468
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1105,
+      "slot": "slot-0049",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "ab0e8510441e1bed0de50afe7858dee766a2b366e4422ea9a4b95f6959f32e43"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "86e5923deb4c70bf92640526f67cf32dce3a56e35f87360e4843d2967e906d98",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.632336321063603,
+        "mean_demand_rmse": 3.0137678572060476,
+        "policy_value": 4622.458606017558,
+        "regret": 0.0,
+        "seen_price_rmse": 3.3005126364212205,
+        "unseen_price_rmse": 2.6114293001282936
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1105,
+      "slot": "slot-0050",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "cee597b9e096a2bb325cebae1128b3ed935407c3fa92288d9a7c7dfe673fa42d"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "86e5923deb4c70bf92640526f67cf32dce3a56e35f87360e4843d2967e906d98",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.08377784979296,
+        "mean_demand_rmse": 1.1152911179064475,
+        "policy_value": 4622.458606017558,
+        "regret": 0.0,
+        "seen_price_rmse": 1.1741116113759689,
+        "unseen_price_rmse": 1.0370846300193814
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1105,
+      "slot": "slot-0051",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "cee597b9e096a2bb325cebae1128b3ed935407c3fa92288d9a7c7dfe673fa42d"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "056312411df77e7877b0bfae8ca93e6e3a9bffd8e26a79cb8beae9da20cf6bbf",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.281847357923002,
+        "mean_demand_rmse": 6.190062851183949,
+        "policy_value": 4381.005427320993,
+        "regret": 31.855189226616503,
+        "seen_price_rmse": 6.449566061613716,
+        "unseen_price_rmse": 5.849516881736277
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1106,
+      "slot": "slot-0052",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "13ed36aae6beb7f21cf37e695b5083db7051d95cbef3a88696342ad0ccd54d62"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "056312411df77e7877b0bfae8ca93e6e3a9bffd8e26a79cb8beae9da20cf6bbf",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 9.636700707850721,
+        "mean_demand_rmse": 4.878651542906754,
+        "policy_value": 4412.8606165476085,
+        "regret": 0.0,
+        "seen_price_rmse": 5.4279102892551165,
+        "unseen_price_rmse": 4.0896245962481155
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1106,
+      "slot": "slot-0053",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "3a07693e0bd7a52bf6bb73f91deec5b55c052c7c7670fe0766ec369a19cf6f9a"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "056312411df77e7877b0bfae8ca93e6e3a9bffd8e26a79cb8beae9da20cf6bbf",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 8.25899827316718,
+        "mean_demand_rmse": 1.920728410670162,
+        "policy_value": 4412.8606165476085,
+        "regret": 0.0,
+        "seen_price_rmse": 2.0510608856472152,
+        "unseen_price_rmse": 1.744170638501294
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1106,
+      "slot": "slot-0054",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "3a07693e0bd7a52bf6bb73f91deec5b55c052c7c7670fe0766ec369a19cf6f9a"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "f30d504958c9fe966a873b2a4106036eadad48b95ee98747dba9833d2f380af3",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 9.1619333735913,
+        "mean_demand_rmse": 5.765110498859554,
+        "policy_value": 4351.580299629919,
+        "regret": 38.06342609596665,
+        "seen_price_rmse": 6.0440894710479585,
+        "unseen_price_rmse": 5.396142230945686
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1107,
+      "slot": "slot-0055",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "7d1a5039b94e5da78d1f9b217575f8e8d56dfc748e16cec22de66348ced83410"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "f30d504958c9fe966a873b2a4106036eadad48b95ee98747dba9833d2f380af3",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 8.200917608934231,
+        "mean_demand_rmse": 3.8904503500873577,
+        "policy_value": 4389.643725725885,
+        "regret": 0.0,
+        "seen_price_rmse": 4.329375062486221,
+        "unseen_price_rmse": 3.259715983796202
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1107,
+      "slot": "slot-0056",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "8033b263ac78590b0940d6ab3499f80b056fcea189d6b1ea8af43ac7d185ed6e"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "f30d504958c9fe966a873b2a4106036eadad48b95ee98747dba9833d2f380af3",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 7.448105951882357,
+        "mean_demand_rmse": 1.646434583503057,
+        "policy_value": 4389.643725725885,
+        "regret": 0.0,
+        "seen_price_rmse": 1.6683505961192626,
+        "unseen_price_rmse": 1.618622329477793
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1107,
+      "slot": "slot-0057",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "8033b263ac78590b0940d6ab3499f80b056fcea189d6b1ea8af43ac7d185ed6e"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "19dcbbb0d7b3280d83d39d11e69990ae3a276586c464276fb27edecdd1d01aa4",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.902337219980167,
+        "mean_demand_rmse": 5.896087021999348,
+        "policy_value": 4424.023273735248,
+        "regret": 28.06810849903279,
+        "seen_price_rmse": 6.389493451083252,
+        "unseen_price_rmse": 5.214078219870781
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1108,
+      "slot": "slot-0058",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "464d01febdba8544211d6be8751161c25ea6c92aec42d0a8cc89808928988d8a"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "19dcbbb0d7b3280d83d39d11e69990ae3a276586c464276fb27edecdd1d01aa4",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 9.533362683533229,
+        "mean_demand_rmse": 2.6454551658817365,
+        "policy_value": 4448.948491795867,
+        "regret": 3.142890438413275,
+        "seen_price_rmse": 2.7943715200590815,
+        "unseen_price_rmse": 2.446596429308826
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1108,
+      "slot": "slot-0059",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "892624bcdcbae6845dbb2ecd5990b41d598a97668d7004f99003782b7079f3e1"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "19dcbbb0d7b3280d83d39d11e69990ae3a276586c464276fb27edecdd1d01aa4",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 9.264320720202816,
+        "mean_demand_rmse": 1.4721226189742196,
+        "policy_value": 4450.946296602613,
+        "regret": 1.1450856316671434,
+        "seen_price_rmse": 1.562800494268328,
+        "unseen_price_rmse": 1.3502386940123763
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1108,
+      "slot": "slot-0060",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "892624bcdcbae6845dbb2ecd5990b41d598a97668d7004f99003782b7079f3e1"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "783880b0ac10c0faaa649de77d295a56a1ffa59d3a8d3751b7725eac29e7b350",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 13.67571443314039,
+        "mean_demand_rmse": 8.573292732611518,
+        "policy_value": 4076.1202444281644,
+        "regret": 245.42858665328663,
+        "seen_price_rmse": 9.296212177290347,
+        "unseen_price_rmse": 7.573214810855404
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1109,
+      "slot": "slot-0061",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "b77e4f56deb5e5cc52102f3fcf26e924b04466cade6e810f2c12585131ea0e17"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "783880b0ac10c0faaa649de77d295a56a1ffa59d3a8d3751b7725eac29e7b350",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 11.242413511095394,
+        "mean_demand_rmse": 4.361310960339843,
+        "policy_value": 4321.548831081451,
+        "regret": 0.0,
+        "seen_price_rmse": 4.838483917185258,
+        "unseen_price_rmse": 3.6788132104906466
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1109,
+      "slot": "slot-0062",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "aa20a05da268fc104dba4ce3874d5f7ed25b251cb353d0a002afe2e735d43766"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "783880b0ac10c0faaa649de77d295a56a1ffa59d3a8d3751b7725eac29e7b350",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.539884289871754,
+        "mean_demand_rmse": 1.928606685452118,
+        "policy_value": 4321.548831081451,
+        "regret": 0.0,
+        "seen_price_rmse": 2.071062878109386,
+        "unseen_price_rmse": 1.734157324114639
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1109,
+      "slot": "slot-0063",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "aa20a05da268fc104dba4ce3874d5f7ed25b251cb353d0a002afe2e735d43766"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "3d5e3a889b228858544b31f9259c041098510b4da355a873a43f26226792bd68",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 13.400515295322641,
+        "mean_demand_rmse": 7.088714360205372,
+        "policy_value": 4297.087208505551,
+        "regret": 102.96332115040921,
+        "seen_price_rmse": 7.637947909358311,
+        "unseen_price_rmse": 6.335566276878527
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1110,
+      "slot": "slot-0064",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "dcf023619e8c7ca56fe38efc66b8c2e2d40500a5964634197b165db40237ab28"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "3d5e3a889b228858544b31f9259c041098510b4da355a873a43f26226792bd68",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 11.440857734610193,
+        "mean_demand_rmse": 3.067462374993121,
+        "policy_value": 4400.042249662088,
+        "regret": 0.008279993871752822,
+        "seen_price_rmse": 3.581725826425091,
+        "unseen_price_rmse": 2.2660609722370344
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1110,
+      "slot": "slot-0065",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "f6377f7b3b7ae48f30088cc981e5dbc616e537924c93b21ff1f75d5738a4ef7f"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "3d5e3a889b228858544b31f9259c041098510b4da355a873a43f26226792bd68",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.994077749005964,
+        "mean_demand_rmse": 1.3324108859703416,
+        "policy_value": 4399.811733883601,
+        "regret": 0.23879577235865668,
+        "seen_price_rmse": 1.4790945475461341,
+        "unseen_price_rmse": 1.122415422043786
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1110,
+      "slot": "slot-0066",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "f6377f7b3b7ae48f30088cc981e5dbc616e537924c93b21ff1f75d5738a4ef7f"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "8784486ea5b566ec8417f2f650bed4c521ff6feab78787cc2ea73e77e56805ae",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 9.96137095009602,
+        "mean_demand_rmse": 5.49604794424608,
+        "policy_value": 4764.396059943331,
+        "regret": 10.811944370413045,
+        "seen_price_rmse": 5.818776169870744,
+        "unseen_price_rmse": 5.063795673054598
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1111,
+      "slot": "slot-0067",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "eac0370c51dc4c78a43afc5ad6cb9e4ba4cd61dddd7e8f42e18e250af4a96364"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "8784486ea5b566ec8417f2f650bed4c521ff6feab78787cc2ea73e77e56805ae",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 8.884426571660436,
+        "mean_demand_rmse": 3.170077142146796,
+        "policy_value": 4769.9289529577545,
+        "regret": 5.279051355990049,
+        "seen_price_rmse": 3.44967493345167,
+        "unseen_price_rmse": 2.781331338227723
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1111,
+      "slot": "slot-0068",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "1cfbf552b8a74b7b07ec2a044d70191a56e1849bdcf3cbee9bc9c5c4aa07b8d6"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "8784486ea5b566ec8417f2f650bed4c521ff6feab78787cc2ea73e77e56805ae",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 8.539839605153515,
+        "mean_demand_rmse": 1.5055808115863296,
+        "policy_value": 4774.686715267217,
+        "regret": 0.5212890465276985,
+        "seen_price_rmse": 1.541655186577984,
+        "unseen_price_rmse": 1.4592342726956635
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1111,
+      "slot": "slot-0069",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "1cfbf552b8a74b7b07ec2a044d70191a56e1849bdcf3cbee9bc9c5c4aa07b8d6"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "a3c8b62ba2251a1dbd00730c546878c2e6196ee6bc0276cc6bcc7201ffed3cbd",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 14.087816131114206,
+        "mean_demand_rmse": 8.332365646002296,
+        "policy_value": 4339.3665893202015,
+        "regret": 52.70663408197245,
+        "seen_price_rmse": 9.107274666089216,
+        "unseen_price_rmse": 7.2481479722436895
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1112,
+      "slot": "slot-0070",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "b160dc6e32fbb10db887d7692b5161fe50bfcfc88c77d00c843f2323b1a638f2"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "a3c8b62ba2251a1dbd00730c546878c2e6196ee6bc0276cc6bcc7201ffed3cbd",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 11.98913513319097,
+        "mean_demand_rmse": 4.219855055445769,
+        "policy_value": 4391.60023000253,
+        "regret": 0.4729933996438689,
+        "seen_price_rmse": 4.70035111201164,
+        "unseen_price_rmse": 3.5283879931136966
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1112,
+      "slot": "slot-0071",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "35b789ce6d7338d5dcb555ed60ead02775addc7eaba3be0a8bcd25d06fd288c6"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "a3c8b62ba2251a1dbd00730c546878c2e6196ee6bc0276cc6bcc7201ffed3cbd",
+      "family": "quadratic",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 11.343932225741698,
+        "mean_demand_rmse": 1.9358834628879074,
+        "policy_value": 4381.410958122345,
+        "regret": 10.662265279828645,
+        "seen_price_rmse": 2.0999454574385967,
+        "unseen_price_rmse": 1.708796975642579
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1112,
+      "slot": "slot-0072",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "35b789ce6d7338d5dcb555ed60ead02775addc7eaba3be0a8bcd25d06fd288c6"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "61ca138244d611743f0d8d8e364da4bc2ca7a9b951c1e2ee63bfb3c2247e24c0",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 12.104007173049375,
+        "mean_demand_rmse": 6.693595810650811,
+        "policy_value": 4585.219898780335,
+        "regret": 110.29201036529206,
+        "seen_price_rmse": 7.329761661142218,
+        "unseen_price_rmse": 5.801098901102858
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1101,
+      "slot": "slot-0073",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "8394459771fe0213fae9d77bfa5b8e2c24fc462f9d9dd4fdc1024f030307fcad"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "61ca138244d611743f0d8d8e364da4bc2ca7a9b951c1e2ee63bfb3c2247e24c0",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.615627219676176,
+        "mean_demand_rmse": 3.062492131521219,
+        "policy_value": 4681.442417507975,
+        "regret": 14.069491637652348,
+        "seen_price_rmse": 3.3480740353227585,
+        "unseen_price_rmse": 2.6627863118664026
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1101,
+      "slot": "slot-0074",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "923a6fbadcfcb829863e3262ef606489dcdd4b4e9bc70650e66b60b48daa27d1"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "61ca138244d611743f0d8d8e364da4bc2ca7a9b951c1e2ee63bfb3c2247e24c0",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.399831323431917,
+        "mean_demand_rmse": 2.1197509605324565,
+        "policy_value": 4691.972004196592,
+        "regret": 3.539904949035048,
+        "seen_price_rmse": 2.251681469796179,
+        "unseen_price_rmse": 1.9422763709747284
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1101,
+      "slot": "slot-0075",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "923a6fbadcfcb829863e3262ef606489dcdd4b4e9bc70650e66b60b48daa27d1"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "b3332b5be819cdbf6737c6da70601096d267de4d5afb6bd17090a28e93ffae5c",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 7.803412257651211,
+        "mean_demand_rmse": 4.543495572639396,
+        "policy_value": 4737.036314260919,
+        "regret": 94.17732101904264,
+        "seen_price_rmse": 4.971669309883148,
+        "unseen_price_rmse": 3.943434085070215
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1102,
+      "slot": "slot-0076",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "16fba01f8100fde922cdf14147144d5a334190600f850e22caa9b73e7d850cba"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "b3332b5be819cdbf6737c6da70601096d267de4d5afb6bd17090a28e93ffae5c",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 6.92537599261659,
+        "mean_demand_rmse": 2.9046461716925034,
+        "policy_value": 4805.710771998249,
+        "regret": 25.50286328171333,
+        "seen_price_rmse": 3.1476142368833573,
+        "unseen_price_rmse": 2.568820134001076
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1102,
+      "slot": "slot-0077",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "a7d7b49bb8e5723491485ad5a528534fd0bfc644827708b1583777524399f2c4"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "b3332b5be819cdbf6737c6da70601096d267de4d5afb6bd17090a28e93ffae5c",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 6.364259769224663,
+        "mean_demand_rmse": 1.1007883466397277,
+        "policy_value": 4831.158160265888,
+        "regret": 0.055475014074474416,
+        "seen_price_rmse": 1.1206789651624733,
+        "unseen_price_rmse": 1.0754078461323715
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1102,
+      "slot": "slot-0078",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "a7d7b49bb8e5723491485ad5a528534fd0bfc644827708b1583777524399f2c4"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "b49da6e6d74aeda306d08122221d4c1ceeb7ab04b33202086bf55f5485e0caa0",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 11.73579151159875,
+        "mean_demand_rmse": 6.249362228635442,
+        "policy_value": 4787.465393384726,
+        "regret": 59.59880556520616,
+        "seen_price_rmse": 6.821807198261841,
+        "unseen_price_rmse": 5.4498964928467375
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1103,
+      "slot": "slot-0079",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "0859ae6e534c5c69225b79a02ef785ac382043f1cc98d0062ada32e05606bc1b"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "b49da6e6d74aeda306d08122221d4c1ceeb7ab04b33202086bf55f5485e0caa0",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.665852861852214,
+        "mean_demand_rmse": 3.7119501634656804,
+        "policy_value": 4814.379575879835,
+        "regret": 32.684623070096364,
+        "seen_price_rmse": 4.02117946456139,
+        "unseen_price_rmse": 3.2847277175370597
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1103,
+      "slot": "slot-0080",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "6e22e149079e0f8380a4bee3bb03e40984b250cb0a57502e185416621606e2fd"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "b49da6e6d74aeda306d08122221d4c1ceeb7ab04b33202086bf55f5485e0caa0",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.851963962635299,
+        "mean_demand_rmse": 2.87298532853913,
+        "policy_value": 4842.5706250493295,
+        "regret": 4.493573900601859,
+        "seen_price_rmse": 2.8763756754188834,
+        "unseen_price_rmse": 2.8687417603935117
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1103,
+      "slot": "slot-0081",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "6e22e149079e0f8380a4bee3bb03e40984b250cb0a57502e185416621606e2fd"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "efccb1b0aefc1dcdb3fb5307535bf3630ce4dc64d0f4ea375eadc097ab1dceb2",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 13.18876036482568,
+        "mean_demand_rmse": 6.5565340603160065,
+        "policy_value": 4295.218566151582,
+        "regret": 157.37339585726184,
+        "seen_price_rmse": 7.172834263878207,
+        "unseen_price_rmse": 5.693098740392374
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1104,
+      "slot": "slot-0082",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "006fea9b825fbcab68ca29655c26c95a5d8a81edf3e464b9bed75809539399ff"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "efccb1b0aefc1dcdb3fb5307535bf3630ce4dc64d0f4ea375eadc097ab1dceb2",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 12.031049947297284,
+        "mean_demand_rmse": 3.0586415915551637,
+        "policy_value": 4420.083783453657,
+        "regret": 32.50817855518679,
+        "seen_price_rmse": 3.3207407573584944,
+        "unseen_price_rmse": 2.6954127505082877
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1104,
+      "slot": "slot-0083",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "53861bb5b7ec5e201ae136cdfa2f1323db2182667c8010f12cd07338f4a98473"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "efccb1b0aefc1dcdb3fb5307535bf3630ce4dc64d0f4ea375eadc097ab1dceb2",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 11.849296970150245,
+        "mean_demand_rmse": 2.1293286208762856,
+        "policy_value": 4451.099836294891,
+        "regret": 1.4921257139525608,
+        "seen_price_rmse": 2.1615961332798386,
+        "unseen_price_rmse": 2.0882932124162057
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1104,
+      "slot": "slot-0084",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "53861bb5b7ec5e201ae136cdfa2f1323db2182667c8010f12cd07338f4a98473"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "41e7c29db2949209fc3f03cf3a18d28fc930903301a283d36ee9e7a7f03b0f16",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 12.540054079487359,
+        "mean_demand_rmse": 6.047525073582645,
+        "policy_value": 4791.119898414637,
+        "regret": 56.45797077789834,
+        "seen_price_rmse": 6.61368651011704,
+        "unseen_price_rmse": 5.254730948630397
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1105,
+      "slot": "slot-0085",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "c009f491deddfaab6e447f5a3c087c148c9218e6031634d97127efe5ef166789"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "41e7c29db2949209fc3f03cf3a18d28fc930903301a283d36ee9e7a7f03b0f16",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 11.39394942903319,
+        "mean_demand_rmse": 3.08316377734734,
+        "policy_value": 4826.496499389069,
+        "regret": 21.081369803466004,
+        "seen_price_rmse": 3.3667389739680247,
+        "unseen_price_rmse": 2.686932884691397
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1105,
+      "slot": "slot-0086",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "94019e7c6e053b8a09cbe7e07a239224b9fd0773cf777506509c42fb438c67f9"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "41e7c29db2949209fc3f03cf3a18d28fc930903301a283d36ee9e7a7f03b0f16",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 11.182359114085648,
+        "mean_demand_rmse": 2.2737123554390317,
+        "policy_value": 4845.628005424624,
+        "regret": 1.9498637679111823,
+        "seen_price_rmse": 2.4534713823482748,
+        "unseen_price_rmse": 2.0267154312751465
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1105,
+      "slot": "slot-0087",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "94019e7c6e053b8a09cbe7e07a239224b9fd0773cf777506509c42fb438c67f9"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "f249c137717a3a4d01fdb674fda9372c643a90d034602afde5123cd46f102866",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 8.868805862076544,
+        "mean_demand_rmse": 5.624993239856634,
+        "policy_value": 4390.404031702993,
+        "regret": 43.485347627680746,
+        "seen_price_rmse": 6.161305761910723,
+        "unseen_price_rmse": 4.872281218205804
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1106,
+      "slot": "slot-0088",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "ffdac2dfee41383ac7a350720f7bfa4a0561de9e98bc79a342aa168f4f2b93b8"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "f249c137717a3a4d01fdb674fda9372c643a90d034602afde5123cd46f102866",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 7.497889862733635,
+        "mean_demand_rmse": 3.256426754634278,
+        "policy_value": 4414.717541562637,
+        "regret": 19.17183776803718,
+        "seen_price_rmse": 3.5592291858205662,
+        "unseen_price_rmse": 2.8327669727978315
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1106,
+      "slot": "slot-0089",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "120b2103791684448bbf47af5ae9ea3a79c19fc2add2a4006e258857d16ed5a7"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "f249c137717a3a4d01fdb674fda9372c643a90d034602afde5123cd46f102866",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 7.039174615862846,
+        "mean_demand_rmse": 1.5916553260984574,
+        "policy_value": 4431.383929934584,
+        "regret": 2.505449396090171,
+        "seen_price_rmse": 1.6936595387141042,
+        "unseen_price_rmse": 1.4541223236450842
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1106,
+      "slot": "slot-0090",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "120b2103791684448bbf47af5ae9ea3a79c19fc2add2a4006e258857d16ed5a7"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "88607250590cc5bdcbb519e48d9348b515cf2ed994fe7119fb4bd69e60191277",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 13.042968568699985,
+        "mean_demand_rmse": 7.170945856790664,
+        "policy_value": 4405.119577631535,
+        "regret": 151.80734351511052,
+        "seen_price_rmse": 7.85326069873201,
+        "unseen_price_rmse": 6.213567057616035
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1107,
+      "slot": "slot-0091",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "91ff809491c28fe5b1211f901de7e29e890eb75193df8b329b7efc99c92e6d9a"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "88607250590cc5bdcbb519e48d9348b515cf2ed994fe7119fb4bd69e60191277",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 11.076144113197683,
+        "mean_demand_rmse": 2.5113671880669997,
+        "policy_value": 4544.689618736696,
+        "regret": 12.237302409950416,
+        "seen_price_rmse": 2.746229475707248,
+        "unseen_price_rmse": 2.1825332021231323
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1107,
+      "slot": "slot-0092",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "7dba6f963bdde16a6ec9ae1406dcd42060a88549faebc562f3a8a35083181399"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "88607250590cc5bdcbb519e48d9348b515cf2ed994fe7119fb4bd69e60191277",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.861910030309271,
+        "mean_demand_rmse": 0.7830065939124671,
+        "policy_value": 4556.788946425544,
+        "regret": 0.1379747211022675,
+        "seen_price_rmse": 0.8441269378093363,
+        "unseen_price_rmse": 0.6991320510670341
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1107,
+      "slot": "slot-0093",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "7dba6f963bdde16a6ec9ae1406dcd42060a88549faebc562f3a8a35083181399"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "d53845c5f90348b3588eca101fc95eb7db6b68a4eeac32af7ae8f12eac842c3b",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 12.431423025612233,
+        "mean_demand_rmse": 6.2385992399202355,
+        "policy_value": 4432.951185120962,
+        "regret": 79.858046004448,
+        "seen_price_rmse": 6.827370194731536,
+        "unseen_price_rmse": 5.413320732403019
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1108,
+      "slot": "slot-0094",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "a760e6b6a08522e1f5c70875804847958dbfda233013445d3c5e93960595e73d"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "d53845c5f90348b3588eca101fc95eb7db6b68a4eeac32af7ae8f12eac842c3b",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.991096463018655,
+        "mean_demand_rmse": 2.3063685055314287,
+        "policy_value": 4503.5094475025135,
+        "regret": 9.299783622896001,
+        "seen_price_rmse": 2.5018721890975097,
+        "unseen_price_rmse": 2.0357553203214063
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1108,
+      "slot": "slot-0095",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "737f4dbf9e7875b38442674c4fdf449cf39e9be62b6149f822aa71958c5840b9"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "d53845c5f90348b3588eca101fc95eb7db6b68a4eeac32af7ae8f12eac842c3b",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.852420675113342,
+        "mean_demand_rmse": 1.3938405935075318,
+        "policy_value": 4512.270988618938,
+        "regret": 0.5382425064717467,
+        "seen_price_rmse": 1.4577493336694929,
+        "unseen_price_rmse": 1.3095761529895467
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1108,
+      "slot": "slot-0096",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "737f4dbf9e7875b38442674c4fdf449cf39e9be62b6149f822aa71958c5840b9"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "74489f058576ce3ae916c62163b48bf23ece74bf5ceb2b905e0368ac22421a90",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 13.006632243931366,
+        "mean_demand_rmse": 7.718495661128699,
+        "policy_value": 4479.810333960182,
+        "regret": 141.69072836719099,
+        "seen_price_rmse": 8.441180320440496,
+        "unseen_price_rmse": 6.70650712790949
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1109,
+      "slot": "slot-0097",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "80d99d19c4bbcaccf169c0f0edbe5b1cb9668a4512bb35e753e34f1ef8a75491"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "74489f058576ce3ae916c62163b48bf23ece74bf5ceb2b905e0368ac22421a90",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 11.07884345600408,
+        "mean_demand_rmse": 2.8732974465926526,
+        "policy_value": 4602.132905851214,
+        "regret": 19.36815647615981,
+        "seen_price_rmse": 3.139335466299442,
+        "unseen_price_rmse": 2.5012700823549148
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1109,
+      "slot": "slot-0098",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "af8a9e706f9b8ebb0ed78a057efd8d214ea61240f99830c14bae8db6f81202c6"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "74489f058576ce3ae916c62163b48bf23ece74bf5ceb2b905e0368ac22421a90",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.721248093631244,
+        "mean_demand_rmse": 1.6352239823233325,
+        "policy_value": 4619.485344946935,
+        "regret": 2.015717380438474,
+        "seen_price_rmse": 1.715824292065574,
+        "unseen_price_rmse": 1.528508443309749
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1109,
+      "slot": "slot-0099",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "af8a9e706f9b8ebb0ed78a057efd8d214ea61240f99830c14bae8db6f81202c6"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "81c5d4673afd2c20d6bdd725f88c44e80489e2ef5807ebc3270b466e80e5f8ea",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 11.472202915523097,
+        "mean_demand_rmse": 6.4264379002665795,
+        "policy_value": 4335.347078243947,
+        "regret": 142.6521077140044,
+        "seen_price_rmse": 7.003339773233725,
+        "unseen_price_rmse": 5.622679451939652
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1110,
+      "slot": "slot-0100",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "c0d1b00299842f56b1993f6dd578c2d7b2322edc79f16d10a1f4302be0303dec"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "81c5d4673afd2c20d6bdd725f88c44e80489e2ef5807ebc3270b466e80e5f8ea",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 9.968864392981581,
+        "mean_demand_rmse": 2.71000242172362,
+        "policy_value": 4477.944152683142,
+        "regret": 0.055033274808735655,
+        "seen_price_rmse": 2.86824985177405,
+        "unseen_price_rmse": 2.4981359085687096
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1110,
+      "slot": "slot-0101",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "5368916878d97dddb407e7718d4becec1b9c0d2f3ac4253064daf13a6d3487b5"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "81c5d4673afd2c20d6bdd725f88c44e80489e2ef5807ebc3270b466e80e5f8ea",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 9.75180091716657,
+        "mean_demand_rmse": 1.6451006408710265,
+        "policy_value": 4471.414964952759,
+        "regret": 6.584221005192774,
+        "seen_price_rmse": 1.7621272375119947,
+        "unseen_price_rmse": 1.4859124352935542
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1110,
+      "slot": "slot-0102",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "5368916878d97dddb407e7718d4becec1b9c0d2f3ac4253064daf13a6d3487b5"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "0827b2da00335fc3f67722717c5a1263aa9282b574f0f876cb3f19020dea418f",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 12.421928601417502,
+        "mean_demand_rmse": 6.682901671805573,
+        "policy_value": 4471.083593074466,
+        "regret": 88.25539959120346,
+        "seen_price_rmse": 7.30165964816453,
+        "unseen_price_rmse": 5.817632781188251
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1111,
+      "slot": "slot-0103",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "2f47ef2e5b38a570f4a3aa76130ab4715bd4628cd2ac118027af8960293bb7e7"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "0827b2da00335fc3f67722717c5a1263aa9282b574f0f876cb3f19020dea418f",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.848538848563857,
+        "mean_demand_rmse": 2.970746343718332,
+        "policy_value": 4542.590555994743,
+        "regret": 16.748436670926253,
+        "seen_price_rmse": 3.24620728437342,
+        "unseen_price_rmse": 2.585473645333059
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1111,
+      "slot": "slot-0104",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "5cb8973a4325359f6a19e3d2338c3121267fe6a077a4d51d5cc41232c231c6e0"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "0827b2da00335fc3f67722717c5a1263aa9282b574f0f876cb3f19020dea418f",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.582613413346241,
+        "mean_demand_rmse": 2.0648704762973056,
+        "policy_value": 4555.235582802774,
+        "regret": 4.103409862895532,
+        "seen_price_rmse": 2.151474067230858,
+        "unseen_price_rmse": 1.9512180455502597
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1111,
+      "slot": "slot-0105",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "5cb8973a4325359f6a19e3d2338c3121267fe6a077a4d51d5cc41232c231c6e0"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "85521c516987182b3a5d876402494730443141c7de68ec53e4cbdcfd279b24c8",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 12.579529432583165,
+        "mean_demand_rmse": 6.605839516373282,
+        "policy_value": 4631.703773492742,
+        "regret": 133.9488048448257,
+        "seen_price_rmse": 7.214982556452213,
+        "unseen_price_rmse": 5.754436875037395
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1112,
+      "slot": "slot-0106",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "9d4ddb15fae6a02c9e224cbfde6178f383e562e7676a4a4cf0c816318f83a8c3"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "85521c516987182b3a5d876402494730443141c7de68ec53e4cbdcfd279b24c8",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 11.095203607220217,
+        "mean_demand_rmse": 2.9684322034354924,
+        "policy_value": 4732.983621772931,
+        "regret": 32.6689565646368,
+        "seen_price_rmse": 3.2325964819844204,
+        "unseen_price_rmse": 2.6007646779767377
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1112,
+      "slot": "slot-0107",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "ad91c3e39dd53e6b2caee4796117fd0394a9557eef06bcf8da977abaa1a43cdd"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "85521c516987182b3a5d876402494730443141c7de68ec53e4cbdcfd279b24c8",
+      "family": "interaction",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 11.011217621712136,
+        "mean_demand_rmse": 2.532879773879008,
+        "policy_value": 4762.149153600818,
+        "regret": 3.50342473674948,
+        "seen_price_rmse": 2.7828388757642406,
+        "unseen_price_rmse": 2.180502149620843
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1112,
+      "slot": "slot-0108",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "ad91c3e39dd53e6b2caee4796117fd0394a9557eef06bcf8da977abaa1a43cdd"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "4243fda81b5b4474ab5ed414543f5c62811c1ee24306b25ff19e6e9de2c710a0",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 9.427908974980145,
+        "mean_demand_rmse": 5.838756392660313,
+        "policy_value": 4367.753671649115,
+        "regret": 0.0,
+        "seen_price_rmse": 6.395869819210252,
+        "unseen_price_rmse": 5.056775953956784
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1101,
+      "slot": "slot-0109",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "bd33ebaf1f66873e70950260a1a5f7fa5e356f177c143422fd2c26fedd2e8864"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "4243fda81b5b4474ab5ed414543f5c62811c1ee24306b25ff19e6e9de2c710a0",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 7.733629876390303,
+        "mean_demand_rmse": 2.2665481110185515,
+        "policy_value": 4359.416923796412,
+        "regret": 8.336747852702402,
+        "seen_price_rmse": 2.4917898703424814,
+        "unseen_price_rmse": 1.948722611504064
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1101,
+      "slot": "slot-0110",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "bf428094fc84462889f47ca39887727344e6ce4f2c2f47047ca60675837a8763"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "4243fda81b5b4474ab5ed414543f5c62811c1ee24306b25ff19e6e9de2c710a0",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 7.4909904399266765,
+        "mean_demand_rmse": 1.1177973713580618,
+        "policy_value": 4367.753671649115,
+        "regret": 0.0,
+        "seen_price_rmse": 1.2001130409093912,
+        "unseen_price_rmse": 1.0054703023872715
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1101,
+      "slot": "slot-0111",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "bf428094fc84462889f47ca39887727344e6ce4f2c2f47047ca60675837a8763"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "9763eb899ce3f88f6596c505491eb053d7a2d70251f9ef7f59c5f0e0aa6df284",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 11.59604051622816,
+        "mean_demand_rmse": 6.551609277317336,
+        "policy_value": 4648.539350824012,
+        "regret": 112.9952660021909,
+        "seen_price_rmse": 7.163384426570813,
+        "unseen_price_rmse": 5.695214545771938
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1102,
+      "slot": "slot-0112",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "9270de4eacee39dcb39fce6c6e17d9731f712e70197b3782b7f0738dc640025f"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "9763eb899ce3f88f6596c505491eb053d7a2d70251f9ef7f59c5f0e0aa6df284",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.035359850367966,
+        "mean_demand_rmse": 3.7465501215609986,
+        "policy_value": 4761.534616826203,
+        "regret": 0.0,
+        "seen_price_rmse": 4.112171466206937,
+        "unseen_price_rmse": 3.231871341919648
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1102,
+      "slot": "slot-0113",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "49ab9a2c52079bab0f4ededf00915198990eea46706b6fc6737ee469efd2351a"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "9763eb899ce3f88f6596c505491eb053d7a2d70251f9ef7f59c5f0e0aa6df284",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 9.441200832079499,
+        "mean_demand_rmse": 2.194388797991151,
+        "policy_value": 4761.534616826203,
+        "regret": 0.0,
+        "seen_price_rmse": 2.30178588700301,
+        "unseen_price_rmse": 2.052254152310957
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1102,
+      "slot": "slot-0114",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "49ab9a2c52079bab0f4ededf00915198990eea46706b6fc6737ee469efd2351a"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "8ab5bf1a37ef1a72916375014340445b67746b0ebe819914f35552408edfa151",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 11.582121337212572,
+        "mean_demand_rmse": 5.486955269307695,
+        "policy_value": 4692.077004056127,
+        "regret": 101.42052476263527,
+        "seen_price_rmse": 5.851836279802232,
+        "unseen_price_rmse": 4.993499872794711
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1103,
+      "slot": "slot-0115",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "9a44ae62c5881207e5cc467f58223db74489afecb372b34c5c330d30a3989654"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "8ab5bf1a37ef1a72916375014340445b67746b0ebe819914f35552408edfa151",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.471946440351982,
+        "mean_demand_rmse": 3.1466978749470407,
+        "policy_value": 4793.497528818763,
+        "regret": 0.0,
+        "seen_price_rmse": 3.424262471763134,
+        "unseen_price_rmse": 2.760774360036471
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1103,
+      "slot": "slot-0116",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "2e0a0b1fab0d3f8769b2f0f053e970c790a09ac91c05ca70dd3be98ed884f5ae"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "8ab5bf1a37ef1a72916375014340445b67746b0ebe819914f35552408edfa151",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.134852827246357,
+        "mean_demand_rmse": 1.8814719901327974,
+        "policy_value": 4793.497528818763,
+        "regret": 0.0,
+        "seen_price_rmse": 2.0574054485861266,
+        "unseen_price_rmse": 1.6351487506897517
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1103,
+      "slot": "slot-0117",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "2e0a0b1fab0d3f8769b2f0f053e970c790a09ac91c05ca70dd3be98ed884f5ae"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "e844b63df87c120e1d5ba01e3e7c6af5e95d4b3b043dac13e6deae80f952f053",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.562942108666581,
+        "mean_demand_rmse": 5.199351090555704,
+        "policy_value": 4430.508048287759,
+        "regret": 69.27405585646201,
+        "seen_price_rmse": 5.585186139814248,
+        "unseen_price_rmse": 4.672465751182645
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1104,
+      "slot": "slot-0118",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "b8f91e615c4bf0599f1abc235230a40a4df23e6295c9c83b3cbdcfc997c2b83e"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "e844b63df87c120e1d5ba01e3e7c6af5e95d4b3b043dac13e6deae80f952f053",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 9.502488123951384,
+        "mean_demand_rmse": 2.588623305369447,
+        "policy_value": 4463.136652432943,
+        "regret": 36.64545171127851,
+        "seen_price_rmse": 2.887789252121783,
+        "unseen_price_rmse": 2.1570872566128463
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1104,
+      "slot": "slot-0119",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "01c37b887aad76f84bd8bcdd57e38d02be352901bba277cab91e236a76d117a5"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "e844b63df87c120e1d5ba01e3e7c6af5e95d4b3b043dac13e6deae80f952f053",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 9.302641975583686,
+        "mean_demand_rmse": 2.0210477160966254,
+        "policy_value": 4463.136652432943,
+        "regret": 36.64545171127851,
+        "seen_price_rmse": 2.1395266573843847,
+        "unseen_price_rmse": 1.8623797443299845
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1104,
+      "slot": "slot-0120",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "01c37b887aad76f84bd8bcdd57e38d02be352901bba277cab91e236a76d117a5"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "69566efadf2ab14c9f6f4a8c90cee720c038e2f1678a1a35d051c506de09e40d",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.01630216070046,
+        "mean_demand_rmse": 5.327617358263054,
+        "policy_value": 4621.3049821020095,
+        "regret": 90.91358687416073,
+        "seen_price_rmse": 5.697603941551795,
+        "unseen_price_rmse": 4.825404311315776
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1105,
+      "slot": "slot-0121",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "7d7f156106171738f8bd5ab8f26dcb65fbe4090a72ccc81ccc8b663afd2fff02"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "69566efadf2ab14c9f6f4a8c90cee720c038e2f1678a1a35d051c506de09e40d",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 8.874051570072472,
+        "mean_demand_rmse": 3.095995125214139,
+        "policy_value": 4660.507094239283,
+        "regret": 51.71147473688626,
+        "seen_price_rmse": 3.5385790591629993,
+        "unseen_price_rmse": 2.4320240309469052
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1105,
+      "slot": "slot-0122",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "8fba829366dfe3cd86450f24013e6a0a4929dfd482ecaf30ce993a0899d81c25"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "69566efadf2ab14c9f6f4a8c90cee720c038e2f1678a1a35d051c506de09e40d",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 8.59042151294113,
+        "mean_demand_rmse": 2.2085783220947284,
+        "policy_value": 4671.543268765457,
+        "regret": 40.67530021071289,
+        "seen_price_rmse": 2.342146407568226,
+        "unseen_price_rmse": 2.02929266439178
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1105,
+      "slot": "slot-0123",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "8fba829366dfe3cd86450f24013e6a0a4929dfd482ecaf30ce993a0899d81c25"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "8f6d0ddc740578a5444eb7adb1b626edf047ca20e10ac991e4536abfee1b8c97",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 11.356691729237433,
+        "mean_demand_rmse": 6.270167746000075,
+        "policy_value": 4475.668911496742,
+        "regret": 0.0,
+        "seen_price_rmse": 6.933697284518507,
+        "unseen_price_rmse": 5.325745062902476
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1106,
+      "slot": "slot-0124",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "5fddf462c0fffc725b4672083b47c09af13d1e4503a11b8a446ede2163d4382c"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "8f6d0ddc740578a5444eb7adb1b626edf047ca20e10ac991e4536abfee1b8c97",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 9.934227404050075,
+        "mean_demand_rmse": 3.196722557829747,
+        "policy_value": 4475.668911496742,
+        "regret": 0.0,
+        "seen_price_rmse": 3.6783150826204545,
+        "unseen_price_rmse": 2.4658318459737094
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1106,
+      "slot": "slot-0125",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "d6723fe43a389dfd24f8c40db3b3235821afb3b36aa583cb23c13387297601a4"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "8f6d0ddc740578a5444eb7adb1b626edf047ca20e10ac991e4536abfee1b8c97",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 9.424473357786246,
+        "mean_demand_rmse": 2.557441351433985,
+        "policy_value": 4475.668911496742,
+        "regret": 0.0,
+        "seen_price_rmse": 2.4701159002621424,
+        "unseen_price_rmse": 2.6625736417318633
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1106,
+      "slot": "slot-0126",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "d6723fe43a389dfd24f8c40db3b3235821afb3b36aa583cb23c13387297601a4"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "700b6d1be61341f30c670bf5337d5ea739333dc396f128af5cc10804f84addec",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 11.893447144583336,
+        "mean_demand_rmse": 5.947650227334664,
+        "policy_value": 4530.128544975578,
+        "regret": 110.68074638090911,
+        "seen_price_rmse": 6.463536108087643,
+        "unseen_price_rmse": 5.231739527577395
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1107,
+      "slot": "slot-0127",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "d85ec0c24d0ec9ecc5c5288f0457a6f884dc7ccfbf95935de00363a932af4208"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "700b6d1be61341f30c670bf5337d5ea739333dc396f128af5cc10804f84addec",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.756807156972428,
+        "mean_demand_rmse": 3.083672875560196,
+        "policy_value": 4640.809291356487,
+        "regret": 0.0,
+        "seen_price_rmse": 3.3748749586531805,
+        "unseen_price_rmse": 2.6754644782948267
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1107,
+      "slot": "slot-0128",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "fa5ae17abe4b88b096071db545102f46490c4a50529fb9387e18520c7edeb34a"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "700b6d1be61341f30c670bf5337d5ea739333dc396f128af5cc10804f84addec",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.575528742110457,
+        "mean_demand_rmse": 1.6418533436327998,
+        "policy_value": 4640.809291356487,
+        "regret": 0.0,
+        "seen_price_rmse": 1.768869530389407,
+        "unseen_price_rmse": 1.4677060792511925
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1107,
+      "slot": "slot-0129",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "fa5ae17abe4b88b096071db545102f46490c4a50529fb9387e18520c7edeb34a"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "266acbd278d547e10243bcdb944b5eb6da07e34dc9637b9d915e7196f9c47d1a",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 11.922252183819262,
+        "mean_demand_rmse": 6.110399043360749,
+        "policy_value": 4422.94395284176,
+        "regret": 184.34456174579518,
+        "seen_price_rmse": 6.747500080141365,
+        "unseen_price_rmse": 5.205501934597587
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1108,
+      "slot": "slot-0130",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "bf7d180e7331cd26b22e55b37fbb0f776160a3f8bf9be5256b59daf98ec11196"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "266acbd278d547e10243bcdb944b5eb6da07e34dc9637b9d915e7196f9c47d1a",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.509626151991013,
+        "mean_demand_rmse": 2.459512261050747,
+        "policy_value": 4581.924568234292,
+        "regret": 25.363946353263003,
+        "seen_price_rmse": 2.843933669016704,
+        "unseen_price_rmse": 1.87102989630688
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1108,
+      "slot": "slot-0131",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "8ce3938a6cc70b35dbf8ab408a453c155e78b9decbc8a2f18e9964291c330161"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "266acbd278d547e10243bcdb944b5eb6da07e34dc9637b9d915e7196f9c47d1a",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.398558682558532,
+        "mean_demand_rmse": 2.3514867652542093,
+        "policy_value": 4581.924568234292,
+        "regret": 25.363946353263003,
+        "seen_price_rmse": 2.5440695571732297,
+        "unseen_price_rmse": 2.085902712605107
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1108,
+      "slot": "slot-0132",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "8ce3938a6cc70b35dbf8ab408a453c155e78b9decbc8a2f18e9964291c330161"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "814889f07117b42da4f8e3fd717c477328d3503f9bedd57a25f8cc320e82ce47",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 13.12139547337924,
+        "mean_demand_rmse": 6.625831733557332,
+        "policy_value": 4336.020266230737,
+        "regret": 102.19381348952928,
+        "seen_price_rmse": 7.164603378624048,
+        "unseen_price_rmse": 5.883389915426789
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1109,
+      "slot": "slot-0133",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "c71b6a03c42fb5df3a3701114ba6fe0c9d4d85934087a55d17bcb8b62d5b2a5d"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "814889f07117b42da4f8e3fd717c477328d3503f9bedd57a25f8cc320e82ce47",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 12.006754814376007,
+        "mean_demand_rmse": 3.20749941606981,
+        "policy_value": 4438.214079720266,
+        "regret": 0.0,
+        "seen_price_rmse": 3.522006789204909,
+        "unseen_price_rmse": 2.764498752973411
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1109,
+      "slot": "slot-0134",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "717ff899beda4249be226ea6da16de0f7e4d706ff3ba117ed16be6f65e3d93a9"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "814889f07117b42da4f8e3fd717c477328d3503f9bedd57a25f8cc320e82ce47",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 11.800591334734815,
+        "mean_demand_rmse": 1.7505738852217414,
+        "policy_value": 4438.214079720266,
+        "regret": 0.0,
+        "seen_price_rmse": 1.8961370518449836,
+        "unseen_price_rmse": 1.549508127736521
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1109,
+      "slot": "slot-0135",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "717ff899beda4249be226ea6da16de0f7e4d706ff3ba117ed16be6f65e3d93a9"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "e6005cb697be5e006b7f1087f63364928a82c6df6fd41519ff7f0396e65635d1",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 9.272850350237372,
+        "mean_demand_rmse": 4.860180231275705,
+        "policy_value": 4326.156355135081,
+        "regret": 31.52873120965984,
+        "seen_price_rmse": 5.159904714848925,
+        "unseen_price_rmse": 4.457271687724107
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1110,
+      "slot": "slot-0136",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "0045ae3b5a462ffdd83a07c484b9ea146c0f9de0421b2c61b012ec04fd94a9ef"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "e6005cb697be5e006b7f1087f63364928a82c6df6fd41519ff7f0396e65635d1",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 8.333376955361008,
+        "mean_demand_rmse": 3.0262854973016013,
+        "policy_value": 4357.685086344741,
+        "regret": 0.0,
+        "seen_price_rmse": 3.1751112788345996,
+        "unseen_price_rmse": 2.829265674856665
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1110,
+      "slot": "slot-0137",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "709ea6290154a112fb2f504f35153310d7a5415fb9cb75731ec3b117eac0d213"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "e6005cb697be5e006b7f1087f63364928a82c6df6fd41519ff7f0396e65635d1",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 7.826341302869357,
+        "mean_demand_rmse": 1.6033468898255727,
+        "policy_value": 4357.685086344741,
+        "regret": 0.0,
+        "seen_price_rmse": 1.7995594945454245,
+        "unseen_price_rmse": 1.317613312961841
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1110,
+      "slot": "slot-0138",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "709ea6290154a112fb2f504f35153310d7a5415fb9cb75731ec3b117eac0d213"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "d553fbdcf206a344de4fab9a7d6e6908773d6aadd860514dc57635071b1f923a",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 10.805958101845585,
+        "mean_demand_rmse": 5.515275465340284,
+        "policy_value": 4650.794220007786,
+        "regret": 121.18769461116115,
+        "seen_price_rmse": 6.06602271204731,
+        "unseen_price_rmse": 4.737647449206498
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1111,
+      "slot": "slot-0139",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "37f8ac58c51a811cb8dcfc7e23c567179029aa2374fa7db5baeee0f64d797106"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "d553fbdcf206a344de4fab9a7d6e6908773d6aadd860514dc57635071b1f923a",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 9.617760263682936,
+        "mean_demand_rmse": 2.223107501061458,
+        "policy_value": 4745.6766174109,
+        "regret": 26.30529720804698,
+        "seen_price_rmse": 2.557317873544314,
+        "unseen_price_rmse": 1.7161358570736336
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1111,
+      "slot": "slot-0140",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "e0201fcce3aaa90ebbdc559bda38fc6acb31429c2a28cc5c8e24eadd78adcbd0"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "d553fbdcf206a344de4fab9a7d6e6908773d6aadd860514dc57635071b1f923a",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 9.137982091379952,
+        "mean_demand_rmse": 1.952161168284486,
+        "policy_value": 4751.040532893294,
+        "regret": 20.94138172565296,
+        "seen_price_rmse": 1.9934258615324751,
+        "unseen_price_rmse": 1.899319991173696
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1111,
+      "slot": "slot-0141",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "e0201fcce3aaa90ebbdc559bda38fc6acb31429c2a28cc5c8e24eadd78adcbd0"
+    },
+    {
+      "baseline": "observational_linear",
+      "evaluation_sha256": "5b5d291280a04bdd7858695e54c0d036ab2fbecd19df118ca1d991015e762043",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 9.910118970744291,
+        "mean_demand_rmse": 5.396420152760091,
+        "policy_value": 4591.875201602683,
+        "regret": 96.68822761659119,
+        "seen_price_rmse": 5.854734047957649,
+        "unseen_price_rmse": 4.761895639460833
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1112,
+      "slot": "slot-0142",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "02773945201c86f0b64d61ed9fd71f0c0c24fb7ee4ba7b5d5dec3c73fb95a355"
+    },
+    {
+      "baseline": "randomized_linear",
+      "evaluation_sha256": "5b5d291280a04bdd7858695e54c0d036ab2fbecd19df118ca1d991015e762043",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 9.002381191359323,
+        "mean_demand_rmse": 2.5411109775710177,
+        "policy_value": 4688.563429219274,
+        "regret": 0.0,
+        "seen_price_rmse": 2.8699648921317946,
+        "unseen_price_rmse": 2.057408114147632
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1112,
+      "slot": "slot-0143",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "aed66f20e54123609810f06859b365f49d80ea55b3fb01f9e5d448a953657676"
+    },
+    {
+      "baseline": "randomized_quadratic",
+      "evaluation_sha256": "5b5d291280a04bdd7858695e54c0d036ab2fbecd19df118ca1d991015e762043",
+      "family": "threshold",
+      "isolated_execution": true,
+      "metrics": {
+        "individual_demand_rmse": 8.746638528441991,
+        "mean_demand_rmse": 1.2358423756551107,
+        "policy_value": 4688.563429219274,
+        "regret": 0.0,
+        "seen_price_rmse": 1.3966109755814653,
+        "unseen_price_rmse": 0.9991429216597026
+      },
+      "owner_diagnostic_names": [
+        "seen_price_rmse",
+        "unseen_price_rmse"
+      ],
+      "recorded_integrity_verified": true,
+      "scientific_verified": false,
+      "seed": 1112,
+      "slot": "slot-0144",
+      "status": "completed",
+      "supervisor_metric_names": [
+        "individual_demand_rmse",
+        "mean_demand_rmse",
+        "policy_value",
+        "regret"
+      ],
+      "training_sha256": "aed66f20e54123609810f06859b365f49d80ea55b3fb01f9e5d448a953657676"
+    }
+  ],
+  "profile": "full",
+  "summary": {
+    "completed": 144,
+    "groups": [
+      {
+        "all_planned_completed": true,
+        "baseline": "observational_linear",
+        "completed": 12,
+        "family": "affine",
+        "metrics": {
+          "individual_demand_rmse": {
+            "mcse": 0.39262673966875805,
+            "mean": 10.536049759679296,
+            "median": 10.863980754004174,
+            "n": 12,
+            "p10": 8.834639034787177,
+            "p90": 12.077813520988425,
+            "sd": 1.3600989230328153
+          },
+          "mean_demand_rmse": {
+            "mcse": 0.25434569344454105,
+            "mean": 4.978795193034428,
+            "median": 5.2648125418399445,
+            "n": 12,
+            "p10": 3.744616921448476,
+            "p90": 5.79203649706016,
+            "sd": 0.8810793274645667
+          },
+          "policy_value": {
+            "mcse": 49.82202927739833,
+            "mean": 4545.069810697533,
+            "median": 4542.843368717109,
+            "n": 12,
+            "p10": 4349.431995475655,
+            "p90": 4735.60616038307,
+            "sd": 172.58857208927603
+          },
+          "regret": {
+            "mcse": 12.729523878040752,
+            "mean": 53.392078804992686,
+            "median": 48.63985168172623,
+            "n": 12,
+            "p10": 2.5353795237545067,
+            "p90": 110.1791981613751,
+            "sd": 44.09636422585558
+          },
+          "seen_price_rmse": {
+            "mcse": 0.27725154875483704,
+            "mean": 5.442644468739169,
+            "median": 5.7620412216296275,
+            "n": 12,
+            "p10": 4.098406917852782,
+            "p90": 6.304875471078384,
+            "sd": 0.9604275378410748
+          },
+          "unseen_price_rmse": {
+            "mcse": 0.22248649192918768,
+            "mean": 4.329619725131159,
+            "median": 4.56778006295505,
+            "n": 12,
+            "p10": 3.248640787329767,
+            "p90": 5.078665199654148,
+            "sd": 0.770715816038232
+          }
+        },
+        "planned": 12
+      },
+      {
+        "all_planned_completed": true,
+        "baseline": "randomized_linear",
+        "completed": 12,
+        "family": "affine",
+        "metrics": {
+          "individual_demand_rmse": {
+            "mcse": 0.3471307555517417,
+            "mean": 9.353326614603061,
+            "median": 9.455320834566425,
+            "n": 12,
+            "p10": 7.723015541230381,
+            "p90": 10.722934730946392,
+            "sd": 1.2024962109707775
+          },
+          "mean_demand_rmse": {
+            "mcse": 0.11148053042659381,
+            "mean": 0.9331662325642843,
+            "median": 0.9642880892730528,
+            "n": 12,
+            "p10": 0.4723760625085128,
+            "p90": 1.3875839863325639,
+            "sd": 0.3861798855071772
+          },
+          "policy_value": {
+            "mcse": 49.00366428929288,
+            "mean": 4597.697025051836,
+            "median": 4564.916152567276,
+            "n": 12,
+            "p10": 4397.179017131123,
+            "p90": 4815.706426917203,
+            "sd": 169.75367261220777
+          },
+          "regret": {
+            "mcse": 0.48316659053130806,
+            "mean": 0.764864450689353,
+            "median": 0.0,
+            "n": 12,
+            "p10": 0.0,
+            "p90": 3.5895200119883808,
+            "sd": 1.6737381666401063
+          },
+          "seen_price_rmse": {
+            "mcse": 0.11313021699481546,
+            "mean": 0.9560977961396553,
+            "median": 0.9908961141751071,
+            "n": 12,
+            "p10": 0.47851901809802405,
+            "p90": 1.3994037648385087,
+            "sd": 0.39189456741262485
+          },
+          "unseen_price_rmse": {
+            "mcse": 0.11040059489794773,
+            "mean": 0.9023222245689788,
+            "median": 0.892750327078675,
+            "n": 12,
+            "p10": 0.46434923911898984,
+            "p90": 1.3745459083923852,
+            "sd": 0.38243887909814966
+          }
+        },
+        "planned": 12
+      },
+      {
+        "all_planned_completed": true,
+        "baseline": "randomized_quadratic",
+        "completed": 12,
+        "family": "affine",
+        "metrics": {
+          "individual_demand_rmse": {
+            "mcse": 0.3618387743025007,
+            "mean": 9.436715399889618,
+            "median": 9.475838331477648,
+            "n": 12,
+            "p10": 7.673857126839628,
+            "p90": 10.753880973653414,
+            "sd": 1.2534462824807582
+          },
+          "mean_demand_rmse": {
+            "mcse": 0.14849064712222185,
+            "mean": 1.4076982080792944,
+            "median": 1.3887901836216834,
+            "n": 12,
+            "p10": 0.9357725724087569,
+            "p90": 1.9599295802250412,
+            "sd": 0.514386690528939
+          },
+          "policy_value": {
+            "mcse": 49.02485500588843,
+            "mean": 4597.654639627973,
+            "median": 4564.550353022294,
+            "n": 12,
+            "p10": 4396.772023608093,
+            "p90": 4818.538909158296,
+            "sd": 169.82707940779235
+          },
+          "regret": {
+            "mcse": 0.45798298970960777,
+            "mean": 0.8072498745525264,
+            "median": 0.11156285207674443,
+            "n": 12,
+            "p10": 0.0,
+            "p90": 2.308194015280475,
+            "sd": 1.5864996143586698
+          },
+          "seen_price_rmse": {
+            "mcse": 0.15258754012741002,
+            "mean": 1.4573032475050336,
+            "median": 1.4157780379284675,
+            "n": 12,
+            "p10": 0.9413645520381041,
+            "p90": 1.9577534130590324,
+            "sd": 0.528578744205258
+          },
+          "unseen_price_rmse": {
+            "mcse": 0.14533285516887012,
+            "mean": 1.3406013036482198,
+            "median": 1.2752076118215188,
+            "n": 12,
+            "p10": 0.9286376965606707,
+            "p90": 1.9644062607858017,
+            "sd": 0.5034477783230643
+          }
+        },
+        "planned": 12
+      },
+      {
+        "all_planned_completed": true,
+        "baseline": "observational_linear",
+        "completed": 12,
+        "family": "quadratic",
+        "metrics": {
+          "individual_demand_rmse": {
+            "mcse": 0.4777082646252704,
+            "mean": 11.692863664792922,
+            "median": 11.689646959238745,
+            "n": 12,
+            "p10": 9.96316000737065,
+            "p90": 13.648194519358615,
+            "sd": 1.654829971053053
+          },
+          "mean_demand_rmse": {
+            "mcse": 0.29810564336885964,
+            "mean": 6.717176047794076,
+            "median": 6.477771748496821,
+            "n": 12,
+            "p10": 5.694877041121803,
+            "p90": 8.269421786464768,
+            "sd": 1.0326682406757461
+          },
+          "policy_value": {
+            "mcse": 54.843429776137995,
+            "mean": 4442.776084591034,
+            "median": 4402.51435052812,
+            "n": 12,
+            "p10": 4301.315146587016,
+            "p90": 4716.570366748158,
+            "sd": 189.98321366721365
+          },
+          "regret": {
+            "mcse": 19.42463357711581,
+            "mean": 81.19383716864829,
+            "median": 71.07163022964995,
+            "n": 12,
+            "p10": 15.425410986694496,
+            "p90": 129.7437136305829,
+            "sd": 67.28890454794593
+          },
+          "seen_price_rmse": {
+            "mcse": 0.3373986687868113,
+            "mean": 7.167443299318047,
+            "median": 6.768198015846392,
+            "n": 12,
+            "p10": 6.056759006778916,
+            "p90": 9.009658852468538,
+            "sd": 1.1687832734897212
+          },
+          "unseen_price_rmse": {
+            "mcse": 0.2495827534094889,
+            "mean": 6.103662612039398,
+            "median": 6.09493506039734,
+            "n": 12,
+            "p10": 5.078823927736216,
+            "p90": 7.2364960004191285,
+            "sd": 0.8645800191963384
+          }
+        },
+        "planned": 12
+      },
+      {
+        "all_planned_completed": true,
+        "baseline": "randomized_linear",
+        "completed": 12,
+        "family": "quadratic",
+        "metrics": {
+          "individual_demand_rmse": {
+            "mcse": 0.34220471268937824,
+            "mean": 10.22034150693769,
+            "median": 10.620124027574157,
+            "n": 12,
+            "p10": 8.81410643640719,
+            "p90": 11.421013312258713,
+            "sd": 1.1854318979350265
+          },
+          "mean_demand_rmse": {
+            "mcse": 0.22475002608003936,
+            "mean": 3.7678711039392154,
+            "median": 4.055152702766563,
+            "n": 12,
+            "p10": 2.7975888759862575,
+            "p90": 4.4345340822900745,
+            "sd": 0.7785569283461168
+          },
+          "policy_value": {
+            "mcse": 45.3619990375398,
+            "mean": 4523.124955195759,
+            "median": 4454.756490309688,
+            "n": 12,
+            "p10": 4389.83937615355,
+            "p90": 4739.848435749136,
+            "sd": 157.1385741318189
+          },
+          "regret": {
+            "mcse": 0.4840717238561568,
+            "mean": 0.8449665639233359,
+            "median": 0.0,
+            "n": 12,
+            "p10": 0.0,
+            "p90": 2.9522397524880564,
+            "sd": 1.6768736404526299
+          },
+          "seen_price_rmse": {
+            "mcse": 0.25426151450761086,
+            "mean": 4.1561442279291185,
+            "median": 4.514863087248931,
+            "n": 12,
+            "p10": 3.0158402443514514,
+            "p90": 4.854625245528371,
+            "sd": 0.8807877230731863
+          },
+          "unseen_price_rmse": {
+            "mcse": 0.1897969860340257,
+            "mean": 3.2118548627590258,
+            "median": 3.394051988454949,
+            "n": 12,
+            "p10": 2.4504655495976624,
+            "p90": 3.9399156686877705,
+            "sd": 0.6574760458687462
+          }
+        },
+        "planned": 12
+      },
+      {
+        "all_planned_completed": true,
+        "baseline": "randomized_quadratic",
+        "completed": 12,
+        "family": "quadratic",
+        "metrics": {
+          "individual_demand_rmse": {
+            "mcse": 0.3730152477882356,
+            "mean": 9.544266932304586,
+            "median": 9.965239577297844,
+            "n": 12,
+            "p10": 7.745353598456606,
+            "p90": 10.948658403092542,
+            "sd": 1.2921627223342365
+          },
+          "mean_demand_rmse": {
+            "mcse": 0.08382500738385554,
+            "mean": 1.534222552308406,
+            "median": 1.4888517152802745,
+            "n": 12,
+            "p10": 1.195173281947875,
+            "p90": 1.9278188579739224,
+            "sd": 0.29037834346734814
+          },
+          "policy_value": {
+            "mcse": 45.80254370499207,
+            "mean": 4522.568891675744,
+            "median": 4454.251121864205,
+            "n": 12,
+            "p10": 4382.234234882699,
+            "p90": 4739.848435749136,
+            "sd": 158.66466562588062
+          },
+          "regret": {
+            "mcse": 0.9119935487264299,
+            "mean": 1.4010300839378818,
+            "median": 0.0,
+            "n": 12,
+            "p10": 0.0,
+            "p90": 3.934941312351908,
+            "sd": 3.159238325138438
+          },
+          "seen_price_rmse": {
+            "mcse": 0.09278884161167697,
+            "mean": 1.6263951043704994,
+            "median": 1.5562810711984647,
+            "n": 12,
+            "p10": 1.195041666760276,
+            "p90": 2.069062678863169,
+            "sd": 0.32142997609377144
+          },
+          "unseen_price_rmse": {
+            "mcse": 0.0764509235365361,
+            "mean": 1.4074511458385803,
+            "median": 1.40473648335402,
+            "n": 12,
+            "p10": 1.1233531045048308,
+            "p90": 1.731621289267433,
+            "sd": 0.26483376770168765
+          }
+        },
+        "planned": 12
+      },
+      {
+        "all_planned_completed": true,
+        "baseline": "observational_linear",
+        "completed": 12,
+        "family": "interaction",
+        "metrics": {
+          "individual_demand_rmse": {
+            "mcse": 0.4894755752855227,
+            "mean": 11.766293003038022,
+            "median": 12.426675813514867,
+            "n": 12,
+            "p10": 9.1291455674212,
+            "p90": 13.039334936223122,
+            "sd": 1.6955931309170607
+          },
+          "mean_demand_rmse": {
+            "mcse": 0.22666831898745946,
+            "mean": 6.379893819330498,
+            "median": 6.4914859802912925,
+            "n": 12,
+            "p10": 5.667246423229235,
+            "p90": 7.123210852176679,
+            "sd": 0.785202089905018
+          },
+          "policy_value": {
+            "mcse": 50.31764510843209,
+            "mean": 4528.539970351586,
+            "median": 4475.446963517325,
+            "n": 12,
+            "p10": 4340.8527735898515,
+            "p90": 4782.422485472345,
+            "sd": 174.30543569004791
+          },
+          "regret": {
+            "mcse": 11.610828054905939,
+            "mean": 104.96644010409706,
+            "median": 102.23466569216734,
+            "n": 12,
+            "p10": 56.77205425662912,
+            "p90": 150.89181993499992,
+            "sd": 40.221088218086415
+          },
+          "seen_price_rmse": {
+            "mcse": 0.24775278698963105,
+            "mean": 6.9760714914123065,
+            "median": 7.0880870185559655,
+            "n": 12,
+            "p10": 6.206543836731355,
+            "p90": 7.8009107949730305,
+            "sd": 0.858240829565661
+          },
+          "unseen_price_rmse": {
+            "mcse": 0.1972544638956395,
+            "mean": 5.545223701028519,
+            "median": 5.657889096166013,
+            "n": 12,
+            "p10": 4.910526191248263,
+            "p90": 6.173973629973257,
+            "sd": 0.6833095069740166
+          }
+        },
+        "planned": 12
+      },
+      {
+        "all_planned_completed": true,
+        "baseline": "randomized_linear",
+        "completed": 12,
+        "family": "interaction",
+        "metrics": {
+          "individual_demand_rmse": {
+            "mcse": 0.4469364349718242,
+            "mean": 10.349036349516263,
+            "median": 10.919817655791256,
+            "n": 12,
+            "p10": 7.744987315758429,
+            "p90": 11.364074846851894,
+            "sd": 1.5482332262498062
+          },
+          "mean_demand_rmse": {
+            "mcse": 0.10260247436268283,
+            "mean": 2.951461224940392,
+            "median": 2.9695892735769123,
+            "n": 12,
+            "p10": 2.5312307114326615,
+            "p90": 3.239100456905584,
+            "sd": 0.35542539715689964
+          },
+          "policy_value": {
+            "mcse": 44.28263326193553,
+            "mean": 4613.890074361055,
+            "median": 4573.411262293955,
+            "n": 12,
+            "p10": 4425.869820376605,
+            "p90": 4813.512695491677,
+            "sd": 153.39954140522372
+          },
+          "regret": {
+            "mcse": 2.9218684572799503,
+            "mean": 19.616336094627503,
+            "median": 19.269997122098495,
+            "n": 12,
+            "p10": 9.593535501601442,
+            "p90": 32.6528787636918,
+            "sd": 10.121649242083535
+          },
+          "seen_price_rmse": {
+            "mcse": 0.11281039367916848,
+            "mean": 3.2081722835958906,
+            "median": 3.23940188317892,
+            "n": 12,
+            "p10": 2.758431513313928,
+            "p90": 3.539980164635312,
+            "sd": 0.39078666694833347
+          },
+          "unseen_price_rmse": {
+            "mcse": 0.08949546406393917,
+            "mean": 2.5946149673400014,
+            "median": 2.593119161654898,
+            "n": 12,
+            "p10": 2.21409347276769,
+            "p90": 2.819031550568877,
+            "sd": 0.31002138161139453
+          }
+        },
+        "planned": 12
+      },
+      {
+        "all_planned_completed": true,
+        "baseline": "randomized_quadratic",
+        "completed": 12,
+        "family": "interaction",
+        "metrics": {
+          "individual_demand_rmse": {
+            "mcse": 0.4840045708455284,
+            "mean": 10.122341375555786,
+            "median": 10.78660602813327,
+            "n": 12,
+            "p10": 7.310437245993219,
+            "p90": 11.165244964848297,
+            "sd": 1.6766410156000506
+          },
+          "mean_demand_rmse": {
+            "mcse": 0.17302510777735516,
+            "mean": 1.8452619165763133,
+            "median": 1.8549855585841661,
+            "n": 12,
+            "p10": 1.1300935713265081,
+            "p90": 2.5069630320350105,
+            "sd": 0.59937655531092
+          },
+          "policy_value": {
+            "mcse": 45.64047134195162,
+            "mean": 4630.929795209473,
+            "median": 4588.13714568624,
+            "n": 12,
+            "p10": 4453.131349160678,
+            "p90": 4841.429378570985,
+            "sd": 158.10323049130298
+          },
+          "regret": {
+            "mcse": 0.5654196895858317,
+            "mean": 2.576615246209631,
+            "median": 2.2605833882643225,
+            "n": 12,
+            "p10": 0.17800149963921544,
+            "p90": 4.454557496831227,
+            "sd": 1.9586712599249674
+          },
+          "seen_price_rmse": {
+            "mcse": 0.1802599711497418,
+            "mean": 1.9393003257309376,
+            "median": 1.9568006523714265,
+            "n": 12,
+            "p10": 1.1543860020131753,
+            "p90": 2.749902126422644,
+            "sd": 0.6244388572045055
+          },
+          "unseen_price_rmse": {
+            "mcse": 0.16634335579389403,
+            "mean": 1.717533851889003,
+            "median": 1.7353924071422386,
+            "n": 12,
+            "p10": 1.0988246768180892,
+            "p90": 2.171281255900379,
+            "sd": 0.5762302874730625
+          }
+        },
+        "planned": 12
+      },
+      {
+        "all_planned_completed": true,
+        "baseline": "observational_linear",
+        "completed": 12,
+        "family": "threshold",
+        "metrics": {
+          "individual_demand_rmse": {
+            "mcse": 0.3346819100964743,
+            "mean": 10.955669087636203,
+            "median": 11.081324915541508,
+            "n": 12,
+            "p10": 9.47612997455656,
+            "p90": 11.91937167989567,
+            "sd": 1.1593721453225854
+          },
+          "mean_demand_rmse": {
+            "mcse": 0.15998007294685376,
+            "mean": 5.760851165644417,
+            "median": 5.677015929000298,
+            "n": 12,
+            "p10": 5.21217771732644,
+            "p90": 6.52346512418561,
+            "sd": 0.5541872290850519
+          },
+          "policy_value": {
+            "mcse": 38.03767810679212,
+            "mean": 4507.814209100782,
+            "median": 4502.8987282361595,
+            "n": 12,
+            "p10": 4339.193606772576,
+            "p90": 4650.568733089409,
+            "sd": 131.7663821658286
+          },
+          "regret": {
+            "mcse": 15.303824357431221,
+            "mean": 85.10226737909123,
+            "median": 99.05437618961324,
+            "n": 12,
+            "p10": 3.1528731209659866,
+            "p90": 120.36845175026413,
+            "sd": 53.014002674362
+          },
+          "seen_price_rmse": {
+            "mcse": 0.18941800602827266,
+            "mean": 6.256989911097899,
+            "median": 6.230946265628781,
+            "n": 12,
+            "p10": 5.596427919988003,
+            "p90": 7.1404157123655825,
+            "sd": 0.6561632206187122
+          },
+          "unseen_price_rmse": {
+            "mcse": 0.12207576405656026,
+            "mean": 5.070545970993128,
+            "median": 5.0251379133757474,
+            "n": 12,
+            "p10": 4.67898392098503,
+            "p90": 5.658267597484992,
+            "sd": 0.4228828514375058
+          }
+        },
+        "planned": 12
+      },
+      {
+        "all_planned_completed": true,
+        "baseline": "randomized_linear",
+        "completed": 12,
+        "family": "threshold",
+        "metrics": {
+          "individual_demand_rmse": {
+            "mcse": 0.3347733059734587,
+            "mean": 9.731534149910575,
+            "median": 9.775993833866504,
+            "n": 12,
+            "p10": 8.387444416832155,
+            "p90": 10.732089056474287,
+            "sd": 1.159688749927664
+          },
+          "mean_demand_rmse": {
+            "mcse": 0.13267319790397666,
+            "mean": 2.881860468712896,
+            "median": 3.0549791864308986,
+            "n": 12,
+            "p10": 2.285844526021771,
+            "p90": 3.2064217302458036,
+            "sd": 0.45959343914465645
+          },
+          "policy_value": {
+            "mcse": 45.28328751535217,
+            "mean": 4580.5528999913595,
+            "median": 4611.366929795389,
+            "n": 12,
+            "p10": 4367.296639388798,
+            "p90": 4759.948816884673,
+            "sd": 156.86590942067878
+          },
+          "regret": {
+            "mcse": 5.213232920722788,
+            "mean": 12.363576488514761,
+            "median": 0.0,
+            "n": 12,
+            "p10": 0.0,
+            "p90": 35.61143626095536,
+            "sd": 18.059168580765125
+          },
+          "seen_price_rmse": {
+            "mcse": 0.14056061067968764,
+            "mean": 3.2063430553002745,
+            "median": 3.27499311874389,
+            "n": 12,
+            "p10": 2.585979453091553,
+            "p90": 3.664341480274709,
+            "sd": 0.486916238480255
+          },
+          "unseen_price_rmse": {
+            "mcse": 0.13334373071684313,
+            "mean": 2.409176185053891,
+            "median": 2.448927938460307,
+            "n": 12,
+            "p10": 1.8787991678265985,
+            "p90": 2.8227889826683397,
+            "sd": 0.46191623294471007
+          }
+        },
+        "planned": 12
+      },
+      {
+        "all_planned_completed": true,
+        "baseline": "randomized_quadratic",
+        "completed": 12,
+        "family": "threshold",
+        "metrics": {
+          "individual_demand_rmse": {
+            "mcse": 0.3477728919220233,
+            "mean": 9.405851802304891,
+            "median": 9.363557666684965,
+            "n": 12,
+            "p10": 7.9027493238765345,
+            "p90": 10.557831736155265,
+            "sd": 1.2047206366082086
+          },
+          "mean_demand_rmse": {
+            "mcse": 0.12488985515232413,
+            "mean": 1.8763324980817722,
+            "median": 1.9168165792086418,
+            "n": 12,
+            "p10": 1.272592827072157,
+            "p90": 2.337195920938261,
+            "sd": 0.4326311489474862
+          },
+          "policy_value": {
+            "mcse": 45.28480687856,
+            "mean": 4582.614303146464,
+            "median": 4611.366929795389,
+            "n": 12,
+            "p10": 4374.79971245623,
+            "p90": 4760.485208432912,
+            "sd": 156.87117264922097
+          },
+          "regret": {
+            "mcse": 4.61028421923989,
+            "mean": 10.302173333408946,
+            "median": 0.0,
+            "n": 12,
+            "p10": 0.0,
+            "p90": 35.517301175476966,
+            "sd": 15.970493010113005
+          },
+          "seen_price_rmse": {
+            "mcse": 0.11856368856259382,
+            "mean": 1.9924804843983555,
+            "median": 2.0254156550593008,
+            "n": 12,
+            "p10": 1.4338368310622596,
+            "p90": 2.4573189509927507,
+            "sd": 0.41071666504637094
+          },
+          "unseen_price_rmse": {
+            "mcse": 0.13959850163626156,
+            "mean": 1.713859366769139,
+            "median": 1.7487642475098681,
+            "n": 12,
+            "p10": 1.0366846034447286,
+            "p90": 2.082537856575692,
+            "sd": 0.4835833949889841
+          }
+        },
+        "planned": 12
+      }
+    ],
+    "paired_comparisons": [
+      {
+        "direction": "left minus right",
+        "family": "affine",
+        "left": "observational_linear",
+        "metrics": {
+          "individual_demand_rmse": {
+            "mcse": 0.10367508981234104,
+            "mean": 1.182723145076234,
+            "median": 1.1870552942048898,
+            "n": 12,
+            "p10": 0.7844634986095278,
+            "p90": 1.5802151653154137,
+            "sd": 0.35914104606848235
+          },
+          "mean_demand_rmse": {
+            "mcse": 0.28015404243581254,
+            "mean": 4.045628960470144,
+            "median": 3.9799707922190826,
+            "n": 12,
+            "p10": 3.1752072276619554,
+            "p90": 5.166987170451243,
+            "sd": 0.9704820708892692
+          },
+          "policy_value": {
+            "mcse": 12.754021320264231,
+            "mean": -52.62721435430323,
+            "median": -48.63985168172667,
+            "n": 12,
+            "p10": -106.61199071980164,
+            "p90": -1.1431101418027492,
+            "sd": 44.18122585502868
+          },
+          "regret": {
+            "mcse": 12.754021320264258,
+            "mean": 52.627214354303334,
+            "median": 48.63985168172623,
+            "n": 12,
+            "p10": 1.1431101418028329,
+            "p90": 106.61199071980207,
+            "sd": 44.18122585502877
+          },
+          "seen_price_rmse": {
+            "mcse": 0.3062741941719522,
+            "mean": 4.486546672599514,
+            "median": 4.473529878469867,
+            "n": 12,
+            "p10": 3.4948470605629067,
+            "p90": 5.683914205419859,
+            "sd": 1.0609649307060738
+          },
+          "unseen_price_rmse": {
+            "mcse": 0.2446326624756702,
+            "mean": 3.42729750056218,
+            "median": 3.287350871512581,
+            "n": 12,
+            "p10": 2.72505954339097,
+            "p90": 4.444350779989997,
+            "sd": 0.8474324011974183
+          }
+        },
+        "planned_pairs": 12,
+        "right": "randomized_linear"
+      },
+      {
+        "direction": "left minus right",
+        "family": "affine",
+        "left": "randomized_linear",
+        "metrics": {
+          "individual_demand_rmse": {
+            "mcse": 0.044687598516401736,
+            "mean": -0.0833887852865578,
+            "median": -0.036910438829622194,
+            "n": 12,
+            "p10": -0.15365013288929816,
+            "p90": 0.05385780038783567,
+            "sd": 0.15480238219729478
+          },
+          "mean_demand_rmse": {
+            "mcse": 0.11439561703680749,
+            "mean": -0.4745319755150099,
+            "median": -0.3977059373604724,
+            "n": 12,
+            "p10": -0.9019946650260958,
+            "p90": -0.12909895148541203,
+            "sd": 0.39627804174188486
+          },
+          "policy_value": {
+            "mcse": 0.604430521899709,
+            "mean": 0.042385423863076234,
+            "median": 0.0,
+            "n": 12,
+            "p10": -2.038869708347738,
+            "p90": 0.8854364771552357,
+            "sd": 2.093808747151338
+          },
+          "regret": {
+            "mcse": 0.6044305218997713,
+            "mean": -0.042385423863173344,
+            "median": 0.0,
+            "n": 12,
+            "p10": -0.8854364771553846,
+            "p90": 2.0388697083480687,
+            "sd": 2.0938087471515536
+          },
+          "seen_price_rmse": {
+            "mcse": 0.1231734257882102,
+            "mean": -0.5012054513653781,
+            "median": -0.39867931986721705,
+            "n": 12,
+            "p10": -0.9683300033010807,
+            "p90": -0.09562702643511184,
+            "sd": 0.4266852632149893
+          },
+          "unseen_price_rmse": {
+            "mcse": 0.10472574921780398,
+            "mean": -0.4382790790792411,
+            "median": -0.3055284499373463,
+            "n": 12,
+            "p10": -0.8165960823910703,
+            "p90": -0.11781501760656506,
+            "sd": 0.36278063701190616
+          }
+        },
+        "planned_pairs": 12,
+        "right": "randomized_quadratic"
+      },
+      {
+        "direction": "left minus right",
+        "family": "quadratic",
+        "left": "observational_linear",
+        "metrics": {
+          "individual_demand_rmse": {
+            "mcse": 0.16706866809645368,
+            "mean": 1.4725221578552308,
+            "median": 1.2709714856217706,
+            "n": 12,
+            "p10": 0.9355685363488133,
+            "p90": 2.1613454105825065,
+            "sd": 0.5787428429918386
+          },
+          "mean_demand_rmse": {
+            "mcse": 0.27297146833431274,
+            "mean": 2.94930494385486,
+            "median": 3.0820680952644692,
+            "n": 12,
+            "p10": 1.8932001695080447,
+            "p90": 4.1033847300221,
+            "sd": 0.9456009043434171
+          },
+          "policy_value": {
+            "mcse": 19.640699828022868,
+            "mean": -80.34887060472495,
+            "median": -70.21694174024788,
+            "n": 12,
+            "p10": -129.743713630583,
+            "p90": -15.111121942853602,
+            "sd": 68.03737999668984
+          },
+          "regret": {
+            "mcse": 19.640699828022868,
+            "mean": 80.34887060472495,
+            "median": 70.21694174024748,
+            "n": 12,
+            "p10": 15.111121942853167,
+            "p90": 129.7437136305829,
+            "sd": 68.03737999668984
+          },
+          "seen_price_rmse": {
+            "mcse": 0.3161002086548137,
+            "mean": 3.011299071388928,
+            "median": 3.2306363266093325,
+            "n": 12,
+            "p10": 1.7343061403688718,
+            "p90": 4.37185340696314,
+            "sd": 1.0950032433465213
+          },
+          "unseen_price_rmse": {
+            "mcse": 0.22864197666387606,
+            "mean": 2.8918077492803715,
+            "median": 2.6497359021065163,
+            "n": 12,
+            "p10": 2.150528627127951,
+            "p90": 3.8769374382412813,
+            "sd": 0.7920390406496218
+          }
+        },
+        "planned_pairs": 12,
+        "right": "randomized_linear"
+      },
+      {
+        "direction": "left minus right",
+        "family": "quadratic",
+        "left": "randomized_linear",
+        "metrics": {
+          "individual_demand_rmse": {
+            "mcse": 0.10056158515995807,
+            "mean": 0.6760745746331037,
+            "median": 0.6738660643364565,
+            "n": 12,
+            "p10": 0.27659646364806323,
+            "p90": 1.0934872373048612,
+            "sd": 0.3483555495734236
+          },
+          "mean_demand_rmse": {
+            "mcse": 0.2135055933638596,
+            "mean": 2.233648551630809,
+            "median": 2.2639936795710813,
+            "n": 12,
+            "p10": 1.222448925272812,
+            "p90": 3.0535453597260793,
+            "sd": 0.7396050708126907
+          },
+          "policy_value": {
+            "mcse": 1.014451518843391,
+            "mean": 0.5560635200146559,
+            "median": 0.0,
+            "n": 12,
+            "p10": -1.7980243260713904,
+            "p90": 2.7307391057892354,
+            "sd": 3.5141631449043387
+          },
+          "regret": {
+            "mcse": 1.014451518843342,
+            "mean": -0.5560635200145457,
+            "median": 0.0,
+            "n": 12,
+            "p10": -2.7307391057889063,
+            "p90": 1.7980243260715192,
+            "sd": 3.5141631449041695
+          },
+          "seen_price_rmse": {
+            "mcse": 0.2392777786687189,
+            "mean": 2.529749123558619,
+            "median": 2.630715060470001,
+            "n": 12,
+            "p10": 1.299215897899047,
+            "p90": 3.4633908454735005,
+            "sd": 0.8288825395528833
+          },
+          "unseen_price_rmse": {
+            "mcse": 0.18300333999537252,
+            "mean": 1.8044037169204454,
+            "median": 1.7303423358947634,
+            "n": 12,
+            "p10": 1.1010865167861295,
+            "p90": 2.656351656394021,
+            "sd": 0.6339421656535735
+          }
+        },
+        "planned_pairs": 12,
+        "right": "randomized_quadratic"
+      },
+      {
+        "direction": "left minus right",
+        "family": "interaction",
+        "left": "observational_linear",
+        "metrics": {
+          "individual_demand_rmse": {
+            "mcse": 0.09370197829221012,
+            "mean": 1.4172566535217586,
+            "median": 1.4623261939782628,
+            "n": 12,
+            "p10": 1.0775552498172993,
+            "p90": 1.8923488844199217,
+            "sd": 0.3245931743436479
+          },
+          "mean_demand_rmse": {
+            "mcse": 0.2663583952085627,
+            "mean": 3.4284325943901046,
+            "median": 3.634255496033691,
+            "n": 12,
+            "p10": 2.385451043217097,
+            "p90": 4.586843875290179,
+            "sd": 0.9226925470474823
+          },
+          "policy_value": {
+            "mcse": 12.260886622912153,
+            "mean": -85.35010400946953,
+            "median": -83.86474082395853,
+            "n": 12,
+            "p10": -138.0995587248517,
+            "p90": -27.760424343041628,
+            "sd": 42.47295715345088
+          },
+          "regret": {
+            "mcse": 12.260886622912151,
+            "mean": 85.35010400946958,
+            "median": 83.86474082395846,
+            "n": 12,
+            "p10": 27.760424343042054,
+            "p90": 138.0995587248516,
+            "sd": 42.47295715345087
+          },
+          "seen_price_rmse": {
+            "mcse": 0.2902215979185554,
+            "mean": 3.767899207816417,
+            "median": 3.982036850143626,
+            "n": 12,
+            "p10": 2.6219316918511866,
+            "p90": 5.028877901285689,
+            "sd": 1.0053571060975277
+          },
+          "unseen_price_rmse": {
+            "mcse": 0.2333748290657196,
+            "mean": 2.9506087336885174,
+            "median": 3.1314280663036986,
+            "n": 12,
+            "p10": 2.052079698398143,
+            "p90": 3.9656870111517737,
+            "sd": 0.8084341222990566
+          }
+        },
+        "planned_pairs": 12,
+        "right": "randomized_linear"
+      },
+      {
+        "direction": "left minus right",
+        "family": "interaction",
+        "left": "randomized_linear",
+        "metrics": {
+          "individual_demand_rmse": {
+            "mcse": 0.0540399523215691,
+            "mean": 0.2266949739604783,
+            "median": 0.21501498956633558,
+            "n": 12,
+            "p10": 0.08945496574780397,
+            "p90": 0.44860325842099325,
+            "sd": 0.18719988611911476
+          },
+          "mean_demand_rmse": {
+            "mcse": 0.12153679457521006,
+            "mean": 1.106199308364079,
+            "median": 0.9360270708338203,
+            "n": 12,
+            "p10": 0.8124027632101326,
+            "p90": 1.7220016775926614,
+            "sd": 0.42101580638665065
+          },
+          "policy_value": {
+            "mcse": 3.079934149333756,
+            "mean": -17.039720848417875,
+            "median": -17.009413733833753,
+            "n": 12,
+            "p10": -29.068083562047924,
+            "p90": -8.93834567364356,
+            "sd": 10.66920486122499
+          },
+          "regret": {
+            "mcse": 3.079934149333787,
+            "mean": 17.039720848417872,
+            "median": 17.009413733834172,
+            "n": 12,
+            "p10": 8.938345673643559,
+            "p90": 29.068083562048038,
+            "sd": 10.669204861225097
+          },
+          "seen_price_rmse": {
+            "mcse": 0.13250246164702223,
+            "mean": 1.2688719578649528,
+            "median": 1.125463201702281,
+            "n": 12,
+            "p10": 0.9263531180005766,
+            "p90": 1.8984492488187665,
+            "sd": 0.4590019914011781
+          },
+          "unseen_price_rmse": {
+            "mcse": 0.11261100674455074,
+            "mean": 0.8770811154509982,
+            "median": 0.7233445541117669,
+            "n": 12,
+            "p10": 0.4389482293295135,
+            "p90": 1.472925500865763,
+            "sd": 0.3900959703460868
+          }
+        },
+        "planned_pairs": 12,
+        "right": "randomized_quadratic"
+      },
+      {
+        "direction": "left minus right",
+        "family": "threshold",
+        "left": "observational_linear",
+        "metrics": {
+          "individual_demand_rmse": {
+            "mcse": 0.07058846713876904,
+            "mean": 1.2241349377256283,
+            "median": 1.1394452891194478,
+            "n": 12,
+            "p10": 0.9515714538602473,
+            "p90": 1.5468590317929098,
+            "sd": 0.24452562302550815
+          },
+          "mean_demand_rmse": {
+            "mcse": 0.1617975194161176,
+            "mean": 2.8789906969315204,
+            "median": 2.859643263481771,
+            "n": 12,
+            "p10": 2.242485749180089,
+            "p90": 3.556820685226338,
+            "sd": 0.5604830483346552
+          },
+          "policy_value": {
+            "mcse": 14.961557485423038,
+            "mean": -72.73869089057644,
+            "median": -95.7853125098527,
+            "n": 12,
+            "p10": -112.7638140400627,
+            "p90": -3.1528731209659675,
+            "sd": 51.828355450230305
+          },
+          "regret": {
+            "mcse": 14.961557485423032,
+            "mean": 72.73869089057645,
+            "median": 95.78531250985267,
+            "n": 12,
+            "p10": 3.1528731209659866,
+            "p90": 112.76381404006273,
+            "sd": 51.82835545023028
+          },
+          "seen_price_rmse": {
+            "mcse": 0.18479681868513517,
+            "mean": 3.0506468557976247,
+            "median": 3.069937054899169,
+            "n": 12,
+            "p10": 2.1858797749538255,
+            "p90": 3.877469428954109,
+            "sd": 0.6401549580794955
+          },
+          "unseen_price_rmse": {
+            "mcse": 0.1356205510181991,
+            "mean": 2.6613697859392373,
+            "median": 2.630381287297885,
+            "n": 12,
+            "p10": 2.248790989519303,
+            "p90": 3.117807380453312,
+            "sd": 0.4698033698280157
+          }
+        },
+        "planned_pairs": 12,
+        "right": "randomized_linear"
+      },
+      {
+        "direction": "left minus right",
+        "family": "threshold",
+        "left": "randomized_linear",
+        "metrics": {
+          "individual_demand_rmse": {
+            "mcse": 0.045503455129639686,
+            "mean": 0.3256823476056831,
+            "median": 0.26968636002433666,
+            "n": 12,
+            "p10": 0.1831351882125439,
+            "p90": 0.5094822068866114,
+            "sd": 0.15762859240893318
+          },
+          "mean_demand_rmse": {
+            "mcse": 0.14381069374604588,
+            "mean": 1.0055279706311238,
+            "median": 1.2069883122373666,
+            "n": 12,
+            "p10": 0.3006092584265569,
+            "p90": 1.4554149309560014,
+            "sd": 0.49817485647975845
+          },
+          "policy_value": {
+            "mcse": 1.1317641987897231,
+            "mean": -2.061403155105836,
+            "median": 0.0,
+            "n": 12,
+            "p10": -8.039464615671658,
+            "p90": 0.0,
+            "sd": 3.9205461889825663
+          },
+          "regret": {
+            "mcse": 1.1317641987897127,
+            "mean": 2.061403155105816,
+            "median": 0.0,
+            "n": 12,
+            "p10": 0.0,
+            "p90": 8.039464615671566,
+            "sd": 3.92054618898253
+          },
+          "seen_price_rmse": {
+            "mcse": 0.13134736709138117,
+            "mean": 1.2138625709019188,
+            "median": 1.3292669263050487,
+            "n": 12,
+            "p10": 0.5823290702843948,
+            "p90": 1.6238833064503104,
+            "sd": 0.45500062648534506
+          },
+          "unseen_price_rmse": {
+            "mcse": 0.18369211564287963,
+            "mean": 0.695316818284752,
+            "median": 1.0007587508023608,
+            "n": 12,
+            "p10": -0.19538602959234472,
+            "p90": 1.2142674026175644,
+            "sd": 0.6363281544865704
+          }
+        },
+        "planned_pairs": 12,
+        "right": "randomized_quadratic"
+      }
+    ],
+    "planned": 144,
+    "scope": "Per-family campaign draws; available-case descriptive summaries with explicit denominators. No pooled headline, confidence interval, p-value, or row-level standard error."
+  }
+}

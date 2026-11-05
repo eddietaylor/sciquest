@@ -170,3 +170,65 @@ already complete. The actual full run still requires failure-inclusive reporting
 raw saved-artifact audit and the declared scientific claim limits. No result is
 required to favor a baseline or be nonzero; no additional campaign, model call,
 control bank or universal semantic-validation requirement is introduced here.
+
+## Completed-allocation outcome assessment
+
+Read-only assessment of `/tmp/sciquest-noisy-pricing-full-v1`, its separate audit
+JSON and the retained final test XML. No notebook, backend, allocation or project
+verifier was executed by this reviewer. Standard-library file/CSV/hash/statistical
+calculations supplied the checks below.
+
+- Actual inventory and all 5,780 manifest hashes match. All 144 outcome rows are
+  completed, none has reporting_error, and incremental/final outcome lists agree.
+  Every reported metric is finite. The nine frozen owner-source files match
+  current source and Git commit4fbcf5f exactly.
+- Independently recomputed all six scores for every slot from the saved truth and
+  prediction CSVs. There are no mismatches at the audit's declared tolerance.
+  Independently recomputed every per-family/baseline mean, sample SD, MCSE and
+  interpolated quantile, plus paired means/MCSE: all agree with results.json.
+  The coordinator's separate audit records the additional augmented-ridge and
+  authoritative custody checks across all144; that solver was not rerun here.
+- Final retained XML has seven test cases and zero failures/errors/skips, with
+  the real smoke-workflow test included. These are software checks, not seven
+  scientific replications. The final no-bytecode setting protects archived helper
+  imports from creating cache artifacts; no new scientific construct is claimed.
+
+No outcome/report arithmetic inconsistency or claim-invalidating blocker was
+found. The descriptive report correctly presents family-separated results,
+paired complete/planned denominators, no pooled winner and no causal claim about
+real markets, autonomous reasoning or philosophical policies.
+
+Consequential interpretations to preserve:
+
+1. Randomized linear has lower observed mean regret than observational linear
+   in all four families. This is descriptive evidence for this recipe and fixed
+   estimators, not a universal ranking or a statistical-significance claim.
+2. More flexible prediction is not automatically better pricing. In the
+   quadratic family, randomized quadratic reduces mean-demand RMSE from3.7679
+   to1.5342, yet mean regret rises from0.8450 to1.4010. The paired regret
+   difference is -0.5561 with MCSE1.0145. Do not turn the forecast improvement
+   into a claim of improved decision quality.
+3. In the threshold family, quadratic lowers mean regret from12.3636 to10.3022
+   but has lower paired regret in only3/12campaigns. Its few larger gains can
+   outweigh more frequent losses. “Consistently superior” would misdescribe the
+   observed distribution; the existing table does not make that claim.
+4. There are45exact-zero-regret slots while all144slots have nonzero mean-demand
+   RMSE. This is a finite observed count, not an independent-replicate success
+   rate. A coarse finite grid permits correct decisions despite prediction error.
+5. Full and smoke profiles intentionally share four family/seed campaigns; their
+   repeated deterministic reproductions are not new independent draws. Nothing
+   here should be relabeled a blinded holdout or fresh human validation. The
+   existing development/descriptive framing is appropriate; no replacement bank
+   or additional allocation is requested.
+
+One narrow wording clarification is warranted in README's sentence that oracle
+means “avoid adding Monte Carlo noise to policy scoring”: they avoid extra
+realized-outcome noise CONDITIONAL ON the64sampled evaluation contexts. Those
+contexts remain a Monte Carlo sample, so their finite average still varies.
+The campaign-level MCSE includes that variation along with world/training draws.
+This is a scope clarification, not a scoring defect or reason to repeat results.
+
+The remaining publication step is to preserve these actual full-run artifacts,
+audit and review with their original hashes/statuses. Do not infer an observed
+remote CI outcome from the local tests or claim validity beyond this transparent,
+synthetic, descriptive benchmark.

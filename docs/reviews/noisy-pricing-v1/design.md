@@ -130,3 +130,64 @@ audit.py  df21f11308ac88cbea0f107170bd882477573e9d29822de6e6465d3653a00a46
 tests     b2a7f873f55c56fbb474110f4a6fa81e235e83531391384bb080e5c7be6ea570
 ci.yml    dca140964eeacf3c8b82fb2705987cbdf8f28b5e371662fa66c1a561337db04a
 ```
+
+## Post-run interpretation review
+
+Accepted the completed run's narrow descriptive interpretation. No concrete
+result-interpretation blocker was found. Inert reads of
+`/tmp/sciquest-noisy-pricing-full-v1` show all 144 planned rows completed, no
+reporting errors, zero declared external-agent calls and no claimed genuine
+external-agent reasoning. All 5,780 manifest entries rehash exactly, and frozen
+owner-source commitments match their files. I independently recomputed every
+per-family baseline summary's means, SDs, MCSEs and interpolated quantiles from
+the retained outcomes, plus all eight paired regret means/MCSEs. These agree.
+Four selected raw prediction/truth-table checks, covering both randomized models
+at seed 1101 in the quadratic and interaction families, also agree with recorded
+RMSE/regret and price-times-demand arithmetic. This is not an independent rerun
+of the notebooks or an independent refit of all 144 models; the coordinator's
+full augmented-ridge audit is separate evidence.
+
+The scientifically consequential counterexample is retained, not explained away:
+in the quadratic family, randomized quadratic ridge improves mean forecast RMSE
+from 3.7679 to 1.5342 but increases mean regret from 0.8450 to 1.4010. The
+prespecified linear-minus-quadratic regret contrast is -0.5561, with MCSE 1.0145.
+For seed 1101 specifically, the raw tables give RMSE 4.33355 versus 1.27771 but
+regret 1.23638 versus 4.24493. The linear fit chooses prices 40/45 across contexts;
+the quadratic fit chooses 40 everywhere. Whole-grid forecast accuracy and errors
+near a decision boundary need not rank models the same way. This case disproves
+a claim that added flexibility necessarily improves pricing, even in the named
+quadratic family; it does not establish that linear models are generally better.
+
+Across the retained draws, observational-minus-randomized-linear mean regret is
+positive in all four families (52.6272, 80.3489, 85.3501, 72.7387). Those are
+family-specific averages, not a claim of improvement in every campaign. The
+linear-minus-quadratic randomized mean differences are -0.0424, -0.5561,
+17.0397 and 2.0614 for affine/quadratic/interaction/threshold respectively. These
+eight prespecified contrasts should remain together; no pooled winning model or
+post-hoc subgroup headline is warranted. MCSE is variability of this finite
+Monte Carlo mean under the specified recipe, not a confidence interval or
+guarantee that a small observed contrast persists in another allocation.
+
+There are 45 exact-zero-regret slots but no exact-zero mean-demand-RMSE slots.
+This is compatible with noisy finite training: finite-grid regret depends on
+action ranking, while RMSE measures forecast error. The oracle evaluates exact
+conditional expected revenue, not independent realized profit. The new benchmark
+therefore supplies genuine finite-noisy-sample performance variation within its
+declared generator, while retaining model-based oracle assumptions and a small
+finite action grid. It establishes no real-market performance, unseen-family
+generalization, uncertainty calibration, autonomous discovery or philosophical
+comparison. The report makes these boundaries clear.
+
+The coordinator reports final seven-test local evidence (41.09 seconds) and
+pre-completion source freezes. This post-run review did not independently inspect
+that XML or remote CI state, and adds no claim that they passed beyond that
+reported evidence. No execution, allocation, backend call or scientific input was
+changed; only this review was appended. No new study or acceptance criterion is
+requested.
+
+Reviewed run raw SHA256:
+
+```text
+report.md    e02bcb6a38743851850efddf43101a6a0146c44718352e6eab1e0b446ff65011
+results.json 9c2b6804685daac9ea0a3329f0a4fa306d451c170b22be57595afec95f2623d4
+```

@@ -1,0 +1,10 @@
+{
+  "planned": 144,
+  "completed": 144,
+  "all_planned_completed": true,
+  "manifest_files_verified": 5780,
+  "independently_recomputed_metrics": true,
+  "independent_augmented_ridge_solver": true,
+  "external_agent_calls": 0,
+  "scope": "Archive extracted into a new directory and audited using its own preserved auditor; all file hashes remain unchanged, no owner-source cache files created."
+}
